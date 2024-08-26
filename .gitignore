@@ -1,1 +1,6 @@
 /tests
+/learn_java/model/_pycache
+/learn_java/model/java_files/_pycache
+/learn_java/view/_pycache
+/learn_java/controller/_pycache
+/.gitignore
