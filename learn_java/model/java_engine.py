@@ -1,14 +1,14 @@
 import subprocess
 import threading
-from time import sleep
 
 class Java_Engine(threading.Thread):
-    def __init__(self, model):
+    def __init__(self, model, communicator):
         super(Java_Engine,self).__init__()
         self._model = model
         self._process = None
         self._input_monitor = None
         self._output_monitor = None
+        self._communicator = communicator
         
     # run java code
     def run(self):
@@ -27,12 +27,15 @@ class Java_Engine(threading.Thread):
         self._output_monitor.start()
         self._output_monitor.join()
         self._input_monitor.join()
+        self._communicator.java_program_stopped.emit()
         print("... java program has terminated")
         self._model.reset_working_directory()
 
     def stop(self):
         self._process.kill()
-        self._monitor.join()
+        self._output_monitor.join()
+        self._input_monitor.join()
+        
 
 
 class Output_Monitor(threading.Thread):

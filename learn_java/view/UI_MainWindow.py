@@ -83,6 +83,7 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.pB_run.sizePolicy().hasHeightForWidth())
         self.pB_run.setSizePolicy(sizePolicy)
+        self.pB_run.setCheckable(True)
         self.pB_run.setObjectName("pB_run")
         self.hL_buttons.addWidget(self.pB_run)
         self.verticalLayout.addLayout(self.hL_buttons)
