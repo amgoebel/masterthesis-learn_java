@@ -9,7 +9,7 @@ class Java_Handling(QAbstractListModel):
         self.file_path = os.path.dirname(__file__)
         self.java_output = ""
         self.java_input = ""
-        self._current_file = 3
+        self._current_file = 1
         self._output = ""
         self._input = ""
         self._input_sent = False
@@ -85,6 +85,14 @@ class Java_Handling(QAbstractListModel):
         f.close()
         self.reset_working_directory()
         return(code)
+    
+    # set current chapter
+    def set_current_chapter(self,chapter):
+        self._current_file = chapter
+
+        # set current chapter
+    def get_current_chapter(self):
+        return self._current_file
     
     # write to file
     def write_java_file(self, user_code):

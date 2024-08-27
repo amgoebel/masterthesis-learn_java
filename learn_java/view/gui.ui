@@ -81,31 +81,34 @@
         <item>
          <widget class="QLineEdit" name="lE_input"/>
         </item>
-        <item>
-         <widget class="QPushButton" name="pB_send">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>absenden</string>
-          </property>
-         </widget>
-        </item>
        </layout>
       </item>
      </layout>
     </item>
     <item>
-     <layout class="QHBoxLayout" name="hL_buttons" stretch="0,0">
+     <layout class="QHBoxLayout" name="hL_buttons" stretch="0,0,0">
+      <property name="spacing">
+       <number>6</number>
+      </property>
       <property name="leftMargin">
        <number>0</number>
       </property>
       <property name="topMargin">
-       <number>0</number>
+       <number>3</number>
       </property>
+      <item>
+       <widget class="QPushButton" name="pB_next_Chapter">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>nächstes Kapitel</string>
+        </property>
+       </widget>
+      </item>
       <item>
        <widget class="QPushButton" name="pB_compile">
         <property name="sizePolicy">
@@ -151,8 +154,26 @@
      <height>30</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menu_Datei">
+    <property name="title">
+     <string>&amp;Datei</string>
+    </property>
+    <addaction name="action_Kapitelwahl"/>
+    <addaction name="action_Beenden"/>
+   </widget>
+   <addaction name="menu_Datei"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="action_Beenden">
+   <property name="text">
+    <string>&amp;Beenden</string>
+   </property>
+  </action>
+  <action name="action_Kapitelwahl">
+   <property name="text">
+    <string>&amp;Kapitelwahl</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>
