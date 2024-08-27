@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1101</width>
-    <height>688</height>
+    <width>1000</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -27,7 +27,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QTextBrowser" name="tB_information"/>
+         <widget class="QTextBrowser" name="tB_Tutorial"/>
         </item>
        </layout>
       </item>
@@ -48,9 +48,19 @@
       <item>
        <layout class="QVBoxLayout" name="vL_output_input">
         <item>
+         <widget class="QLabel" name="l_Informationen">
+          <property name="text">
+           <string>Informationen:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTextBrowser" name="tB_Informationen"/>
+        </item>
+        <item>
          <widget class="QLabel" name="l_Output">
           <property name="text">
-           <string>Output / Information:</string>
+           <string>Output:</string>
           </property>
          </widget>
         </item>
@@ -137,7 +147,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1101</width>
+     <width>1000</width>
      <height>30</height>
     </rect>
    </property>

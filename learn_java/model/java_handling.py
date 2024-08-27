@@ -13,14 +13,14 @@ class Java_Handling(QAbstractListModel):
         self._output = ""
         self._input = ""
         self._input_sent = False
-        self._color = QColor("white")
+        #self._color = QColor("white")
 
     # methods for data handling:
     def data(self, index, role=Qt.ItemDataRole.DisplayRole):
         if role == Qt.ItemDataRole.DisplayRole:
             return str(self._output)
-        elif role == Qt.ItemDataRole.BackgroundRole:
-            return QBrush(self._color)
+        #elif role == Qt.ItemDataRole.BackgroundRole:
+        #    return QBrush(self._color)
         return None
     
     def setData(self, index, output, role=Qt.ItemDataRole.EditRole):
@@ -30,9 +30,9 @@ class Java_Handling(QAbstractListModel):
             return True
         return False
 
-    def update_output(self, output, colorNr=0):
+    def update_output(self, output): #, colorNr=0):
         self.setData(self.index(0), output)
-        self.setBackgroundColor(colorNr=colorNr)
+        #self.setBackgroundColor(colorNr=colorNr)
 
     def get_output(self):
         return(self.data(self.index(0)))
@@ -40,6 +40,7 @@ class Java_Handling(QAbstractListModel):
     def clear_output(self):
         self.update_output("")   
     
+    # not used in the moment:
     def setBackgroundColor(self, colorNr=0):
         colors = ["white","lightgreen","lightcoral"]
         self._color = QColor(colors[colorNr])

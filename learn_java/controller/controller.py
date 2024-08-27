@@ -23,8 +23,8 @@ class Controller:
     def _set_initial_values(self):
         self._view.pTE_code.setPlainText(self._model.get_current_java_file())
 
-    def _update_output(self, output, colorNr=0):
-        self._model.update_output(output,colorNr)
+    def _update_output(self, output): #, colorNr=0):
+        self._model.update_output(output) #,colorNr)
 
     def _send_input(self):
         self._model.set_input(self._view.lE_input.text())
@@ -35,15 +35,17 @@ class Controller:
         self._model.write_java_file(user_code)
         compile_result = self._model.compile_java()
         if (compile_result == "compilation successful"):
-            colorNr = 1
+            color = 1
             self._view.pB_run.setEnabled(True)
             compile_result = """Das kompilieren deines Codes hat geklappt.
 Mit der Taste "start" kannst du dein Programm nun laufen lassen.""" 
         else:
-            colorNr = 2
+            color = 2
             self._view.pB_run.setEnabled(False)
             compile_result = self._model.compile_check(user_code=user_code,compile_result=compile_result)    
-        self._update_output(compile_result,colorNr)
+        self._view.tB_Informationen.setText(compile_result)
+        colors = ["white","lightgreen","lightcoral"]
+        self._view.tB_Informationen.setStyleSheet("background-color: " + colors[color] + ";")
 
     def _run_stop_java_program(self):
         if self._view.pB_run.isChecked():
