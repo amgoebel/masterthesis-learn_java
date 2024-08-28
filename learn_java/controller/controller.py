@@ -2,6 +2,7 @@ from PyQt6.QtCore import pyqtSignal, QObject
 from PyQt6.QtWidgets import QApplication, QDialog
 from model.java_engine import Java_Engine
 from view.dialogs import Dialog_Chapter
+from time import sleep
 
 class Controller:
     """Learn Java's controller class."""
@@ -15,6 +16,7 @@ class Controller:
         self._dialog = Dialog_Chapter()
         self._connectSignalsAndSlots()
         self._set_code_file()
+        self._colors = ["white","lightgreen","lightcoral"]
 
     def _connectSignalsAndSlots(self):
         self._view.pB_compile.clicked.connect(self._compile_java_code)
@@ -36,6 +38,8 @@ class Controller:
         self._view.lE_input.clear()
         
     def _compile_java_code(self):
+        self._view.pB_compile.setEnabled(False)
+        QApplication.processEvents()
         user_code = self._view.pTE_code.toPlainText()
         self._model.write_java_file(user_code)
         compile_result = self._model.compile_java()
@@ -48,9 +52,9 @@ Mit der Taste "start" kannst du dein Programm nun laufen lassen."""
             color = 2
             self._view.pB_run.setEnabled(False)
             compile_result = self._model.compile_check(user_code=user_code,compile_result=compile_result)    
-        self._view.tB_Informationen.setText(compile_result)
-        colors = ["white","lightgreen","lightcoral"]
-        self._view.tB_Informationen.setStyleSheet("background-color: " + colors[color] + ";")
+        self._view.tE_Informationen.setText(compile_result)
+        self._view.tE_Informationen.setStyleSheet("background-color: " + self._colors[color] + ";")
+        self._view.pB_compile.setEnabled(True)
 
     def _run_stop_java_program(self):
         if self._view.pB_run.isChecked():
@@ -74,13 +78,23 @@ Mit der Taste "start" kannst du dein Programm nun laufen lassen."""
     def _next_chapter(self):
         self._model.set_current_chapter(self._model.get_current_chapter() + 1)
         self._set_code_file()
+        self._view.pB_run.setEnabled(False)
+        self._clear_information()
+        self._model.clear_output()
 
     def _choose_chapter(self):
         if (self._dialog.exec() == QDialog.DialogCode.Accepted): 
             self._model.set_current_chapter(int(self._dialog.cB_choose_chapter.currentText()))
             self._set_code_file()
+            self._view.pB_run.setEnabled(False)
+            self._clear_information()
+            self._model.clear_output()
         else:
             print("not dummy")
+
+    def _clear_information(self):
+        self._view.tE_Informationen.clear()
+        self._view.tE_Informationen.setStyleSheet("background-color: " + self._colors[0] + ";")
 
     def _exit_application(self):
         QApplication.instance().quit()

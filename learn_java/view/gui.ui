@@ -27,7 +27,11 @@
          </widget>
         </item>
         <item>
-         <widget class="QTextBrowser" name="tB_Tutorial"/>
+         <widget class="QTextEdit" name="tE_Tutorial">
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
@@ -55,7 +59,11 @@
          </widget>
         </item>
         <item>
-         <widget class="QTextBrowser" name="tB_Informationen"/>
+         <widget class="QTextEdit" name="tE_Informationen">
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QLabel" name="l_Output">
