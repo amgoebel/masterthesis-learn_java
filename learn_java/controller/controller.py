@@ -2,6 +2,7 @@ from PyQt6.QtCore import pyqtSignal, QObject
 from PyQt6.QtWidgets import QApplication, QDialog
 from model.java_engine import Java_Engine
 from view.dialogs import Dialog_Chapter
+from model.tutorial_files.tutorial import Tutorial_Handling
 from time import sleep
 
 class Controller:
@@ -14,8 +15,10 @@ class Controller:
         self._java_engine = None
         self._communicator = Communicator()
         self._dialog = Dialog_Chapter()
+        self._tutorial = Tutorial_Handling()
         self._connectSignalsAndSlots()
         self._set_code_file()
+        self._set_tutorial()
         self._colors = ["white","lightgreen","lightcoral"]
 
     def _connectSignalsAndSlots(self):
@@ -29,6 +32,10 @@ class Controller:
 
     def _set_code_file(self):
         self._view.pTE_code.setPlainText(self._model.get_current_java_file())
+
+    def _set_tutorial(self):
+        html_content = self._tutorial.get_tutorial_html(self._model.get_current_chapter())
+        self._view.tE_Tutorial.setHtml(html_content)
 
     def _update_output(self, output): #, colorNr=0):
         self._model.update_output(output) #,colorNr)
@@ -58,6 +65,8 @@ Mit der Taste "start" kannst du dein Programm nun laufen lassen."""
 
     def _run_stop_java_program(self):
         if self._view.pB_run.isChecked():
+            self._view.lE_input.setEnabled(True)
+            QApplication.processEvents()
             self._java_engine = Java_Engine(self._model, self._communicator)
             self._java_engine.start()
             self._set_start_button_text(True)
@@ -67,6 +76,7 @@ Mit der Taste "start" kannst du dein Programm nun laufen lassen."""
 
     def _disable_stop_button(self):
         self._view.pB_run.setChecked(False)
+        self._view.lE_input.setEnabled(False)
         self._set_start_button_text(False)
 
     def _set_start_button_text(self, value):
@@ -78,6 +88,7 @@ Mit der Taste "start" kannst du dein Programm nun laufen lassen."""
     def _next_chapter(self):
         self._model.set_current_chapter(self._model.get_current_chapter() + 1)
         self._set_code_file()
+        self._set_tutorial()
         self._view.pB_run.setEnabled(False)
         self._clear_information()
         self._model.clear_output()
@@ -86,6 +97,7 @@ Mit der Taste "start" kannst du dein Programm nun laufen lassen."""
         if (self._dialog.exec() == QDialog.DialogCode.Accepted): 
             self._model.set_current_chapter(int(self._dialog.cB_choose_chapter.currentText()))
             self._set_code_file()
+            self._set_tutorial()
             self._view.pB_run.setEnabled(False)
             self._clear_information()
             self._model.clear_output()

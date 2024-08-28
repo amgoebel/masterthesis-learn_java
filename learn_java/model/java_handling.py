@@ -70,12 +70,6 @@ class Java_Handling(QAbstractListModel):
         except:
             print("... there was an error setting the working directory")
 
-    def reset_working_directory(self):
-        try:
-            os.chdir(self.file_path)
-        except:
-            print("... there was an error setting the working directory")
-
     # get current start file
     def get_current_java_file(self):
         self.set_working_directory()
@@ -83,7 +77,6 @@ class Java_Handling(QAbstractListModel):
         f = open(filename,"r")
         code = f.read()
         f.close()
-        self.reset_working_directory()
         return(code)
     
     # set current chapter
@@ -105,7 +98,6 @@ class Java_Handling(QAbstractListModel):
             print("... code successfully written to file")
         except:
             print("... there was an error writing to file")
-        self.reset_working_directory()
 
 
     # compile java code
@@ -120,5 +112,4 @@ class Java_Handling(QAbstractListModel):
             print("... compilation failed")
             print("Error message: ", e.stderr)
             error_code = "Error message: " + e.stderr
-        self.reset_working_directory()
         return(error_code)

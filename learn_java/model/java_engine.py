@@ -29,7 +29,6 @@ class Java_Engine(threading.Thread):
         self._input_monitor.join()
         self._communicator.java_program_stopped.emit()
         print("... java program has terminated")
-        self._model.reset_working_directory()
 
     def stop(self):
         self._process.kill()

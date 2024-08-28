@@ -16,7 +16,7 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <layout class="QHBoxLayout" name="hL_mainFields" stretch="1,2,1">
+     <layout class="QHBoxLayout" name="hL_mainFields" stretch="1,1,1">
       <item>
        <layout class="QVBoxLayout" name="vL_Information">
         <item>
@@ -87,7 +87,11 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lE_input"/>
+         <widget class="QLineEdit" name="lE_input">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
