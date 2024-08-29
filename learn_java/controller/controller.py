@@ -82,8 +82,9 @@ Mit der Taste "start" kannst du dein Programm nun laufen lassen."""
         user_code = self._view.pTE_code.toPlainText()
         output = self._model.get_output()
         assignment = self._tutorial.get_assignment(self._model.get_current_chapter())
+        topics = self._tutorial.get_topics(self._model.get_current_chapter())
         input = self._view.lE_input.text()
-        run_information = self._model.run_check(user_code=user_code,assignment=assignment,output=output,input=input)
+        run_information = self._model.run_check(user_code=user_code,assignment=assignment,output=output,topics=topics,input=input)
         self._view.tE_Informationen.setText(run_information)
         self._view.tE_Informationen.setStyleSheet("background-color: " + self._colors[0] + ";")
 

@@ -34,3 +34,13 @@ class Tutorial_Handling:
         assignment = f.read()
         f.close()
         return(assignment)
+    
+    def get_topics(self,chapter):
+        self._set_working_directory()
+        filename = "topics" + str(chapter) + ".txt"
+        path = self.file_path
+
+        f = open(filename,"r")
+        topics = f.read()
+        f.close()
+        return(topics)

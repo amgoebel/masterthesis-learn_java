@@ -61,7 +61,7 @@ class Chains:
         return chain.invoke({"user_code": user_code, "error": compile_result})
 
 
-    def run_check(self, user_code, assignment, output, input=None) -> str:
+    def run_check(self, user_code, assignment, output, topics, input) -> str:
         
         system_run_message = """You will be given the student's assignment, the java code of the student,
         all previous topics of the class and the output of the program.
@@ -83,12 +83,12 @@ class Chains:
         {output}
 
         topics:
-        output command
+        {topics}
         """
         
         system_run_message_prompt = SystemMessagePromptTemplate(
             prompt=PromptTemplate(
-                input_variables=["assignment","output"], template=system_run_message 
+                input_variables=["assignment","output","topics"], template=system_run_message 
             )
         )
 
@@ -101,10 +101,10 @@ class Chains:
             )
         )
 
-        if (input == None):
+        if (input == ""):
             messages = [self.system_role_prompt, system_run_message_prompt, human_code_prompt]
             prompt = ChatPromptTemplate(
-                input_variables=["assignment","output","user_code"],
+                input_variables=["assignment","output","topics","user_code"],
                 messages=messages,
             )
         else:
@@ -118,10 +118,10 @@ class Chains:
             )
             messages = [self.system_role_prompt, system_run_message_prompt, human_code_prompt, human_input_prompt]
             prompt = ChatPromptTemplate(
-            input_variables=["assignment","output","user_code","input"],
+            input_variables=["assignment","output","topics","user_code","input"],
             messages=messages,
             )
         
         chain = prompt | self.chat_model | self.output_parser
 
-        return chain.invoke({"assignment": assignment,"output": output,"user_code": user_code, "input": input})
+        return chain.invoke({"assignment": assignment,"output": output,"user_code": user_code, "topics": topics,"input": input})
