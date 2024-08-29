@@ -63,14 +63,14 @@ class Chains:
 
     def run_check(self, user_code, assignment, output, input=None) -> str:
         
-        system_run_message = """You will be given the student's assignment, the java code of the student 
-        and the output of the program.
+        system_run_message = """You will be given the student's assignment, the java code of the student,
+        all previous topics of the class and the output of the program.
         If applicable, you will also be given the input to the program. 
-        Analyze the assignment, the java code and the output and potential input. 
+        Analyze the assignment, the java code, the topics and the output and potential input. 
         Decide, whether the assignment was solved correctly. Be very generous with this decision. 
-        Do not ask for things that are not specifically stated in the assignment. 
-        For example do not ask for dynamic solutions if not specifically stated in the assignment.  
-        If so, only state this. Do not write anything further.
+        Do not ask for things that are not specifically stated in the assignment.
+        It is important that you do not ask for solutions that require knowledge not covered in the previous topics.
+        If the assignment was solved correctly, only state this. Do not write anything further.
         If the assignment was not solved correctly, do not solve the problem for the student, 
         but give him a hint that will guide him to the solution.
         If the output is only correct for certain inputs, give a hint for a different input 
@@ -81,6 +81,9 @@ class Chains:
 
         output:
         {output}
+
+        topics:
+        output command
         """
         
         system_run_message_prompt = SystemMessagePromptTemplate(
