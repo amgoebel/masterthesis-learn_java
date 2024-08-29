@@ -25,7 +25,7 @@ class Controller:
         self._view.pB_compile.clicked.connect(self._compile_java_code)
         self._view.pB_run.clicked.connect(self._run_stop_java_program)
         self._view.lE_input.returnPressed.connect(self._send_input)
-        self._communicator.java_program_stopped.connect(self._disable_stop_button)
+        self._communicator.java_program_stopped.connect(self._after_run)
         self._view.action_Beenden.triggered.connect(self._exit_application)
         self._view.action_Kapitelwahl.triggered.connect(self._choose_chapter)
         self._view.pB_next_Chapter.clicked.connect(self._next_chapter)
@@ -74,10 +74,18 @@ Mit der Taste "start" kannst du dein Programm nun laufen lassen."""
             self._java_engine.stop()
             self._set_start_button_text(False)
 
-    def _disable_stop_button(self):
+    # perform tasks after run:
+    def _after_run(self):
         self._view.pB_run.setChecked(False)
         self._view.lE_input.setEnabled(False)
         self._set_start_button_text(False)
+        user_code = self._view.pTE_code.toPlainText()
+        output = self._model.get_output()
+        assignment = self._tutorial.get_assignment(self._model.get_current_chapter())
+        input = self._view.lE_input.text()
+        run_information = self._model.run_check(user_code=user_code,assignment=assignment,output=output,input=input)
+        self._view.tE_Informationen.setText(run_information)
+        self._view.tE_Informationen.setStyleSheet("background-color: " + self._colors[0] + ";")
 
     def _set_start_button_text(self, value):
         if value:
