@@ -172,6 +172,7 @@
     </property>
     <addaction name="action_Kapitelwahl"/>
     <addaction name="action_Person"/>
+    <addaction name="actionzeige_Startinformationen"/>
     <addaction name="action_Beenden"/>
    </widget>
    <addaction name="menu_Datei"/>
@@ -190,6 +191,11 @@
   <action name="action_Person">
    <property name="text">
     <string>&amp;Persönliche Informationen</string>
+   </property>
+  </action>
+  <action name="actionzeige_Startinformationen">
+   <property name="text">
+    <string>zeige &amp;Startinformationen</string>
    </property>
   </action>
  </widget>

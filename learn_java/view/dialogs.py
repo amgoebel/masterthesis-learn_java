@@ -1,6 +1,7 @@
 from PyQt6.QtWidgets import QDialog
 from view.UI_dialog_chapter import Ui_Dialog_Choose_Chapter
 from view.UI_dialog_preferences import Ui_UI_Dialog_Preferences
+from view.UI_dialog_about import Ui_UI_Dialog_About
 
 
 class Dialog_Chapter(QDialog, Ui_Dialog_Choose_Chapter):
@@ -18,7 +19,6 @@ class Dialog_Preferences(QDialog, Ui_UI_Dialog_Preferences):
         super(Dialog_Preferences, self).__init__()
         self.setupUi(self)
         self._model = model
-        self._set_values()
 
     def showEvent(self, event):
         self._set_values()
@@ -33,3 +33,17 @@ class Dialog_Preferences(QDialog, Ui_UI_Dialog_Preferences):
         self.lE_Hobbys.setText(preferences.get_hobby())
         self.lE_Beruf.setText(preferences.get_profession())
         self.lE_Vorbild.setText(preferences.get_role_model())
+
+
+class Dialog_About(QDialog, Ui_UI_Dialog_About):
+    def __init__(self,parent=None):
+        super(Dialog_About, self).__init__()
+        self.setupUi(self)
+
+    def showEvent(self, event):
+        self._set_values()
+        # Call the base class implementation to ensure the event is handled properly
+        super().showEvent(event)
+
+    def _set_values(self):
+        print("dummy2")
