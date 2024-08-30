@@ -1,3 +1,4 @@
+.venv/
 tests/
 learn_java/__pycache__
 learn_java/model/__pycache__/
