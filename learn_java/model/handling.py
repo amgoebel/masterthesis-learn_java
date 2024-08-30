@@ -91,6 +91,9 @@ class Handling(QAbstractListModel):
     def set_preferences(self,name,age,subject,hobby,profession,role_model):
         self._preferences.set_preferences(name=name,age=age,subject=subject,hobby=hobby,profession=profession,role_model=role_model)
     
+    def get_preferences(self):
+        return self._preferences    
+    
     # write to file
     def write_java_file(self, user_code):
         self.set_working_directory()
@@ -135,3 +138,21 @@ class Preferences:
         self._hobby = hobby
         self._profession = profession
         self._role_model = role_model
+
+    def get_name(self):
+        return self._name
+    
+    def get_age(self):
+        return self._age
+    
+    def get_subject(self):
+        return self._subject
+
+    def get_hobby(self):
+        return self._hobby
+    
+    def get_profession(self):
+        return self._profession
+    
+    def get_role_model(self):
+        return self._role_model

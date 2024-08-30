@@ -15,7 +15,7 @@ class Controller:
         self._java_engine = None
         self._communicator = Communicator()
         self._dialog_chapter = Dialog_Chapter()
-        self._dialog_preferences = Dialog_Preferences()
+        self._dialog_preferences = Dialog_Preferences(model=model)
         self._tutorial = Tutorial_Handling() 
         self._connectSignalsAndSlots()
         self._set_code_file()
@@ -113,8 +113,8 @@ Mit der Taste "start" kannst du dein Programm nun laufen lassen."""
             self._clear_information()
             self._model.clear_output()
 
-    def _edit_preferences(self):
-        if (self._dialog_preferences.exec() == QDialog.DialogCode.Accepted): 
+    def _edit_preferences(self): 
+        if (self._dialog_preferences.exec() == QDialog.DialogCode.Accepted):
             name = self._dialog_preferences.lE_Name.text()
             age = self._dialog_preferences.lE_Alter.text()
             subject = self._dialog_preferences.lE_Fach.text()
