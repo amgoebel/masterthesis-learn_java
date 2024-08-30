@@ -1,7 +1,7 @@
 from PyQt6.QtCore import pyqtSignal, QObject
 from PyQt6.QtWidgets import QApplication, QDialog
 from model.java_engine import Java_Engine
-from view.dialogs import Dialog_Chapter, Dialog_Preferences, Dialog_About
+from view.dialogs import Dialog_Chapter, Dialog_Preferences, Dialog_Welcome
 from model.tutorial_files.tutorial import Tutorial_Handling
 
 class Controller:
@@ -13,7 +13,7 @@ class Controller:
         self._view = view
         self._java_engine = None
         self._communicator = Communicator()
-        self._dialog_about = Dialog_About()
+        self._dialog_welcome = Dialog_Welcome()
         self._dialog_chapter = Dialog_Chapter()
         self._dialog_preferences = Dialog_Preferences(model=model)
         self._tutorial = Tutorial_Handling() 
@@ -21,7 +21,7 @@ class Controller:
         self._set_code_file()
         self._set_tutorial()
         self._colors = ["white","lightgreen","lightcoral"]
-        self._dialog_about.exec()
+        self._dialog_welcome.exec()
 
     def _connectSignalsAndSlots(self):
         self._view.pB_compile.clicked.connect(self._compile_java_code)

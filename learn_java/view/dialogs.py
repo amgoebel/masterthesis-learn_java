@@ -1,7 +1,7 @@
 from PyQt6.QtWidgets import QDialog
 from view.UI_dialog_chapter import Ui_Dialog_Choose_Chapter
 from view.UI_dialog_preferences import Ui_UI_Dialog_Preferences
-from view.UI_dialog_about import Ui_UI_Dialog_About
+from view.UI_dialog_welcome import Ui_UI_Dialog_Welcome
 
 
 class Dialog_Chapter(QDialog, Ui_Dialog_Choose_Chapter):
@@ -35,9 +35,9 @@ class Dialog_Preferences(QDialog, Ui_UI_Dialog_Preferences):
         self.lE_Vorbild.setText(preferences.get_role_model())
 
 
-class Dialog_About(QDialog, Ui_UI_Dialog_About):
+class Dialog_Welcome(QDialog, Ui_UI_Dialog_Welcome):
     def __init__(self,parent=None):
-        super(Dialog_About, self).__init__()
+        super(Dialog_Welcome, self).__init__()
         self.setupUi(self)
 
     def showEvent(self, event):
