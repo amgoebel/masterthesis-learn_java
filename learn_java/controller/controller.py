@@ -1,7 +1,7 @@
 from PyQt6.QtCore import pyqtSignal, QObject
 from PyQt6.QtWidgets import QApplication, QDialog
 from model.java_engine import Java_Engine
-from view.dialogs import Dialog_Chapter
+from view.dialogs import Dialog_Chapter, Dialog_Preferences
 from model.tutorial_files.tutorial import Tutorial_Handling
 from time import sleep
 
@@ -14,8 +14,9 @@ class Controller:
         self._view = view
         self._java_engine = None
         self._communicator = Communicator()
-        self._dialog = Dialog_Chapter()
-        self._tutorial = Tutorial_Handling()
+        self._dialog_chapter = Dialog_Chapter()
+        self._dialog_preferences = Dialog_Preferences()
+        self._tutorial = Tutorial_Handling() 
         self._connectSignalsAndSlots()
         self._set_code_file()
         self._set_tutorial()
@@ -28,6 +29,7 @@ class Controller:
         self._communicator.java_program_stopped.connect(self._after_run)
         self._view.action_Beenden.triggered.connect(self._exit_application)
         self._view.action_Kapitelwahl.triggered.connect(self._choose_chapter)
+        self._view.action_Person.triggered.connect(self._edit_preferences)
         self._view.pB_next_Chapter.clicked.connect(self._next_chapter)
 
     def _set_code_file(self):
@@ -103,15 +105,23 @@ Mit der Taste "start" kannst du dein Programm nun laufen lassen."""
         self._model.clear_output()
 
     def _choose_chapter(self):
-        if (self._dialog.exec() == QDialog.DialogCode.Accepted): 
-            self._model.set_current_chapter(int(self._dialog.cB_choose_chapter.currentText()))
+        if (self._dialog_chapter.exec() == QDialog.DialogCode.Accepted): 
+            self._model.set_current_chapter(int(self._dialog_chapter.cB_choose_chapter.currentText()))
             self._set_code_file()
             self._set_tutorial()
             self._view.pB_run.setEnabled(False)
             self._clear_information()
             self._model.clear_output()
-        else:
-            print("not dummy")
+
+    def _edit_preferences(self):
+        if (self._dialog_preferences.exec() == QDialog.DialogCode.Accepted): 
+            name = self._dialog_preferences.lE_Name.text()
+            age = self._dialog_preferences.lE_Alter.text()
+            subject = self._dialog_preferences.lE_Fach.text()
+            hobby = self._dialog_preferences.lE_Hobbys.text()
+            profession = self._dialog_preferences.lE_Beruf.text()
+            role_model = self._dialog_preferences.lE_Vorbild.text()
+            self._model.set_preferences(name,age,subject,hobby,profession,role_model)
 
     def _clear_information(self):
         self._view.tE_Informationen.clear()

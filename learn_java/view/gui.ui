@@ -171,6 +171,7 @@
      <string>&amp;Datei</string>
     </property>
     <addaction name="action_Kapitelwahl"/>
+    <addaction name="action_Person"/>
     <addaction name="action_Beenden"/>
    </widget>
    <addaction name="menu_Datei"/>
@@ -184,6 +185,11 @@
   <action name="action_Kapitelwahl">
    <property name="text">
     <string>&amp;Kapitelwahl</string>
+   </property>
+  </action>
+  <action name="action_Person">
+   <property name="text">
+    <string>&amp;Persönliche Informationen</string>
    </property>
   </action>
  </widget>

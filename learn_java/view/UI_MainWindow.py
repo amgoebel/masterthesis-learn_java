@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'gui.ui'
+# Form implementation generated from reading ui file './view/gui.ui'
 #
 # Created by: PyQt6 UI code generator 6.7.1
 #
@@ -111,7 +111,10 @@ class Ui_MainWindow(object):
         self.action_Beenden.setObjectName("action_Beenden")
         self.action_Kapitelwahl = QtGui.QAction(parent=MainWindow)
         self.action_Kapitelwahl.setObjectName("action_Kapitelwahl")
+        self.action_Person = QtGui.QAction(parent=MainWindow)
+        self.action_Person.setObjectName("action_Person")
         self.menu_Datei.addAction(self.action_Kapitelwahl)
+        self.menu_Datei.addAction(self.action_Person)
         self.menu_Datei.addAction(self.action_Beenden)
         self.menubar.addAction(self.menu_Datei.menuAction())
 
@@ -132,3 +135,4 @@ class Ui_MainWindow(object):
         self.menu_Datei.setTitle(_translate("MainWindow", "&Datei"))
         self.action_Beenden.setText(_translate("MainWindow", "&Beenden"))
         self.action_Kapitelwahl.setText(_translate("MainWindow", "&Kapitelwahl"))
+        self.action_Person.setText(_translate("MainWindow", "&Persönliche Informationen"))

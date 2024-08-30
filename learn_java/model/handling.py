@@ -3,9 +3,9 @@ import subprocess
 from PyQt6.QtCore import Qt, QAbstractListModel, QModelIndex
 from PyQt6.QtGui import QBrush, QColor
 
-class Java_Handling(QAbstractListModel):
+class Handling(QAbstractListModel):
     def __init__(self):
-        super(Java_Handling,self).__init__()
+        super(Handling,self).__init__()
         self.file_path = os.path.dirname(__file__)
         self.java_output = ""
         self.java_input = ""
@@ -13,6 +13,7 @@ class Java_Handling(QAbstractListModel):
         self._output = ""
         self._input = ""
         self._input_sent = False
+        self._preferences = Preferences()
         #self._color = QColor("white")
 
     # methods for data handling:
@@ -87,6 +88,9 @@ class Java_Handling(QAbstractListModel):
     def get_current_chapter(self):
         return self._current_file
     
+    def set_preferences(self,name,age,subject,hobby,profession,role_model):
+        self._preferences.set_preferences(name=name,age=age,subject=subject,hobby=hobby,profession=profession,role_model=role_model)
+    
     # write to file
     def write_java_file(self, user_code):
         self.set_working_directory()
@@ -113,3 +117,21 @@ class Java_Handling(QAbstractListModel):
             print("Error message: ", e.stderr)
             error_code = "Error message: " + e.stderr
         return(error_code)
+    
+class Preferences:
+    def __init__(self):
+        super(Preferences,self).__init__()
+        self._name = ""
+        self._age = ""
+        self._subject = ""
+        self._hobby = ""
+        self._profession = ""
+        self._role_model = ""
+    
+    def set_preferences(self,name,age,subject,hobby,profession,role_model):
+        self._name = name
+        self._age = age
+        self._subject = subject
+        self._hobby = hobby
+        self._profession = profession
+        self._role_model = role_model
