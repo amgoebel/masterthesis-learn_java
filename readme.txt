@@ -1,5 +1,5 @@
 Requirements:
-- Python with te following Packages:
+- Python with the following Packages:
 PyQT6
 python-dotenv
 langchain
