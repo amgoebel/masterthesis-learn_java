@@ -7,18 +7,24 @@ class Tutorial_Handling:
 
     def _set_working_directory(self):
         try:
-            os.chdir(self.file_path)
+            os.chdir(self.file_path + "/tutorial_files")
         except:
             print("... there was an error setting the working directory")
+    
+    def get_welcome_html(self):
+        self._set_working_directory()
+        f = open("welcome.html","r", encoding='utf-8')
+        welcome = f.read()
+        f.close()
+        return(welcome)
     
     def get_tutorial_html(self,chapter):
         assignment = self.get_assignment(chapter)
         assignment = assignment.replace("<","&lt;")
         assignment = assignment.replace(">","&gt;")
         filename = "chapter" + str(chapter) + ".html"
-        path = self.file_path
 
-        f = open(filename,"r")
+        f = open(filename,"r", encoding='utf-8')
         tutorial = f.read()
         f.close()
 
@@ -30,7 +36,7 @@ class Tutorial_Handling:
         filename = "assignment" + str(chapter) + ".txt"
         path = self.file_path
 
-        f = open(filename,"r")
+        f = open(filename,"r", encoding='utf-8')
         assignment = f.read()
         f.close()
         return(assignment)
@@ -40,7 +46,7 @@ class Tutorial_Handling:
         filename = "topics" + str(chapter) + ".txt"
         path = self.file_path
 
-        f = open(filename,"r")
+        f = open(filename,"r", encoding='utf-8')
         topics = f.read()
         f.close()
         return(topics)

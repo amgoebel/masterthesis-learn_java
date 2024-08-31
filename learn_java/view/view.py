@@ -12,7 +12,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def closeEvent(self,event):
         if (self._java_engine != None):
-            print("dummy")
             self._java_engine.stop_signal.emit()
             self._java_engine.wait()
 

@@ -5,13 +5,14 @@ from view.UI_dialog_welcome import Ui_UI_Dialog_Welcome
 
 
 class Dialog_Chapter(QDialog, Ui_Dialog_Choose_Chapter):
-    def __init__(self,parent=None):
+    def __init__(self,model,parent=None):
         super(Dialog_Chapter, self).__init__()
         self.setupUi(self)
+        self._model = model
         self._set_values()
 
     def _set_values(self):
-        for i in range(1, 11):
+        for i in range(1, self._model.get_max_chapter() + 1):
             self.cB_choose_chapter.addItem(str(i))
 
 class Dialog_Preferences(QDialog, Ui_UI_Dialog_Preferences):
@@ -36,9 +37,10 @@ class Dialog_Preferences(QDialog, Ui_UI_Dialog_Preferences):
 
 
 class Dialog_Welcome(QDialog, Ui_UI_Dialog_Welcome):
-    def __init__(self,parent=None):
+    def __init__(self,model,parent=None):
         super(Dialog_Welcome, self).__init__()
         self.setupUi(self)
+        self._model = model
 
     def showEvent(self, event):
         self._set_values()
@@ -46,4 +48,4 @@ class Dialog_Welcome(QDialog, Ui_UI_Dialog_Welcome):
         super().showEvent(event)
 
     def _set_values(self):
-        print("dummy2")
+        self.tE_Welcome.setText(self._model.get_tutorial().get_welcome_html())

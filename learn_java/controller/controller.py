@@ -2,7 +2,6 @@ from PyQt6.QtCore import pyqtSignal, QObject
 from PyQt6.QtWidgets import QApplication, QDialog
 from model.java_engine import Java_Engine
 from view.dialogs import Dialog_Chapter, Dialog_Preferences, Dialog_Welcome
-from model.tutorial_files.tutorial import Tutorial_Handling
 
 class Controller:
     """Learn Java's controller class."""
@@ -13,10 +12,9 @@ class Controller:
         self._view = view
         self._java_engine = None
         self._communicator = Communicator()
-        self._dialog_welcome = Dialog_Welcome()
-        self._dialog_chapter = Dialog_Chapter()
+        self._dialog_welcome = Dialog_Welcome(model=model)
+        self._dialog_chapter = Dialog_Chapter(model=model)
         self._dialog_preferences = Dialog_Preferences(model=model)
-        self._tutorial = Tutorial_Handling() 
         self._connectSignalsAndSlots()
         self._set_code_file()
         self._set_tutorial()
@@ -37,7 +35,7 @@ class Controller:
         self._view.pTE_code.setPlainText(self._model.get_current_java_file())
 
     def _set_tutorial(self):
-        html_content = self._tutorial.get_tutorial_html(self._model.get_current_chapter())
+        html_content = self._model.get_tutorial().get_tutorial_html(self._model.get_current_chapter())
         self._view.tE_Tutorial.setHtml(html_content)
 
     def _update_output(self, output): #, colorNr=0):
@@ -85,8 +83,8 @@ Mit der Taste "start" kannst du dein Programm nun laufen lassen."""
         self._set_start_button_text(False)
         user_code = self._view.pTE_code.toPlainText()
         output = self._model.get_output()
-        assignment = self._tutorial.get_assignment(self._model.get_current_chapter())
-        topics = self._tutorial.get_topics(self._model.get_current_chapter())
+        assignment = self._model.get_tutorial().get_assignment(self._model.get_current_chapter())
+        topics = self._model.get_tutorial().get_topics(self._model.get_current_chapter())
         input = self._view.lE_input.text()
         run_information = self._model.run_check(user_code=user_code,assignment=assignment,output=output,topics=topics,input=input)
         self._view.tE_Informationen.setText(run_information)
@@ -99,7 +97,8 @@ Mit der Taste "start" kannst du dein Programm nun laufen lassen."""
             self._view.pB_run.setText("start")
 
     def _next_chapter(self):
-        self._model.set_current_chapter(self._model.get_current_chapter() + 1)
+        if (self._model.get_current_chapter() < self._model.get_max_chapter()):
+            self._model.set_current_chapter(self._model.get_current_chapter() + 1)
         self._set_code_file()
         self._set_tutorial()
         self._view.pB_run.setEnabled(False)

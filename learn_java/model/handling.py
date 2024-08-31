@@ -2,6 +2,7 @@ import os
 import subprocess
 from PyQt6.QtCore import Qt, QAbstractListModel, QModelIndex
 from PyQt6.QtGui import QBrush, QColor
+from model.tutorial import Tutorial_Handling
 
 class Handling(QAbstractListModel):
     def __init__(self):
@@ -9,11 +10,13 @@ class Handling(QAbstractListModel):
         self.file_path = os.path.dirname(__file__)
         self.java_output = ""
         self.java_input = ""
-        self._current_file = 1
+        self._current_chapter = 1
+        self._max_chapter = 3
         self._output = ""
         self._input = ""
         self._input_sent = False
         self._preferences = Preferences()
+        self._tutorial = Tutorial_Handling()
         #self._color = QColor("white")
 
     # methods for data handling:
@@ -74,25 +77,32 @@ class Handling(QAbstractListModel):
     # get current start file
     def get_current_java_file(self):
         self.set_working_directory()
-        filename = "java" + str(self._current_file) + ".txt"
-        f = open(filename,"r")
+        filename = "java" + str(self._current_chapter) + ".txt"
+        f = open(filename,"r", encoding='utf-8')
         code = f.read()
         f.close()
         return(code)
     
     # set current chapter
     def set_current_chapter(self,chapter):
-        self._current_file = chapter
+        self._current_chapter = chapter
 
-        # set current chapter
+    # set current chapter
     def get_current_chapter(self):
-        return self._current_file
+        return self._current_chapter
+    
+    def get_max_chapter(self):
+        return self._max_chapter
     
     def set_preferences(self,name,age,subject,hobby,profession,role_model):
         self._preferences.set_preferences(name=name,age=age,subject=subject,hobby=hobby,profession=profession,role_model=role_model)
     
     def get_preferences(self):
-        return self._preferences    
+        return self._preferences
+    
+    def get_tutorial(self):
+        return self._tutorial
+
     
     # write to file
     def write_java_file(self, user_code):
