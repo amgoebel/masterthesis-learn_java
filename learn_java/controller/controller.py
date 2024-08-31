@@ -29,6 +29,7 @@ class Controller:
         self._view.action_Beenden.triggered.connect(self._exit_application)
         self._view.action_Kapitelwahl.triggered.connect(self._choose_chapter)
         self._view.action_Person.triggered.connect(self._edit_preferences)
+        self._view.action_zeige_Startinformationen.triggered.connect(self._show_welcome_page)
         self._view.pB_next_Chapter.clicked.connect(self._next_chapter)
 
     def _set_code_file(self):
@@ -123,6 +124,9 @@ Mit der Taste "start" kannst du dein Programm nun laufen lassen."""
             profession = self._dialog_preferences.lE_Beruf.text()
             role_model = self._dialog_preferences.lE_Vorbild.text()
             self._model.set_preferences(name,age,subject,hobby,profession,role_model)
+
+    def _show_welcome_page(self):
+        self._dialog_welcome.exec()
 
     def _clear_information(self):
         self._view.tE_Informationen.clear()

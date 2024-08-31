@@ -13,7 +13,7 @@ class Ui_UI_Dialog_Preferences(object):
     def setupUi(self, UI_Dialog_Preferences):
         UI_Dialog_Preferences.setObjectName("UI_Dialog_Preferences")
         UI_Dialog_Preferences.resize(700, 300)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Minimum)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(UI_Dialog_Preferences.sizePolicy().hasHeightForWidth())
@@ -95,7 +95,7 @@ class Ui_UI_Dialog_Preferences(object):
 
     def retranslateUi(self, UI_Dialog_Preferences):
         _translate = QtCore.QCoreApplication.translate
-        UI_Dialog_Preferences.setWindowTitle(_translate("UI_Dialog_Preferences", "Dialog"))
+        UI_Dialog_Preferences.setWindowTitle(_translate("UI_Dialog_Preferences", "Persönliche Informationen"))
         self.l_Vorlieben.setText(_translate("UI_Dialog_Preferences", "Fülle bitte diese Felder aus, damit die Aufgaben auf dich angepasst werden können:"))
         self.l_Name.setText(_translate("UI_Dialog_Preferences", "Name:"))
         self.l_Alter.setText(_translate("UI_Dialog_Preferences", "Alter:"))

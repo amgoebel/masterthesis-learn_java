@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'dialog_chapter.ui'
+# Form implementation generated from reading ui file './view/dialog_chapter.ui'
 #
 # Created by: PyQt6 UI code generator 6.7.1
 #
@@ -38,5 +38,5 @@ class Ui_Dialog_Choose_Chapter(object):
 
     def retranslateUi(self, Dialog_Choose_Chapter):
         _translate = QtCore.QCoreApplication.translate
-        Dialog_Choose_Chapter.setWindowTitle(_translate("Dialog_Choose_Chapter", "Dialog"))
+        Dialog_Choose_Chapter.setWindowTitle(_translate("Dialog_Choose_Chapter", "Kapitelwahl"))
         self.l_Kapitel.setText(_translate("Dialog_Choose_Chapter", "Kapitel:"))

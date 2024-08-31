@@ -33,4 +33,4 @@ class Ui_UI_Dialog_Welcome(object):
 
     def retranslateUi(self, UI_Dialog_Welcome):
         _translate = QtCore.QCoreApplication.translate
-        UI_Dialog_Welcome.setWindowTitle(_translate("UI_Dialog_Welcome", "Dialog"))
+        UI_Dialog_Welcome.setWindowTitle(_translate("UI_Dialog_Welcome", "Willkommen zu learn Java"))

@@ -99,7 +99,7 @@ class Ui_MainWindow(object):
         self.verticalLayout.addLayout(self.hL_buttons)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(parent=MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 1000, 30))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1000, 19))
         self.menubar.setObjectName("menubar")
         self.menu_Datei = QtWidgets.QMenu(parent=self.menubar)
         self.menu_Datei.setObjectName("menu_Datei")
@@ -113,11 +113,11 @@ class Ui_MainWindow(object):
         self.action_Kapitelwahl.setObjectName("action_Kapitelwahl")
         self.action_Person = QtGui.QAction(parent=MainWindow)
         self.action_Person.setObjectName("action_Person")
-        self.actionzeige_Startinformationen = QtGui.QAction(parent=MainWindow)
-        self.actionzeige_Startinformationen.setObjectName("actionzeige_Startinformationen")
+        self.action_zeige_Startinformationen = QtGui.QAction(parent=MainWindow)
+        self.action_zeige_Startinformationen.setObjectName("action_zeige_Startinformationen")
         self.menu_Datei.addAction(self.action_Kapitelwahl)
         self.menu_Datei.addAction(self.action_Person)
-        self.menu_Datei.addAction(self.actionzeige_Startinformationen)
+        self.menu_Datei.addAction(self.action_zeige_Startinformationen)
         self.menu_Datei.addAction(self.action_Beenden)
         self.menubar.addAction(self.menu_Datei.menuAction())
 
@@ -126,7 +126,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "learn Java"))
         self.l_Lehrgang.setText(_translate("MainWindow", "Lehrgang:"))
         self.l_Code.setText(_translate("MainWindow", "Dein Code:"))
         self.l_Informationen.setText(_translate("MainWindow", "Informationen:"))
@@ -139,4 +139,4 @@ class Ui_MainWindow(object):
         self.action_Beenden.setText(_translate("MainWindow", "&Beenden"))
         self.action_Kapitelwahl.setText(_translate("MainWindow", "&Kapitelwahl"))
         self.action_Person.setText(_translate("MainWindow", "&Persönliche Informationen"))
-        self.actionzeige_Startinformationen.setText(_translate("MainWindow", "zeige &Startinformationen"))
+        self.action_zeige_Startinformationen.setText(_translate("MainWindow", "zeige &Startinformationen"))

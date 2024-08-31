@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>learn Java</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -163,7 +163,7 @@
      <x>0</x>
      <y>0</y>
      <width>1000</width>
-     <height>30</height>
+     <height>19</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_Datei">
@@ -172,7 +172,7 @@
     </property>
     <addaction name="action_Kapitelwahl"/>
     <addaction name="action_Person"/>
-    <addaction name="actionzeige_Startinformationen"/>
+    <addaction name="action_zeige_Startinformationen"/>
     <addaction name="action_Beenden"/>
    </widget>
    <addaction name="menu_Datei"/>
@@ -193,7 +193,7 @@
     <string>&amp;Persönliche Informationen</string>
    </property>
   </action>
-  <action name="actionzeige_Startinformationen">
+  <action name="action_zeige_Startinformationen">
    <property name="text">
     <string>zeige &amp;Startinformationen</string>
    </property>
