@@ -1,7 +1,11 @@
 import subprocess
 import threading
+from PyQt6.QtCore import pyqtSignal, QThread, pyqtSlot
 
-class Java_Engine(threading.Thread):
+class Java_Engine(QThread):
+    
+    stop_signal = pyqtSignal()
+
     def __init__(self, model, communicator):
         super(Java_Engine,self).__init__()
         self._model = model
@@ -9,6 +13,7 @@ class Java_Engine(threading.Thread):
         self._input_monitor = None
         self._output_monitor = None
         self._communicator = communicator
+        self.stop_signal.connect(self.stop)
         
     # run java code
     def run(self):
@@ -30,6 +35,8 @@ class Java_Engine(threading.Thread):
         self._communicator.java_program_stopped.emit()
         print("... java program has terminated")
 
+    
+    @pyqtSlot()
     def stop(self):
         self._process.kill()
         self._output_monitor.join()

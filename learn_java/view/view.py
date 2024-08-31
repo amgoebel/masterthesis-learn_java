@@ -8,5 +8,15 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self._model = model
         self.lV_output.setModel(self._model)
+        self._java_engine = None
+
+    def closeEvent(self,event):
+        if (self._java_engine != None):
+            print("dummy")
+            self._java_engine.stop_signal.emit()
+            self._java_engine.wait()
+
+    def connect_java_engine(self,java_engine):
+        self._java_engine = java_engine
 
     

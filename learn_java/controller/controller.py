@@ -71,10 +71,11 @@ Mit der Taste "start" kannst du dein Programm nun laufen lassen."""
             self._view.lE_input.setEnabled(True)
             QApplication.processEvents()
             self._java_engine = Java_Engine(self._model, self._communicator)
+            self._view.connect_java_engine(self._java_engine)
             self._java_engine.start()
             self._set_start_button_text(True)
         else:
-            self._java_engine.stop()
+            self._java_engine.stop_signal.emit()
             self._set_start_button_text(False)
 
     # perform tasks after run:
