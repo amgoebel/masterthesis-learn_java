@@ -19,7 +19,7 @@ class Java_Engine(QThread):
     def run(self):
         self._model.set_working_directory()
         print("running java program ...")
-        self._process = subprocess.Popen(['java', 'main'],
+        self._process = subprocess.Popen(['java', 'Main'],
                                 stdin=subprocess.PIPE,
                                 stdout=subprocess.PIPE,
                                 stderr=subprocess.PIPE,

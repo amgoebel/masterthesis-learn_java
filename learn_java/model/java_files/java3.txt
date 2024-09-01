@@ -1,11 +1,28 @@
-import java.util.Scanner;  // Import the Scanner class
+// Basis-Klasse Tier
+class Tier {
+    todo ...
+}
 
-class main {
-  public static void main(String[] args) {
-    Scanner myObj = new Scanner(System.in);  // Create a Scanner object
-    System.out.println("Enter username");
+// Spezialisierte Klasse Hund, erbt von Tier
+class Hund extends Tier {
+    todo ...
+}
 
-    String userName = myObj.nextLine();  // Read user input
-    System.out.println("Username is: " + userName);  // Output user input
-  }
+// Spezialisierte Klasse Katze, erbt von Tier
+class Katze extends Tier {
+
+    // Konstruktor
+    public Katze(String name, double gewicht) {
+        super(name, gewicht);
+    }
+
+    todo ...
+
+}
+
+// Main-Klasse zum Testen
+public class Main {
+    public static void main(String[] args) {
+        todo ...
+    }
 }

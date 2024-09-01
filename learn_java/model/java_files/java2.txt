@@ -1,20 +1,8 @@
-import java.util.concurrent.TimeUnit;
+import java.util.Scanner;
 
-public class main {
-    public static void main(String[] args) {
-        System.out.println("Hello World!");
-try {
-    TimeUnit.SECONDS.sleep(1);
-} catch (InterruptedException ie) {
-    Thread.currentThread().interrupt();
-}
-System.out.println("Hello World!");
-try {
-    TimeUnit.SECONDS.sleep(1);
-} catch (InterruptedException ie) {
-    Thread.currentThread().interrupt();
-}
-System.out.println("Hello World!");
-
-    }
+class Main {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    
+  }
 }

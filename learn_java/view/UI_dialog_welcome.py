@@ -12,7 +12,7 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_UI_Dialog_Welcome(object):
     def setupUi(self, UI_Dialog_Welcome):
         UI_Dialog_Welcome.setObjectName("UI_Dialog_Welcome")
-        UI_Dialog_Welcome.resize(1058, 840)
+        UI_Dialog_Welcome.resize(1000, 900)
         self.verticalLayout = QtWidgets.QVBoxLayout(UI_Dialog_Welcome)
         self.verticalLayout.setObjectName("verticalLayout")
         self.tE_Welcome = QtWidgets.QTextEdit(parent=UI_Dialog_Welcome)

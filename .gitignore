@@ -2,7 +2,8 @@
 tests/
 learn_java/__pycache__
 learn_java/model/__pycache__/
-learn_java/model/java_files/main.*
+learn_java/model/java_files/*.class
+learn_java/model/java_files/*.java
 learn_java/model/java_files/__pycache__/
 learn_java/model/tutorial_files/__pycache__/
 learn_java/view/__pycache__/

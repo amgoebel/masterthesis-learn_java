@@ -1,1 +1,5 @@
-output command
+output command: System.out.println()
+variables: concept, naming, calling
+data types: boolean, int, float, double, char, String
+type conversion and casting
+input command: nextline() via java.util.Scanner

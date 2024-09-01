@@ -1,1 +1,107 @@
-todo
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title>Learn Java - Kapitel ??</title>
+	<meta name="generator" content="LibreOffice 24.2.5.2 (Linux)"/>
+	<meta name="created" content="00:00:00"/>
+	<meta name="changed" content="2024-09-01T19:24:52.144914776"/>
+	<meta name="" content=""/>
+	<meta name="created" content="00:00:00">
+	<meta name="created" content="00:00:00">
+	<style type="text/css">
+		@page { size: 8.27in 11.69in; margin-left: 0.79in; margin-right: 0.39in; margin-top: 0.39in; margin-bottom: 0.39in }
+		p { line-height: 100%; margin-bottom: 0.01in; background: transparent; background: transparent }
+		h1 { margin-bottom: 0.08in; background: transparent; background: transparent; page-break-after: avoid }
+		h1.western { font-family: "Liberation Serif", serif; font-size: 24pt; font-weight: bold }
+		h1.cjk { font-family: "Noto Serif CJK SC"; font-size: 24pt; font-weight: bold }
+		h1.ctl { font-family: "Noto Sans Devanagari"; font-size: 24pt; font-weight: bold }
+		h2 { margin-top: 0.14in; margin-bottom: 0.08in; background: transparent; background: transparent; page-break-after: avoid }
+		h2.western { font-family: "Liberation Serif", serif; font-size: 18pt; font-weight: bold }
+		h2.cjk { font-family: "Noto Serif CJK SC"; font-size: 18pt; font-weight: bold }
+		h2.ctl { font-family: "Noto Sans Devanagari"; font-size: 18pt; font-weight: bold }
+		pre { margin-top: 0.01in; margin-bottom: 0.01in; background: transparent; background: transparent; page-break-before: auto; page-break-after: auto }
+		pre.western { font-family: "Liberation Mono", monospace; font-size: 12pt }
+		pre.cjk { font-family: "Noto Sans Mono CJK SC", monospace; font-size: 10pt }
+		pre.ctl { font-family: "Liberation Mono", monospace; font-size: 10pt }
+		code.western { font-family: "Liberation Mono", monospace }
+		code.cjk { font-family: "Noto Sans Mono CJK SC", monospace }
+		code.ctl { font-family: "Liberation Mono", monospace }
+		a:link { color: #000080; text-decoration: underline }
+		a:visited { color: #800000; text-decoration: underline }
+	</style>
+</head>
+<body lang="de-DE" link="#000080" vlink="#800000" dir="ltr"><h1 class="western">
+Kapitel ?? - Vererbung</h1>
+<p style="margin-bottom: 0.1in">Wir haben schon festgestellt, dass
+ein wichtiges Konzept der OOP die Wiederverwendbarkeit von Code
+ist.<br/>
+Häufig kommt es vor, dass man zwei verschiedene Klassen
+benötigt, die sich nur in kleinen Teilen unterscheiden. 
+</p>
+<p style="margin-bottom: 0.1in">Damit sich Code nicht in zwei (oder
+mehr) Klassen wiederholt, erstellt man eine Basis-Klasse, die alle
+gemeinsamen Elemente enthält. Die benötigten Klassen sind dann
+Kopien dieser Basis-Klasse, erweitert um die jeweiligen
+(unterschiedlichen) Eigenschaften.</p>
+<p style="margin-bottom: 0.1in">Die Basis-Klasse nennt man die
+<b>Elter-Klasse</b> und die abgeleiteten Klassen heißen
+<b>Kind-Klassen</b>. Die Eigenschaften der Elter-Klasse werden auf
+die Kind-Klassen <b>vererbt</b>.</p>
+<p style="margin-bottom: 0.1in">Um anzuzeigen, dass eine Klasse von
+einer anderen Klasse erbt, verwendet man das Keywort <b>extends</b>.</p>
+<p style="margin-bottom: 0.1in">Im folgenden Beispiel sind die
+Klassen <span style="font-variant: normal"><font face="Liberation Mono, monospace"><span style="font-style: normal">Auto</span></font></span>
+und <span style="font-variant: normal"><font face="Liberation Mono, monospace"><span style="font-style: normal">Motorrad</span></font></span>
+Kind-Klassen von der Klasse <span style="font-variant: normal"><font face="Liberation Mono, monospace"><span style="font-style: normal">Fahrzeug</span></font></span>:</p>
+<pre class="western" style="line-height: 100%"><code class="western"><font size="3" style="font-size: 12pt">class Fahrzeug {</font></code>
+<code class="western">  </code><code class="western"><font size="3" style="font-size: 12pt">public String art = &quot;Kraftfahrzeug&quot;;  // Attribut von Fahrzeug</font></code>
+<code class="western">  </code><code class="western"><font size="3" style="font-size: 12pt"><span style="font-weight: normal">public void hupen() {                 // Methode von Fahrzeug</span></font></code>
+<code class="western">  </code><code class="western"><font size="3" style="font-size: 12pt">System.out.println(&quot;Tuut, tuut!&quot;);</font></code>
+<code class="western">  </code><code class="western"><font size="3" style="font-size: 12pt">}</font></code>
+<code class="western"><font size="3" style="font-size: 12pt">}</font></code>
+
+<code class="western"><font size="3" style="font-size: 12pt">class Auto extends Fahrzeug {</font></code>
+<code class="western">  </code><code class="western"><font size="3" style="font-size: 12pt">public int anzahlRaeder = 4;     // Attribut von Auto</font></code>
+<code class="western"><font size="3" style="font-size: 12pt">}</font></code>
+
+<code class="western"><font size="3" style="font-size: 12pt">class Motorrad extends Fahrzeug {</font></code>
+<code class="western">  </code><code class="western"><font size="3" style="font-size: 12pt">public int anzahlRaeder = 2;     // Attribut von Motorrad</font></code>
+<code class="western"><font size="3" style="font-size: 12pt">}</font></code>
+
+<code class="western"><font size="3" style="font-size: 12pt">class main{</font></code>
+<code class="western">  </code><code class="western"><font size="3" style="font-size: 12pt">public static void main(String[] args) {</font></code>
+<code class="western">    </code><code class="western"><font size="3" style="font-size: 12pt">// Deklaration von einem Auto und einem Motorrad</font></code>
+<code class="western">    </code><code class="western"><font size="3" style="font-size: 12pt">Auto meinAuto = new Auto();</font></code>
+<code class="western">    </code><code class="western"><font size="3" style="font-size: 12pt">Motorrad meinRad = new Motorrad();</font></code>
+
+<code class="western">    </code><code class="western"><font size="3" style="font-size: 12pt">// Aufrufen der hupen() Methode (von der Fahrzeug Klasse)</font></code>
+<code class="western">    </code><code class="western"><font size="3" style="font-size: 12pt">meinAuto.hupen();</font></code>
+<code class="western">    </code><code class="western"><font size="3" style="font-size: 12pt">meinRad.hupen();</font></code>
+
+<code class="western">    </code><code class="western"><font size="3" style="font-size: 12pt">// Anzeigen der Attribute Art und der Anzahl Räder</font></code>
+<code class="western">    </code><code class="western"><font size="3" style="font-size: 12pt">System.out.print(&quot;Art: &quot; + meinAuto.art);</font></code>
+<code class="western">    </code><code class="western"><font size="3" style="font-size: 12pt">System.out.println(&quot;, Anzahl Räder: &quot; + meinAuto.anzahlRaeder);</font></code>
+<code class="western">    </code><code class="western"><font size="3" style="font-size: 12pt">System.out.print(&quot;Art: &quot; + meinRad.art);</font></code>
+<code class="western">    </code><code class="western"><font size="3" style="font-size: 12pt">System.out.println(&quot;, Anzahl Räder: &quot; + meinRad.anzahlRaeder);</font></code>
+<code class="western">  </code><code class="western"><font size="3" style="font-size: 12pt">}</font></code>
+<code class="western"><font size="3" style="font-size: 12pt">}</font></code></pre><p style="margin-bottom: 0.1in">
+Die Ausführung dieses Programms ergibt folgenden Output:</p>
+<pre class="western"><font size="3" style="font-size: 12pt">Tuut, tuut!</font>
+<font size="3" style="font-size: 12pt">Tuut, tuut!</font>
+<font size="3" style="font-size: 12pt">Art: Kraftfahrzeug, Anzahl Räder: 4</font>
+<font size="3" style="font-size: 12pt">Art: Kraftfahrzeug, Anzahl Räder: 2</font></pre><p style="margin-bottom: 0.1in">
+Die Klassen <font face="Liberation Mono, monospace">Auto</font> und
+<font face="Liberation Mono, monospace">Motorrad</font> besitzen
+beide auch das Attribut <font face="Liberation Mono, monospace">art</font>
+und die Methode <font face="Liberation Mono, monospace">hupen().</font></p>
+<p style="margin-bottom: 0.1in"><br/>
+<br/>
+
+</p>
+<h2 class="western"><br/>
+<br/>
+
+</h2>
+</body>
+</html>

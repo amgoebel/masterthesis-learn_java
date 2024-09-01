@@ -20,22 +20,19 @@ class Tutorial_Handling:
     
     def get_tutorial_html(self,chapter):
         assignment = self.get_assignment(chapter)
-        assignment = assignment.replace("<","&lt;")
-        assignment = assignment.replace(">","&gt;")
         filename = "chapter" + str(chapter) + ".html"
 
         f = open(filename,"r", encoding='utf-8')
         tutorial = f.read()
         f.close()
 
-        tutorial = tutorial.replace("{assignment}",assignment)
+        tutorial = tutorial + assignment
         return(tutorial)
     
     def get_assignment(self,chapter):
         self._set_working_directory()
-        filename = "assignment" + str(chapter) + ".txt"
-        path = self.file_path
-
+        filename = "assignment" + str(chapter) + ".html"
+        
         f = open(filename,"r", encoding='utf-8')
         assignment = f.read()
         f.close()

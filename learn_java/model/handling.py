@@ -109,7 +109,7 @@ class Handling(QAbstractListModel):
         self.set_working_directory()
         print("writing java code to file ...")
         try:
-            f = open("main.java","w")
+            f = open("Main.java","w")
             f.write(user_code)
             f.close()
             print("... code successfully written to file")
@@ -122,7 +122,7 @@ class Handling(QAbstractListModel):
         self.set_working_directory()
         print("starting compilation ...")
         try:
-            p = subprocess.run(["javac","main.java"], capture_output=True, text=True, check=True)
+            p = subprocess.run(["javac","Main.java"], capture_output=True, text=True, check=True)
             print("... compilation successful")
             error_code = "compilation successful"
         except subprocess.CalledProcessError as e: 
