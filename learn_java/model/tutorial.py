@@ -38,6 +38,23 @@ class Tutorial_Handling:
         f.close()
         return(assignment)
     
+    def get_original_assignment(self,chapter):
+        self._set_working_directory()
+        filename = "assignment" + str(chapter) + "_original.html"
+        
+        f = open(filename,"r", encoding='utf-8')
+        assignment = f.read()
+        f.close()
+        return(assignment)
+    
+    def set_assignment(self,chapter,assignment):
+        self._set_working_directory()
+        filename = "assignment" + str(chapter) + ".html"
+        
+        f = open(filename,"w", encoding='utf-8')
+        f.write(assignment)
+        f.close()
+    
     def get_topics(self,chapter):
         self._set_working_directory()
         filename = "topics" + str(chapter) + ".txt"

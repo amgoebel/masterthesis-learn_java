@@ -8,6 +8,7 @@ from langchain.prompts import (
     ChatPromptTemplate,
 )
 from langchain_core.output_parsers import StrOutputParser
+import re
 
 class Chains:
     def __init__(self):
@@ -124,4 +125,90 @@ class Chains:
         
         chain = prompt | self.chat_model | self.output_parser
 
-        return chain.invoke({"assignment": assignment,"output": output,"user_code": user_code, "topics": topics,"input": input})
+        return chain.invoke({"assignment": assignment,"output": output,"user_code": user_code, 
+                             "topics": topics,"input": input})
+    
+    def formulate_assignment(self, tutorial_chapter, assignment, preferences, code, topics) -> str:
+        
+        name = preferences.get_name()
+        age = preferences.get_age()
+        subject = preferences.get_subject()
+        hobby = preferences.get_hobby()
+        profession = preferences.get_profession()
+        role_model = preferences.get_role_model()
+
+        system_formulate_message = """You will be given the content of the current chapter
+        and a corresponding assignment in html format. You will also be given a starting code for the student,
+        all previous topics of the class and preferences of the student. 
+        Your task is to analyze the given information and reformulate the assignment and if necessary the starting code 
+        in order to make the assignment more interesting for the student.
+        It is important that you do not change the difficulty level and the extent of the assignment.
+        Be aware that the starting code is only a starting point for the student and not the solution!
+        Most of the time it contains a "todo ..." part. The revised version should contain this as well. 
+        The new starting code should be of the same extent as the original starting code. 
+        Give the assignment in html format and the starting code in plain text. 
+        Wrap the html with ```html and ``` and the java code with ```java and ``` 
+
+        chapter (in German):
+        {tutorial_chapter}
+
+        assignment (in German): 
+        {assignment}
+
+        starting code:
+        {code}
+
+        topics:
+        {topics}
+        """
+        
+        system_formulate_message_prompt = SystemMessagePromptTemplate(
+            prompt=PromptTemplate(
+                input_variables=["tutorial_chapter","assignment","code","topics"], template=system_formulate_message 
+            )
+        )
+
+        human_preferences_prompt = HumanMessagePromptTemplate(
+            prompt=PromptTemplate(
+                input_variables=["name","age","subject","hobby","profession","role_model"], template="""
+                
+                preferences (in German):
+                name: {name}
+                age: {age}
+                favorite subject: {subject}
+                hobbys: = {hobby}
+                dream profession = {profession}
+                role_model = {role_model}"""
+            )
+        )
+
+        
+        messages = [self.system_role_prompt, system_formulate_message_prompt, human_preferences_prompt]
+        prompt = ChatPromptTemplate(
+            input_variables=["tutorial_chapter","assignment","code","topics","name","age","subject","hobby","profession","role_model"],
+            messages=messages,
+        )
+        
+        
+        chain = prompt | self.chat_model | self.output_parser
+
+        response = chain.invoke({"tutorial_chapter": tutorial_chapter,"assignment": assignment,"code": code,"topics": topics,
+                             "name": name,"age": age,"subject": subject,"hobby": hobby,"profession": profession,"role_model": role_model})
+        
+        
+        keyword1 = ["`html","`java"]
+        keyword2 = "`"
+
+        start_pos = []
+        extracted_text = []
+
+        for i in range(2):
+            # Find the start and end positions of the keywords
+            start_pos.append(response.find(keyword1[i]) + len(keyword1[i]))
+            end_pos = response.find(keyword2, start_pos[i])  # start searching for keyword2 after start_pos
+
+            # Extract the text between the keywords
+            extracted_text.append(response[start_pos[i]:end_pos])
+        
+        
+        return(extracted_text)

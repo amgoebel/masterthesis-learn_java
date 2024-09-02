@@ -83,11 +83,34 @@ class Handling(QAbstractListModel):
         f.close()
         return(code)
     
+    def get_java_file(self,chapter):
+        self.set_working_directory()
+        filename = "java" + str(chapter) + ".txt"
+        f = open(filename,"r", encoding='utf-8')
+        code = f.read()
+        f.close()
+        return(code)
+    
+    def get_original_java_file(self,chapter):
+        self.set_working_directory()
+        filename = "java" + str(chapter) + "_original.txt"
+        f = open(filename,"r", encoding='utf-8')
+        code = f.read()
+        f.close()
+        return(code)
+    
+    def set_java_file(self,chapter,code):
+        self.set_working_directory()
+        filename = "java" + str(chapter) + ".txt"
+        f = open(filename,"w", encoding='utf-8')
+        f.write(code)
+        f.close()
+    
     # set current chapter
     def set_current_chapter(self,chapter):
         self._current_chapter = chapter
 
-    # set current chapter
+    # get current chapter
     def get_current_chapter(self):
         return self._current_chapter
     

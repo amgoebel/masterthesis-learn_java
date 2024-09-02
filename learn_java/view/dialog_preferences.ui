@@ -170,7 +170,14 @@
        </property>
       </widget>
      </item>
-     <item row="7" column="0" colspan="2">
+     <item row="8" column="1">
+      <widget class="QLabel" name="l_note">
+       <property name="text">
+        <string>Durch die Änderung dieser Angaben, werden die Aufgaben neu erstellt. Dies kann eine Weile dauern!</string>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="1">
       <widget class="QDialogButtonBox" name="buttonBox">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>

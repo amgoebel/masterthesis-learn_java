@@ -17,6 +17,7 @@ class Ui_UI_Dialog_Welcome(object):
         self.verticalLayout.setObjectName("verticalLayout")
         self.tE_Welcome = QtWidgets.QTextEdit(parent=UI_Dialog_Welcome)
         self.tE_Welcome.setLocale(QtCore.QLocale(QtCore.QLocale.Language.German, QtCore.QLocale.Country.Germany))
+        self.tE_Welcome.setReadOnly(True)
         self.tE_Welcome.setObjectName("tE_Welcome")
         self.verticalLayout.addWidget(self.tE_Welcome)
         self.buttonBox = QtWidgets.QDialogButtonBox(parent=UI_Dialog_Welcome)

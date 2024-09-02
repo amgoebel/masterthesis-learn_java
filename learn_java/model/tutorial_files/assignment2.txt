@@ -1,2 +1,0 @@
-Vervollständige das Programm, so dass es nach einem Username fragt und diesen unter der Variable userName abspeichert.
-Anschließend soll das Programm den Text "Der Username ist: userName" ausgeben, wobei userName durch den Wert der Variable ersetzt wird. 

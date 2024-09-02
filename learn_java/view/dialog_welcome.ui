@@ -19,6 +19,9 @@
      <property name="locale">
       <locale language="German" country="Germany"/>
      </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
     </widget>
    </item>
    <item>

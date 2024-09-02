@@ -1,1 +1,0 @@
-Ändere das Programm so ab, dass es nicht mehr "Hallo Welt" ausgibt, sondern "Hallo" und deinen Namen ausgibt.

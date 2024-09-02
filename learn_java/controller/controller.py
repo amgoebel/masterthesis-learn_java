@@ -16,6 +16,7 @@ class Controller:
         self._dialog_chapter = Dialog_Chapter(model=model)
         self._dialog_preferences = Dialog_Preferences(model=model)
         self._connectSignalsAndSlots()
+        self._reset_files()
         self._set_code_file()
         self._set_tutorial()
         self._colors = ["white","lightgreen","lightcoral"]
@@ -32,6 +33,13 @@ class Controller:
         self._view.action_zeige_Startinformationen.triggered.connect(self._show_welcome_page)
         self._view.pB_next_Chapter.clicked.connect(self._next_chapter)
 
+    def _reset_files(self):
+        for chapter in range(1,self._model.get_max_chapter() + 1):
+            self._model.get_tutorial().set_assignment(
+                chapter=chapter,assignment=self._model.get_tutorial().get_original_assignment(chapter))
+            self._model.set_java_file(chapter=chapter,code=self._model.get_original_java_file(chapter))
+    
+    
     def _set_code_file(self):
         self._view.pTE_code.setPlainText(self._model.get_current_java_file())
 
@@ -100,21 +108,22 @@ Mit der Taste "start" kannst du dein Programm nun laufen lassen."""
     def _next_chapter(self):
         if (self._model.get_current_chapter() < self._model.get_max_chapter()):
             self._model.set_current_chapter(self._model.get_current_chapter() + 1)
+            self._prepare_chapter()
+        
+
+    def _choose_chapter(self):
+        if (self._dialog_chapter.exec() == QDialog.DialogCode.Accepted): 
+            self._model.set_current_chapter(int(self._dialog_chapter.cB_choose_chapter.currentText()))
+            self._prepare_chapter()
+
+    def _prepare_chapter(self):
         self._set_code_file()
         self._set_tutorial()
         self._view.pB_run.setEnabled(False)
         self._clear_information()
         self._model.clear_output()
-
-    def _choose_chapter(self):
-        if (self._dialog_chapter.exec() == QDialog.DialogCode.Accepted): 
-            self._model.set_current_chapter(int(self._dialog_chapter.cB_choose_chapter.currentText()))
-            self._set_code_file()
-            self._set_tutorial()
-            self._view.pB_run.setEnabled(False)
-            self._clear_information()
-            self._model.clear_output()
-
+    
+    
     def _edit_preferences(self): 
         if (self._dialog_preferences.exec() == QDialog.DialogCode.Accepted):
             name = self._dialog_preferences.lE_Name.text()
@@ -124,6 +133,16 @@ Mit der Taste "start" kannst du dein Programm nun laufen lassen."""
             profession = self._dialog_preferences.lE_Beruf.text()
             role_model = self._dialog_preferences.lE_Vorbild.text()
             self._model.set_preferences(name,age,subject,hobby,profession,role_model)
+            
+            preferences = self._model.get_preferences()
+            for chapter in range(1,self._model.get_max_chapter() + 1):
+                tutorial_chapter = self._model.get_tutorial().get_tutorial_html(chapter)
+                assignment = self._model.get_tutorial().get_original_assignment(chapter)
+                code = self._model.get_java_file(chapter)
+                topics = self._model.get_tutorial().get_topics(chapter)
+                response = self._model.formulate_assignment(tutorial_chapter=tutorial_chapter, assignment=assignment, preferences=preferences, code=code, topics=topics)
+                self._model.get_tutorial().set_assignment(chapter=chapter,assignment=response[0])
+                self._model.set_java_file(chapter=chapter,code=response[1])
 
     def _show_welcome_page(self):
         self._dialog_welcome.exec()
