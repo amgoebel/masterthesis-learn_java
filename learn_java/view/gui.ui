@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1000</width>
-    <height>600</height>
+    <width>1014</width>
+    <height>617</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -68,7 +68,7 @@
         <item>
          <widget class="QLabel" name="l_Output">
           <property name="text">
-           <string>Output:</string>
+           <string>Output / Fehlermeldung:</string>
           </property>
          </widget>
         </item>
@@ -100,7 +100,10 @@
     <item>
      <layout class="QHBoxLayout" name="hL_buttons" stretch="0,0,0">
       <property name="spacing">
-       <number>6</number>
+       <number>250</number>
+      </property>
+      <property name="sizeConstraint">
+       <enum>QLayout::SetDefaultConstraint</enum>
       </property>
       <property name="leftMargin">
        <number>0</number>
@@ -108,18 +111,41 @@
       <property name="topMargin">
        <number>3</number>
       </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
       <item>
-       <widget class="QPushButton" name="pB_next_Chapter">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
+       <layout class="QHBoxLayout" name="hl_Chapters" stretch="0,0">
+        <property name="spacing">
+         <number>50</number>
         </property>
-        <property name="text">
-         <string>nächstes Kapitel</string>
-        </property>
-       </widget>
+        <item>
+         <widget class="QPushButton" name="pB_previous_Chapter">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>vorheriges Kapitel</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pB_next_Chapter">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>nächstes Kapitel</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item>
        <widget class="QPushButton" name="pB_compile">
@@ -162,8 +188,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1000</width>
-     <height>19</height>
+     <width>1014</width>
+     <height>30</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_Datei">

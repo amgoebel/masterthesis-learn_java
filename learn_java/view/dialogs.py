@@ -27,13 +27,10 @@ class Dialog_Preferences(QDialog, Ui_UI_Dialog_Preferences):
         super().showEvent(event)
 
     def _set_values(self):
-        preferences = self._model.get_preferences()
-        self.lE_Name.setText(preferences.get_name())
-        self.lE_Alter.setText(preferences.get_age())
-        self.lE_Fach.setText(preferences.get_subject())
-        self.lE_Hobbys.setText(preferences.get_hobby())
-        self.lE_Beruf.setText(preferences.get_profession())
-        self.lE_Vorbild.setText(preferences.get_role_model())
+        self.lE_Fach.setText(self._model.get_favorite_subjects())
+        self.lE_Hobbys.setText(self._model.get_hobbies())
+        self.lE_Beruf.setText(self._model.get_profession())
+        
 
 
 class Dialog_Welcome(QDialog, Ui_UI_Dialog_Welcome):
@@ -48,4 +45,4 @@ class Dialog_Welcome(QDialog, Ui_UI_Dialog_Welcome):
         super().showEvent(event)
 
     def _set_values(self):
-        self.tE_Welcome.setText(self._model.get_tutorial().get_welcome_html())
+        self.tE_Welcome.setText(self._model.get_welcome_html())

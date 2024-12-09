@@ -1,6 +1,7 @@
 from PyQt6.QtCore import pyqtSignal, QObject
 from PyQt6.QtWidgets import QApplication, QDialog
-from model.java_engine import Java_Engine
+from model.java_engine import Java_Engine, compile_java
+from model.chains import Assignment_Adjuster
 from view.dialogs import Dialog_Chapter, Dialog_Preferences, Dialog_Welcome
 
 class Controller:
@@ -11,16 +12,19 @@ class Controller:
         self._model = model
         self._view = view
         self._java_engine = None
+        self._assignment_adjuster = None
         self._communicator = Communicator()
         self._dialog_welcome = Dialog_Welcome(model=model)
         self._dialog_chapter = Dialog_Chapter(model=model)
         self._dialog_preferences = Dialog_Preferences(model=model)
         self._connectSignalsAndSlots()
-        self._reset_files()
+        self._colors = ["white","lightgreen","lightcoral"]
+        if self._model.new_user :
+            self._show_welcome_page()
+        else:
+            self._model.set_starting_chapter()
         self._set_code_file()
         self._set_tutorial()
-        self._colors = ["white","lightgreen","lightcoral"]
-        self._dialog_welcome.exec()
 
     def _connectSignalsAndSlots(self):
         self._view.pB_compile.clicked.connect(self._compile_java_code)
@@ -29,22 +33,16 @@ class Controller:
         self._communicator.java_program_stopped.connect(self._after_run)
         self._view.action_Beenden.triggered.connect(self._exit_application)
         self._view.action_Kapitelwahl.triggered.connect(self._choose_chapter)
-        self._view.action_Person.triggered.connect(self._edit_preferences)
+        self._view.action_Person.triggered.connect(self._adjust_assignments)
         self._view.action_zeige_Startinformationen.triggered.connect(self._show_welcome_page)
         self._view.pB_next_Chapter.clicked.connect(self._next_chapter)
+        self._view.pB_previous_Chapter.clicked.connect(self._previous_chapter)
 
-    def _reset_files(self):
-        for chapter in range(1,self._model.get_max_chapter() + 1):
-            self._model.get_tutorial().set_assignment(
-                chapter=chapter,assignment=self._model.get_tutorial().get_original_assignment(chapter))
-            self._model.set_java_file(chapter=chapter,code=self._model.get_original_java_file(chapter))
-    
-    
     def _set_code_file(self):
         self._view.pTE_code.setPlainText(self._model.get_current_java_file())
 
     def _set_tutorial(self):
-        html_content = self._model.get_tutorial().get_tutorial_html(self._model.get_current_chapter())
+        html_content = self._model.get_tutorial_html(self._model.get_current_chapter())
         self._view.tE_Tutorial.setHtml(html_content)
 
     def _update_output(self, output): #, colorNr=0):
@@ -55,11 +53,13 @@ class Controller:
         self._view.lE_input.clear()
         
     def _compile_java_code(self):
+        self._model.update_output("")  # clear output window
+        self._model.set_current_java_file(self._view.pTE_code.toPlainText())
         self._view.pB_compile.setEnabled(False)
         QApplication.processEvents()
         user_code = self._view.pTE_code.toPlainText()
         self._model.write_java_file(user_code)
-        compile_result = self._model.compile_java()
+        compile_result = compile_java()
         if (compile_result == "compilation successful"):
             color = 1
             self._view.pB_run.setEnabled(True)
@@ -68,6 +68,8 @@ Mit der Taste "start" kannst du dein Programm nun laufen lassen."""
         else:
             color = 2
             self._view.pB_run.setEnabled(False)
+            self._model.update_output(compile_result)
+            QApplication.processEvents()
             compile_result = self._model.compile_check(user_code=user_code,compile_result=compile_result)    
         self._view.tE_Informationen.setText(compile_result)
         self._view.tE_Informationen.setStyleSheet("background-color: " + self._colors[color] + ";")
@@ -92,8 +94,8 @@ Mit der Taste "start" kannst du dein Programm nun laufen lassen."""
         self._set_start_button_text(False)
         user_code = self._view.pTE_code.toPlainText()
         output = self._model.get_output()
-        assignment = self._model.get_tutorial().get_assignment(self._model.get_current_chapter())
-        topics = self._model.get_tutorial().get_topics(self._model.get_current_chapter())
+        assignment = self._model.get_assignment(self._model.get_current_chapter())
+        topics = self._model.get_topics(self._model.get_current_chapter())
         input = self._view.lE_input.text()
         run_information = self._model.run_check(user_code=user_code,assignment=assignment,output=output,topics=topics,input=input)
         self._view.tE_Informationen.setText(run_information)
@@ -107,7 +109,14 @@ Mit der Taste "start" kannst du dein Programm nun laufen lassen."""
 
     def _next_chapter(self):
         if (self._model.get_current_chapter() < self._model.get_max_chapter()):
+            self._model.set_current_java_file(self._view.pTE_code.toPlainText())
             self._model.set_current_chapter(self._model.get_current_chapter() + 1)
+            self._prepare_chapter()
+            
+    def _previous_chapter(self):
+        if (self._model.get_current_chapter() > 1):
+            self._model.set_current_java_file(self._view.pTE_code.toPlainText())
+            self._model.set_current_chapter(self._model.get_current_chapter() - 1)
             self._prepare_chapter()
         
 
@@ -122,28 +131,16 @@ Mit der Taste "start" kannst du dein Programm nun laufen lassen."""
         self._view.pB_run.setEnabled(False)
         self._clear_information()
         self._model.clear_output()
-    
-    
-    def _edit_preferences(self): 
+                
+    def _adjust_assignments(self):
         if (self._dialog_preferences.exec() == QDialog.DialogCode.Accepted):
-            name = self._dialog_preferences.lE_Name.text()
-            age = self._dialog_preferences.lE_Alter.text()
-            subject = self._dialog_preferences.lE_Fach.text()
-            hobby = self._dialog_preferences.lE_Hobbys.text()
-            profession = self._dialog_preferences.lE_Beruf.text()
-            role_model = self._dialog_preferences.lE_Vorbild.text()
-            self._model.set_preferences(name,age,subject,hobby,profession,role_model)
-            
-            preferences = self._model.get_preferences()
-            for chapter in range(1,self._model.get_max_chapter() + 1):
-                tutorial_chapter = self._model.get_tutorial().get_tutorial_html(chapter)
-                assignment = self._model.get_tutorial().get_original_assignment(chapter)
-                code = self._model.get_java_file(chapter)
-                topics = self._model.get_tutorial().get_topics(chapter)
-                response = self._model.formulate_assignment(tutorial_chapter=tutorial_chapter, assignment=assignment, preferences=preferences, code=code, topics=topics)
-                self._model.get_tutorial().set_assignment(chapter=chapter,assignment=response[0])
-                self._model.set_java_file(chapter=chapter,code=response[1])
-
+            self._model.set_preferences(favorite_subjects=self._dialog_preferences.lE_Fach.text(),
+                                        hobbies=self._dialog_preferences.lE_Hobbys.text(),
+                                        profession=self._dialog_preferences.lE_Beruf.text(),
+                                        other="")
+            self._assignment_adjuster = Assignment_Adjuster(model=self._model)
+            self._assignment_adjuster.start()             
+    
     def _show_welcome_page(self):
         self._dialog_welcome.exec()
 
@@ -152,6 +149,7 @@ Mit der Taste "start" kannst du dein Programm nun laufen lassen."""
         self._view.tE_Informationen.setStyleSheet("background-color: " + self._colors[0] + ";")
 
     def _exit_application(self):
+        self._model.set_session_chapter()
         QApplication.instance().quit()
 
 

@@ -1,5 +1,7 @@
 from PyQt6 import QtWidgets
+from PyQt6.QtWidgets import QDialog
 from view.UI_MainWindow import Ui_MainWindow
+from view.UI_dialog_login import Ui_UI_Dialog_Login
 
 
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
@@ -19,3 +21,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self._java_engine = java_engine
 
     
+class Login_Dialog(QDialog,Ui_UI_Dialog_Login):
+    def __init__(self, *args, obj=None, **kwargs):
+        super(Login_Dialog, self).__init__(*args, **kwargs)
+        self.setupUi(self)

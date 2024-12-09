@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file './view/gui.ui'
+# Form implementation generated from reading ui file 'gui.ui'
 #
 # Created by: PyQt6 UI code generator 6.7.1
 #
@@ -12,7 +12,7 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1000, 600)
+        MainWindow.resize(1014, 617)
         self.centralwidget = QtWidgets.QWidget(parent=MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
@@ -67,9 +67,21 @@ class Ui_MainWindow(object):
         self.hL_mainFields.setStretch(2, 1)
         self.verticalLayout.addLayout(self.hL_mainFields)
         self.hL_buttons = QtWidgets.QHBoxLayout()
-        self.hL_buttons.setContentsMargins(0, 3, -1, -1)
-        self.hL_buttons.setSpacing(6)
+        self.hL_buttons.setSizeConstraint(QtWidgets.QLayout.SizeConstraint.SetDefaultConstraint)
+        self.hL_buttons.setContentsMargins(0, 3, 0, -1)
+        self.hL_buttons.setSpacing(250)
         self.hL_buttons.setObjectName("hL_buttons")
+        self.hl_Chapters = QtWidgets.QHBoxLayout()
+        self.hl_Chapters.setSpacing(50)
+        self.hl_Chapters.setObjectName("hl_Chapters")
+        self.pB_previous_Chapter = QtWidgets.QPushButton(parent=self.centralwidget)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.pB_previous_Chapter.sizePolicy().hasHeightForWidth())
+        self.pB_previous_Chapter.setSizePolicy(sizePolicy)
+        self.pB_previous_Chapter.setObjectName("pB_previous_Chapter")
+        self.hl_Chapters.addWidget(self.pB_previous_Chapter)
         self.pB_next_Chapter = QtWidgets.QPushButton(parent=self.centralwidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -77,7 +89,8 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.pB_next_Chapter.sizePolicy().hasHeightForWidth())
         self.pB_next_Chapter.setSizePolicy(sizePolicy)
         self.pB_next_Chapter.setObjectName("pB_next_Chapter")
-        self.hL_buttons.addWidget(self.pB_next_Chapter)
+        self.hl_Chapters.addWidget(self.pB_next_Chapter)
+        self.hL_buttons.addLayout(self.hl_Chapters)
         self.pB_compile = QtWidgets.QPushButton(parent=self.centralwidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -99,7 +112,7 @@ class Ui_MainWindow(object):
         self.verticalLayout.addLayout(self.hL_buttons)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(parent=MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 1000, 19))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1014, 30))
         self.menubar.setObjectName("menubar")
         self.menu_Datei = QtWidgets.QMenu(parent=self.menubar)
         self.menu_Datei.setObjectName("menu_Datei")
@@ -130,8 +143,9 @@ class Ui_MainWindow(object):
         self.l_Lehrgang.setText(_translate("MainWindow", "Lehrgang:"))
         self.l_Code.setText(_translate("MainWindow", "Dein Code:"))
         self.l_Informationen.setText(_translate("MainWindow", "Informationen:"))
-        self.l_Output.setText(_translate("MainWindow", "Output:"))
+        self.l_Output.setText(_translate("MainWindow", "Output / Fehlermeldung:"))
         self.l_Input.setText(_translate("MainWindow", "Input:"))
+        self.pB_previous_Chapter.setText(_translate("MainWindow", "vorheriges Kapitel"))
         self.pB_next_Chapter.setText(_translate("MainWindow", "nächstes Kapitel"))
         self.pB_compile.setText(_translate("MainWindow", "kompilieren"))
         self.pB_run.setText(_translate("MainWindow", "start"))

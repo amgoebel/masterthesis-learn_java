@@ -1,0 +1,416 @@
+{
+    "alex": {
+        "password_hash": "$2b$12$lf.9QQjZUDamUrjzLJxnG./UzgkqMoid2aDQVs.YlQrJBm1ZZd2we",
+        "assignment_chapter": 4,
+        "current_chapter": 4,
+        "preferences": {
+            "favorite_subjects": "Mathematik, Physik",
+            "hobbies": "Basketball, Schach",
+            "profession": "Astronaut",
+            "other": ""
+        },
+        "data": [
+            {
+                "chapter_nr": 1,
+                "assignment": "\n<!DOCTYPE html>\n<html>\n<head>\n\t<meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"/>\n\t<title>Learn Java - Kapitel 1</title>\n\t<style type=\"text/css\">\n\t\tp { line-height: 100%; margin-bottom: 0.01in; background: transparent; background: transparent; font-family: \"Liberation Serif\"; font-size: 12pt }\n\t\th1 { margin-bottom: 0.08in; background: transparent; background: transparent; page-break-after: avoid }\n\t\th1.western { font-family: \"Liberation Serif\", serif; font-size: 24pt; font-weight: bold }\n\t\th2 { margin-top: 0.14in; margin-bottom: 0.08in; background: transparent; background: transparent; page-break-after: avoid }\n\t\th2.western { font-family: \"Liberation Serif\", serif; font-size: 18pt; font-weight: bold }\n\t\tpre { margin-top: 0.01in; margin-bottom: 0.01in; background: #cccccc; font-size: 12pt; page-break-before: auto; page-break-after: auto }\n\t\tpre.western { margin-top: 0.1in; \"font-family: \"Liberation Mono\", monospace }\n\t\tcode.western { font-family: \"Liberation Mono\", monospace}\n\t\tul, ol { font-family: \"Liberation Serif\"; font-size: 12pt; line-height: 100%; margin-bottom: 0.01in; }\n\t\tli { font-family: \"Liberation Serif\"; font-size: 12pt; line-height: 100%; margin-bottom: 0.01in; }\n\t</style>\n</head>\n<body lang=\"de-DE\">\n<h1 class=\"western\">Kapitel 1 - Hallo Welt</h1>\n<p>Rechts siehst du ein &quot;Hallo Welt&quot; Programm.</p>\n<p>In vielen Programmiersprachen ist\ndies das erste Programm, das man schreibt. Es macht nichts weiter,\nals dass es die Worte &quot;Hallo Welt&quot; ausgibt.</p>\n<p>Im ersten Kapitel lernst du mit Hilfe\ndieses einfachen Programms einige Regeln f\u00fcr Java kennen. Du wirst\nhier schon auf einige Begriffe sto\u00dfen, die am Anfang noch unklar\nsind und die du erst im Laufe dieses Lehrgangs richtig verstehen\nwirst. Mach dir darum keine Sorgen.</p>\n<p>Das Programm besteht aus einer Klasse\nmit dem Namen &quot;main&quot;:</p>\n<pre class=\"western\"><code class=\"western\">public class Main {\n<code class=\"western\">     </code>...\n}</code></pre>\n<p>Da das Programm nur aus einer Klasse besteht, ist dies die\nHauptklasse. Jede Java Datei hat die Erweiterung <b>.java </b>und\nbesitzt eine Hauptklasse mit dem gleichen Namen wie die Datei. Dieses\nProgramm w\u00fcrde also unter dem Namen <b>Main.java</b> abgespeichert.</p>\n<p>Du wirst noch genauer erfahren, was\nman bei der Programmierung unter einer Klasse versteht.</p>\n<p>Zun\u00e4chst kannst du dir eine Klasse\nals ein Konzept mit einer Aufgabe vorstellen. Die Aufgabe dieser\nKlasse ist die Ausgabe des Textes &quot;Hallo Welt&quot;.</p>\n<p>Klassennamen schreibt man in der\nRegel gro\u00df. Die geschweiften Klammern geben an, was alles zu der\nKlasse hinzu geh\u00f6rt.</p>\n<p>In der Klasse befindet sich eine\n<b>Methode</b> main(), die die Aufgabe des Programms enth\u00e4lt:</p>\n<pre class=\"western\"><code class=\"western\">public static void main(String[] args) {\n<code class=\"western\">     </code>...\n}</code></pre>\n<p>Der Name einer Methode endet immer mit runden Klammern. Sp\u00e4ter wirst\ndu sehen, dass es auch Methoden gibt, bei denen nichts in der Klammer\nsteht. Trotzdem m\u00fcssen die runden Klammern immer am Ende des Namens\nvorhanden sein.</p>\n<p>Wie bei der Klasse zeigen die\ngeschweiften Klammern an, was zu der Methode hinzu geh\u00f6rt.</p>\n<p>Die Begriffe <b>public</b>, <b>static</b>,\n<b>void</b> und <b>String[] args</b> werden wir sp\u00e4ter genauer\nverstehen. F\u00fcrs erste reicht es zu verstehen, dass sie (notwendige)\nEigenschaften der Methode beschreiben.</p>\n<p>Der entscheidende Befehl f\u00fcr das\nProgramm ist:</p>\n<pre class=\"western\"><code class=\"western\">System.out.println(&quot;Hallo Welt&quot;);</code></pre><p>\nDieser Befehl weist den Computer an, den Text &quot;Hallo Welt&quot;\nauszugeben.</p>\n<p>Der Befehl ist zusammengesetzt aus\neinzelnen Komponenten (zu erkennen an den Punkten). Du wirst bald\nverstehen, was die einzelnen Teile bedeuten. F\u00fcrs Erste kannst du\ndir merken, dass man mit diesem Befehl Text ausgeben kann.</p>\n<br><h2>Aufgabe</h2>\n<p>\u00c4ndere das Programm so ab, dass es nicht mehr \"Hallo Welt\", sondern \"Hello World\" ausgibt. Um das Programm interessanter zu gestalten, f\u00fcge eine zweite Ausgabe hinzu, die deinen Traumberuf als Astronaut erw\u00e4hnt. Zum Beispiel: \"Ich m\u00f6chte Astronaut werden!\"</p>\n</body>\n</html>\n",
+                "java": "public class Main {\n    public static void main(String[] args) {\n        System.out.println(\"Hallo Welt!\");\n    }\n}"
+            },
+            {
+                "chapter_nr": 2,
+                "assignment": "\n<!DOCTYPE html>\n<html>\n<head>\n\t<meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"/>\n\t<title>Learn Java - Kapitel 2</title>\n\t<style type=\"text/css\">\n\t\tp { line-height: 100%; margin-bottom: 0.01in; background: transparent; background: transparent; font-family: \"Liberation Serif\"; font-size: 12pt }\n\t\th1 { margin-bottom: 0.08in; background: transparent; background: transparent; page-break-after: avoid }\n\t\th1.western { font-family: \"Liberation Serif\", serif; font-size: 24pt; font-weight: bold }\n\t\th2 { margin-top: 0.14in; margin-bottom: 0.08in; background: transparent; background: transparent; page-break-after: avoid }\n\t\th2.western { font-family: \"Liberation Serif\", serif; font-size: 18pt; font-weight: bold }\n\t\tpre { margin-top: 0.01in; margin-bottom: 0.01in; background: #cccccc; font-size: 12pt; page-break-before: auto; page-break-after: auto }\n\t\tpre.western { margin-top: 0.1in; \"font-family: \"Liberation Mono\", monospace }\n\t\tcode.western { font-family: \"Liberation Mono\", monospace}\n\t\tul, ol { font-family: \"Liberation Serif\"; font-size: 12pt; line-height: 100%; margin-bottom: 0.01in; }\n\t\tli { font-family: \"Liberation Serif\"; font-size: 12pt; line-height: 100%; margin-bottom: 0.01in; }\n\t</style>\n</head>\n<body lang=\"de-DE\">\n<h1 class=\"western\">Kapitel 2 - Kommentare im Code</h1>\n<p>In der Programmierung ist es wichtig, den Code verst\u00e4ndlich zu halten. Eine M\u00f6glichkeit, dies zu tun, ist die Verwendung von Kommentaren.</p>\n<p>Kommentare sind Texte im Code, die vom Computer ignoriert werden. Sie dienen dazu, den Code zu erkl\u00e4ren oder Notizen f\u00fcr dich selbst oder andere Programmierer zu hinterlassen.</p>\n<p>In Java gibt es zwei Arten von Kommentaren:</p>\n<ul>\n    <li><b>Einzeilige Kommentare:</b> Diese beginnen mit zwei Schr\u00e4gstrichen <code>//</code>. Alles, was nach diesen Zeichen kommt, wird als Kommentar betrachtet.</li>\n    <li><b>Mehrzeilige Kommentare:</b> Diese beginnen mit <code>/*</code> und enden mit <code>*/</code>. Alles dazwischen wird als Kommentar betrachtet, egal wie viele Zeilen es sind.</li>\n</ul>\n<p>Hier ist ein Beispiel f\u00fcr einen einzeiligen Kommentar:</p>\n<pre class=\"western\"><code class=\"western\">// Dies ist ein Kommentar</code></pre>\n<p>Und hier ist ein Beispiel f\u00fcr einen mehrzeiligen Kommentar:</p>\n<pre class=\"western\"><code class=\"western\">/*\nDies ist ein mehrzeiliger Kommentar.\nEr kann \u00fcber mehrere Zeilen gehen.\n*/</code></pre>\n<p>Kommentare sind sehr n\u00fctzlich, um den Code zu dokumentieren und um zu erkl\u00e4ren, was bestimmte Teile des Codes tun. Es ist eine gute Praxis, Kommentare zu verwenden, um den Code lesbarer zu machen.</p>\n<br><h2>Aufgabe</h2>\n<p>Stell dir vor, du bist ein Astronaut, der ein neues Raumschiff programmiert. F\u00fcge deinem Programm Kommentare hinzu, um zu erkl\u00e4ren, was jeder Teil des Codes macht. Erstelle sowohl einzeilige als auch mehrzeilige Kommentare. Denke daran, dass andere Astronauten deinen Code verstehen m\u00fcssen, um sicher zu fliegen!</p>\n</body>\n</html>\n",
+                "java": "\npublic class Main {\n    public static void main(String[] args) {\n        // TODO: F\u00fcge hier einen Kommentar hinzu, der erkl\u00e4rt, was der folgende Code macht\n        System.out.println(\"Dies ist der Beginn eines Kurses, der dir Java beibringen soll.\");\n        // TODO: F\u00fcge hier einen Kommentar hinzu, der erkl\u00e4rt, was der folgende Code macht\n        System.out.println(\"Am Ende des Kurses wirst du die Grundlagen der Programmierung mit Java beherrschen\");\n    }\n}\n"
+            },
+            {
+                "chapter_nr": 3,
+                "assignment": "\n<!DOCTYPE html>\n<html>\n<head>\n\t<meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"/>\n\t<title>Learn Java - Kapitel 1</title>\n\t<style type=\"text/css\">\n\t\tp { line-height: 100%; margin-bottom: 0.01in; background: transparent; background: transparent; font-family: \"Liberation Serif\"; font-size: 12pt }\n\t\th1 { margin-bottom: 0.08in; background: transparent; background: transparent; page-break-after: avoid }\n\t\th1.western { font-family: \"Liberation Serif\", serif; font-size: 24pt; font-weight: bold }\n\t\th2 { margin-top: 0.14in; margin-bottom: 0.08in; background: transparent; background: transparent; page-break-after: avoid }\n\t\th2.western { font-family: \"Liberation Serif\", serif; font-size: 18pt; font-weight: bold }\n\t\tpre { margin-top: 0.01in; margin-bottom: 0.01in; background: #cccccc; font-size: 12pt; page-break-before: auto; page-break-after: auto }\n\t\tpre.western { margin-top: 0.1in; \"font-family: \"Liberation Mono\", monospace }\n\t\tcode.western { font-family: \"Liberation Mono\", monospace}\n\t\tul, ol { font-family: \"Liberation Serif\"; font-size: 12pt; line-height: 100%; margin-bottom: 0.01in; }\n\t\tli { font-family: \"Liberation Serif\"; font-size: 12pt; line-height: 100%; margin-bottom: 0.01in; }\n\t</style>\n</head>\n<body lang=\"de-DE\">\n<h1 class=\"western\">Kapitel 3 - Grundlegende Datentypen und Variablen</h1>\n<p>In der Programmierung ist es wichtig, Daten zu speichern und zu verarbeiten. In Java gibt es verschiedene Arten von Daten, die wir als <b>Datentypen</b> bezeichnen. Die h\u00e4ufigsten Datentypen sind:</p>\n<ul>\n    <li><b>int:</b> Dieser Datentyp wird verwendet, um ganze Zahlen zu speichern, wie z.B. 1, 2 oder -5.</li>\n    <li><b>double:</b> Dieser Datentyp wird verwendet, um Dezimalzahlen zu speichern, wie z.B. 3.14 oder -0.001.</li>\n    <li><b>char:</b> Dieser Datentyp wird verwendet, um ein einzelnes Zeichen zu speichern, wie z.B. 'a' oder 'Z'.</li>\n    <li><b>boolean:</b> Dieser Datentyp wird verwendet, um Wahrheitswerte zu speichern, die entweder <code>true</code> oder <code>false</code> sein k\u00f6nnen.</li>\n</ul>\n<p>Um eine Variable zu verwenden, musst du sie zuerst <b>deklarieren</b>. Das bedeutet, dass du dem Computer sagst, dass du eine Variable mit einem bestimmten Datentyp erstellen m\u00f6chtest. Zum Beispiel:</p>\n<pre class=\"western\"><code class=\"western\">int zahl;</code></pre>\n<p>Hier haben wir eine Variable namens <code>zahl</code> deklariert, die eine ganze Zahl speichern kann. Um der Variable einen Wert zuzuweisen, verwenden wir das <b>Gleichheitszeichen</b>:</p>\n<pre class=\"western\"><code class=\"western\">zahl = 5;</code></pre>\n<p>Du kannst auch die Deklaration und die Zuweisung in einem Schritt durchf\u00fchren:</p>\n<pre class=\"western\"><code class=\"western\">int zahl = 5;</code></pre>\n<p>Jetzt enth\u00e4lt die Variable <code>zahl</code> den Wert 5. Das nennt man <b>Initialisierung</b>.</p>\n<p>In diesem Kapitel hast du gelernt, wie man Variablen deklariert und initialisiert, um verschiedene Datentypen zu verwenden.</p>\n<br><h2>Aufgabe</h2>\n<p>Stelle dir vor, du bist ein Astronaut auf einer Mission. Erstelle ein Programm, das die folgenden Variablen deklariert und initialisiert:</p>\n<ul>\n    <li>Eine ganze Zahl (int) mit dem Namen <code>alter</code> und dem Wert 16, um dein Alter zu repr\u00e4sentieren.</li>\n    <li>Eine Dezimalzahl (double) mit dem Namen <code>gewicht</code> und dem Wert 65.5, um dein Gewicht in Kilogramm darzustellen.</li>\n    <li>Ein Zeichen (char) mit dem Namen <code>anfangsBuchstabe</code> und dem Wert 'J', um deinen Vornamen zu repr\u00e4sentieren.</li>\n    <li>Ein Wahrheitswert (boolean) mit dem Namen <code>istStudent</code> und dem Wert <code>true</code>, um anzuzeigen, dass du noch zur Schule gehst.</li>\n</ul>\n<p>Gib anschlie\u00dfend die Werte der Variablen in der Konsole aus, um deine Missionsergebnisse zu pr\u00e4sentieren.</p>\n<p>Den Wert einer Variable x kann man z.B. mit dem folgenden Befehl ausgeben:</p>\n<pre class=\"western\"><code class=\"western\">System.out.println(\"Wert von x: \" + x);</code></pre>\n<p></p>\n</body>\n</html>\n",
+                "java": "\npublic class Main {\n    public static void main(String[] args) {\n        // Deklaration und Initialisierung der Variablen\n        int alter = 16; // Dein Alter\n        double gewicht = 65.5; // Dein Gewicht in kg\n        char anfangsBuchstabe = 'J'; // Erster Buchstabe deines Vornamens\n        boolean istStudent = true; // Status als Student\n        \n        // TODO: Gib die Werte der Variablen in der Konsole aus\n    }\n}\n"
+            },
+            {
+                "chapter_nr": 4,
+                "assignment": "\n<!DOCTYPE html>\n<html>\n<head>\n\t<meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"/>\n\t<title>Learn Java - Kapitel 1</title>\n\t<style type=\"text/css\">\n\t\tp { line-height: 100%; margin-bottom: 0.01in; background: transparent; background: transparent; font-family: \"Liberation Serif\"; font-size: 12pt }\n\t\th1 { margin-bottom: 0.08in; background: transparent; background: transparent; page-break-after: avoid }\n\t\th1.western { font-family: \"Liberation Serif\", serif; font-size: 24pt; font-weight: bold }\n\t\th2 { margin-top: 0.14in; margin-bottom: 0.08in; background: transparent; background: transparent; page-break-after: avoid }\n\t\th2.western { font-family: \"Liberation Serif\", serif; font-size: 18pt; font-weight: bold }\n\t\tpre { margin-top: 0.01in; margin-bottom: 0.01in; background: #cccccc; font-size: 12pt; page-break-before: auto; page-break-after: auto }\n\t\tpre.western { margin-top: 0.1in; \"font-family: \"Liberation Mono\", monospace }\n\t\tcode.western { font-family: \"Liberation Mono\", monospace}\n\t\tul, ol { font-family: \"Liberation Serif\"; font-size: 12pt; line-height: 100%; margin-bottom: 0.01in; }\n\t\tli { font-family: \"Liberation Serif\"; font-size: 12pt; line-height: 100%; margin-bottom: 0.01in; }\n\t</style>\n</head>\n<body lang=\"de-DE\">\n<h1 class=\"western\">Kapitel 4 - Grundlegende arithmetische Operationen</h1>\n<p>In der Programmierung ist es oft notwendig, mit Zahlen zu rechnen. Java bietet verschiedene arithmetische Operationen, die du verwenden kannst, um Berechnungen durchzuf\u00fchren.</p>\n<p>Die grundlegenden arithmetischen Operationen sind:</p>\n<ul>\n    <li><b>Addition (+):</b> Diese Operation wird verwendet, um zwei Zahlen zu addieren.</li>\n    <li><b>Subtraktion (-):</b> Diese Operation wird verwendet, um eine Zahl von einer anderen zu subtrahieren.</li>\n    <li><b>Multiplikation (*):</b> Diese Operation wird verwendet, um zwei Zahlen zu multiplizieren.</li>\n    <li><b>Division (/):</b> Diese Operation wird verwendet, um eine Zahl durch eine andere zu dividieren.</li>\n</ul>\n<p>Hier ist ein einfaches Beispiel, das zeigt, wie man diese Operationen in Java verwenden kann:</p>\n<pre class=\"western\"><code class=\"western\">int a = 10;\nint b = 5;\nint summe = a + b; // Addition\nint differenz = a - b; // Subtraktion\nint produkt = a * b; // Multiplikation\nint quotient = a / b; // Division</code></pre>\n<p>In diesem Beispiel haben wir zwei Variablen <code>a</code> und <code>b</code> deklariert und ihnen Werte zugewiesen. Dann haben wir die vier grundlegenden arithmetischen Operationen durchgef\u00fchrt und die Ergebnisse in neuen Variablen gespeichert.</p>\n<p>Du wirst lernen, wie man diese Operationen in deinen Programmen anwendet, um verschiedene Berechnungen durchzuf\u00fchren.</p>\n<br><h2>Aufgabe</h2>\n<p>Stell dir vor, du bist ein Astronaut, der die Berechnungen f\u00fcr eine Raumfahrtmission durchf\u00fchren muss. Erstelle ein Programm, das zwei (Dezimal-)Zahlen deklariert, die die Geschwindigkeit eines Raumschiffs in km/h und die Zeit in Stunden darstellen. Berechne die zur\u00fcckgelegte Strecke mit den vier grundlegenden arithmetischen Operationen (Addition, Subtraktion, Multiplikation und Division) und gib die Ergebnisse aus.</p>\n</body>\n</html>\n",
+                "java": "\npublic class Main {\n    public static void main(String[] args) {\n        // TODO: Deklariere und initialisiere zwei Variablen mit den Namen geschwindigkeit und zeit\n        // TODO: F\u00fchre die vier grundlegenden arithmetischen Operationen durch \n        // und speichere sie in den Variablen strecke, differenz, produkt und quotient\n        double geschwindigkeit = \n        double zeit = \n        double strecke = \n        double differenz = \n        double produkt = \n        double quotient = \n        // TODO: Gib die Ergebnisse der Operationen aus\n    }\n}\n"
+            },
+            {
+                "chapter_nr": 5,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Vervollst\u00e4ndige das Programm, so dass es nach einem Username fragt und diesen unter der Variable userName abspeichert.\n        Anschlie\u00dfend soll das Programm den Text \"Der Username ist: userName\" ausgeben, wobei userName durch den Wert der Variable ersetzt wird. </p>\n",
+                "java": "import java.util.Scanner;\n\nclass Main {\n  public static void main(String[] args) {\n    Scanner scanner = new Scanner(System.in);\n    todo ...\n  }\n}"
+            },
+            {
+                "chapter_nr": 6,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle ein Programm, das eine Zahl vom Benutzer einliest und \u00fcberpr\u00fcft, ob die Zahl gerade oder ungerade ist. Gib eine entsprechende Nachricht aus.</p>\n",
+                "java": "import java.util.Scanner;\n\nclass Main {\n    public static void main(String[] args) {\n        Scanner scanner = new Scanner(System.in);\n        // TODO: Lese eine Zahl vom Benutzer ein\n        // TODO: \u00dcberpr\u00fcfe, ob die Zahl gerade oder ungerade ist\n        // TODO: Gib die entsprechende Nachricht aus\n    }\n}"
+            },
+            {
+                "chapter_nr": 7,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle ein Programm, das eine Zahl zwischen 1 und 5 einliest und den entsprechenden Wochentag ausgibt. Verwende die <b>switch-case</b> Struktur, um die Wochentage zu definieren.</p>\n",
+                "java": "import java.util.Scanner;\n\nclass Main {\n    public static void main(String[] args) {\n        Scanner scanner = new Scanner(System.in);\n        // TODO: Lese eine Zahl zwischen 1 und 5 ein\n        // TODO: Verwende die switch-case Struktur, um den entsprechenden Wochentag auszugeben\n    }\n}"
+            },
+            {
+                "chapter_nr": 8,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle ein Programm, das die Zahlen von 1 bis 10 mit einer for-Schleife ausgibt.</p>\n",
+                "java": "public class Main {\n    public static void main(String[] args) {\n        // TODO: Verwende eine for-Schleife, um die Zahlen von 1 bis 10 auszugeben\n    }\n}"
+            },
+            {
+                "chapter_nr": 9,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle ein Programm, das die Zahlen von 10 bis 1 mit einer while-Schleife ausgibt.</p>\n",
+                "java": "public class Main {\n    public static void main(String[] args) {\n        // TODO: Verwende eine while-Schleife, um die Zahlen von 10 bis 1 auszugeben\n    }\n}"
+            },
+            {
+                "chapter_nr": 10,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle ein Programm, das die Zahlen von 1 bis 20 ausgibt, aber die Zahlen 5 und 10 \u00fcberspringt. Verwende daf\u00fcr die <b>continue</b> Anweisung. Beende die Schleife, wenn die Zahl 15 erreicht ist, indem du die <b>break</b> Anweisung verwendest.</p>\n",
+                "java": "public class Main {\n    public static void main(String[] args) {\n        // TODO: Verwende eine Schleife, um die Zahlen von 1 bis 20 auszugeben\n        // TODO: \u00dcberspringe die Zahlen 5 und 10 mit continue\n        // TODO: Beende die Schleife, wenn die Zahl 15 erreicht ist mit break\n    }\n}"
+            },
+            {
+                "chapter_nr": 11,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle ein Programm, das eine <code>double</code> Zahl deklariert und diese in eine <code>int</code> Zahl umwandelt. Gib sowohl die urspr\u00fcngliche <code>double</code> Zahl als auch die umgewandelte <code>int</code> Zahl aus.</p>\n",
+                "java": "public class Main {\n    public static void main(String[] args) {\n        // TODO: Deklariere eine double Zahl\n        // TODO: Wandle die double Zahl in eine int Zahl um\n        // TODO: Gib beide Zahlen aus\n    }\n}"
+            },
+            {
+                "chapter_nr": 12,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle ein Programm, das zwei Zahlen vom Benutzer einliest und die Division der ersten Zahl durch die zweite Zahl durchf\u00fchrt. F\u00fcr das Einlesen einer Zahl vom Benutzer kannst du du folgenden Befehl verwenden:<pre class=\"western\"><code class=\"western\">scanner.nextInt()</code></pre>\n Stelle sicher, dass die zweite Zahl nicht Null ist, bevor du die Division durchf\u00fchrst. Gib eine entsprechende Fehlermeldung aus, wenn die zweite Zahl Null ist.</p>\n<p>Probiere auch mal aus, was passiert, wenn du doch durch Null teilst.</p>\n",
+                "java": "import java.util.Scanner;\n\nclass Main {\n    public static void main(String[] args) {\n        Scanner scanner = new Scanner(System.in);\n        // TODO: Lese zwei Zahlen vom Benutzer ein\n        // TODO: \u00dcberpr\u00fcfe, ob die zweite Zahl Null ist\n        // TODO: F\u00fchre die Division durch und gib das Ergebnis aus\n    }\n}"
+            },
+            {
+                "chapter_nr": 13,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle ein Programm, das den Benutzer nach seinem Alter fragt und basierend auf dem Alter eine entsprechende Nachricht ausgibt. Wenn der Benutzer unter 18 Jahre alt ist, gib \"Du bist ein Jugendlicher\" aus. Wenn der Benutzer zwischen 18 und 65 Jahren alt ist, gib \"Du bist ein Erwachsener\" aus. Wenn der Benutzer \u00fcber 65 Jahre alt ist, gib \"Du bist ein Senior\" aus.</p>\n",
+                "java": "import java.util.Scanner;\n\nclass Main {\n    public static void main(String[] args) {\n        Scanner scanner = new Scanner(System.in);\n        // TODO: Frage den Benutzer nach seinem Alter\n        // TODO: Verwende if-else Anweisungen, um die entsprechende Nachricht auszugeben\n    }\n}"
+            },
+            {
+                "chapter_nr": 14,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle ein Programm, das ein Array von 5 ganzen Zahlen deklariert, diese initialisiert und anschlie\u00dfend die Werte des Arrays in der Konsole ausgibt.</p>\n",
+                "java": "public class Main {\n    public static void main(String[] args) {\n        // TODO: Deklariere und initialisiere ein Array von 5 ganzen Zahlen\n        // TODO: Gib die Werte des Arrays in der Konsole aus.\n    }\n}"
+            },
+            {
+                "chapter_nr": 15,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle ein Programm, das ein Array von 5 ganzen Zahlen deklariert, diese mit Werten initialisiert und dann die Werte verdoppelt. Gib die urspr\u00fcnglichen und die verdoppelten Werte in der Konsole aus. Verwende eine for-Schleife zur Verdoppelung und Ausgabe der Werte des Arrays.</p>\n",
+                "java": "public class Main {\n    public static void main(String[] args) {\n        // TODO: Deklariere und initialisiere ein Array von 5 ganzen Zahlen\n        // TODO: Verwende eine Schleife, um die Werte im Array zu verdoppeln und die urspr\u00fcnlichen und verdoppelten Werte auszugeben.\n    }\n}"
+            },
+            {
+                "chapter_nr": 16,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle ein Programm, das ein zweidimensionales Array von 3x3 deklariert, es mit Werten initialisiert und anschlie\u00dfend die Werte des Arrays in der Konsole ausgibt. Verwende zur Ausgabe der Werte zwei verschachtelte for-Schleifen.</p>\n",
+                "java": "public class Main {\n    public static void main(String[] args) {\n        // TODO: Deklariere und initialisiere ein zweidimensionales Array von 3x3\n        // TODO: Gib die Werte des Arrays in der Konsole aus. Verwnde dazu zwei verschachtelte for-Schleifen.\n    }\n}"
+            },
+            {
+                "chapter_nr": 17,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle ein Programm, das eine Methode deklariert, die eine einfache Nachricht ausgibt. Rufe diese Methode in der <code>main</code> Methode drei mal auf.</p>\n",
+                "java": "public class Main {\n    public static void main(String[] args) {\n        // TODO: Rufe deine Methode drei mal auf\n    }\n\n    //TODO: Deklariere und erstelle deine Methode, die einen einfachen Text ausgibt.\n}"
+            },
+            {
+                "chapter_nr": 18,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle ein Programm, das eine Methode deklariert, die zwei Zahlen als Parameter entgegennimmt und deren Summe ausgibt. Rufe diese Methode in der <code>main</code> Methode mit verschiedenen Zahlen auf.</p>\n",
+                "java": "public class Main {\n    public static void main(String[] args) {\n        // TODO: Rufe deine Methode mit verschiedenen Zahlen auf\n    }\n\n    //TODO: Deklariere und erstelle deine Methode, die zwei Zahlen als Parameter entgegennimmt und deren Summe ausgibt.\n}"
+            },
+            {
+                "chapter_nr": 19,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle ein Programm, das eine Methode deklariert, die den Quadratwert einer Zahl berechnet und zur\u00fcckgibt. Rufe diese Methode in der <code>main</code> Methode auf und gib das Ergebnis aus.</p>\n",
+                "java": "public class Main {\n    public static void main(String[] args) {\n        // TODO: Rufe deine Methode auf und gib das Ergebnis aus\n    }\n\n    //TODO: Deklariere und erstelle deine Methode, die den Quadratwert einer Zahl berechnet und zur\u00fcckgibt.\n}"
+            },
+            {
+                "chapter_nr": 20,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle eine Klasse namens <code>Person</code>, die die Attribute <code>name</code> (String) und <code>alter</code> (int) hat. Erstelle dann ein Objekt der Klasse <code>Person</code> und gib den Attributen entsprechende Werte. Gib anschlie\u00dfend die Werte der Attribute auf der Konsole aus.</p>\n</p>",
+                "java": "// TODO: Erstelle eine Klasse mit dem Namen Person mit den Attributen name und alter.\n\n\npublic class Main {\n    public static void main(String[] args) {\n        // TODO: Erstelle ein Objekt der Klasse Person, setze die Attribute und gib sie auf der Konsole aus.\n    }\n}"
+            },
+            {
+                "chapter_nr": 21,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle eine Klasse namens <code>Rechner</code>, die eine Methode <code>addiere</code> hat, die zwei Zahlen als Parameter entgegennimmt und deren Summe zur\u00fcckgibt. Erstelle dann ein Objekt der Klasse <code>Rechner</code> in der <code>main</code> Methode und rufe die <code>addiere</code> Methode auf, um die Summe von zwei Zahlen zu berechnen und auszugeben.</p>\n",
+                "java": "class Rechner {\n    // TODO: Definiere die Methode addiere, die zwei Zahlen addiert und zur\u00fcckgibt\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        // TODO: Erstelle ein Objekt der Klasse Rechner und rufe die addiere Methode auf\n    }\n}"
+            },
+            {
+                "chapter_nr": 22,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle eine Klasse namens <code>Person</code>, die die Instanzvariablen <code>name</code> (String) und <code>alter</code> (int) und eine Methode <code>vorstellen</code> hat. F\u00fcge einen Konstruktor hinzu, der die Variablen initialisiert. Erstelle dann ein Objekt der Klasse <code>Person</code> in der <code>main</code> Methode und gib die Werte der Instanzvariablen mit Hilfe der <code>vorstellen</code> Methode aus.</p>\n",
+                "java": "// TODO: Erstelle eine Klasse Person mit den geforderten Attributen und Methode.\n\npublic class Main {\n    public static void main(String[] args) {\n        // TODO: Erstelle ein Objekt der Klasse Person und gib die Werte der Instanzvariablen aus\n    }\n}"
+            },
+            {
+                "chapter_nr": 23,
+                "assignment": "<h2>Aufgabe</h2>\n    <p>Erstelle ein Programm, das die Vererbung zwischen verschiedenen Tierarten demonstriert und dabei die\n\t\tBesonderheiten der Tiere hervorhebt. Du kannst das Programm erweitern, um\n\t\tauch andere Tiere wie V\u00f6gel oder Fische einzubeziehen.</p>\n\t<p>Erstelle eine Basis-Klasse Tier, die allgemeine Eigenschaften und Methoden f\u00fcr Tiere definiert.</p>\n\t<p>Erstelle dann zwei spezialisierte Klassen, Hund und Katze, die von der Klasse Tier erben.</p>\n\t<p>Die Klassen sollen folgende Anforderungen erf\u00fcllen:</p>\n\t<p>Basis-Klasse Tier:</p>\n\t<ul>\n\t\t<li>Attribut: name (String) - Der Name des Tieres.</li>\n\t\t<li>Attribut: gewicht (double) - Das Gewicht des Tieres.</li>\n\t</ul>\n\t<p>Klasse Hund:</p>\n\t<ul>\n\t\t<li>Erbt von der Klasse Tier.</li>\n\t\t<li>Methode: geraeuschMachen() - Gibt &quot;Hund bellt: Wuff, Wuff!&quot; aus.</li>\n\t\t<li>Methode: apportieren() - Gibt &quot;Hund apportiert den Ball!&quot; aus.</li>\n\t</ul>\n\t<p>Klasse Katze:</p>\n\t<ul>\n\t\t<li>Erbt von der Klasse Tier.</li>\n\t\t<li>Methode: geraeuschMachen() - Gibt &quot;Katze miaut: Miau, Miau!&quot; aus.</li>\n\t\t<li>Methode: kratzen() - Gibt &quot;Katze kratzt das Sofa!&quot; aus.</li>\n\t</ul>\n\t<p>main-Klasse:</p>\n\t<ul>\n\t\t<li>Erstelle in der main-Methode ein Objekt von der Klasse Hund und eines von der Klasse Katze.</li>\n\t\t<li>Rufe die Methode geraeuschMachen() f\u00fcr beide Objekte auf.</li>\n\t\t<li>Rufe die Methoden apportieren() und kratzen() f\u00fcr die entsprechenden Objekte auf.</li>\n\t\t<li>Gib die Attribute name und gewicht f\u00fcr beide Objekte aus.</li>\n\t\t<li>Zus\u00e4tzlich: \u00dcberlege dir, welche besonderen Eigenschaften oder Verhaltensweisen du f\u00fcr andere Tiere\n\t\t\thinzuf\u00fcgen k\u00f6nntest, und implementiere diese als neue Klassen.</li>\n\t</ul>\n",
+                "java": "// Basis-Klasse Tier\nclass Tier {\n    todo ...\n}\n\n// Spezialisierte Klasse Hund, erbt von Tier\nclass Hund extends Tier {\n    todo ...\n}\n\n// Spezialisierte Klasse Katze, erbt von Tier\nclass Katze extends Tier {\n\n    // Konstruktor\n    public Katze(String name, double gewicht) {\n        super(name, gewicht);\n    }\n\n    todo ...\n\n}\n\n// Main-Klasse zum Testen\npublic class Main {\n    public static void main(String[] args) {\n        todo ...\n    }\n}\n"
+            },
+            {
+                "chapter_nr": 24,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle eine Basisklasse <code>Fahrzeug</code> mit einer Methode <code>fahren</code>, die eine allgemeine Nachricht ausgibt. Erstelle dann zwei abgeleitete Klassen <code>Auto</code> und <code>Motorrad</code>, die die Methode <code>fahren</code> \u00fcberschreiben und spezifische Nachrichten ausgeben. Erstelle in der <code>main</code> Methode ein Objekt jeder Klasse und rufe die <code>fahren</code> Methode auf.</p>\n",
+                "java": "class Fahrzeug {\n    todo ...\n}\n\nclass Auto extends Fahrzeug {\n    todo ...\n}\n\nclass Motorrad extends Fahrzeug {\n    todo ...\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        // TODO: Erstelle ein Objekt von Auto und Motorrad und rufe die fahren Methode auf\n    }\n}"
+            },
+            {
+                "chapter_nr": 25,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle eine Klasse <code>Fahrzeug</code> mit einem Attribut <code>geschwindigkeit</code> und einer Methode <code>fahren</code>, die die Geschwindigkeit ausgibt. Erstelle dann eine Klasse <code>Auto</code>, die von <code>Fahrzeug</code> erbt und einen Konstruktor hat, der die Geschwindigkeit \u00fcber das <code>super</code> Schl\u00fcsselwort initialisiert. Rufe die Methode <code>fahren</code> in der <code>main</code> Methode auf.</p>\n",
+                "java": "todo ..."
+            }
+        ]
+    },
+    "florian": {
+        "password_hash": "$2b$12$c126RBPqgugBFnIx2ZXK6uNAP/Wuq9FmKAHndtGmmcrdSUoRgQity",
+        "assignment_chapter": 0,
+        "current_chapter": 4,
+        "preferences": {
+            "favorite_subjects": "",
+            "hobbies": "",
+            "profession": "",
+            "other": ""
+        },
+        "data": [
+            {
+                "chapter_nr": 1,
+                "assignment": "<h2>Aufgabe</h2>\n<p>\u00c4ndere das Programm so ab, dass es nicht mehr \"Hallo Welt\", sondern \"Hello World\" ausgibt.</p>\n",
+                "java": "public class Main {\n    public static void main(String[] args) {\n        System.out.println(\"Hallo Welt!\");\n    }\n}"
+            },
+            {
+                "chapter_nr": 2,
+                "assignment": "<h2>Aufgabe</h2>\n<p>F\u00fcge deinem Programm Kommentare hinzu, um zu erkl\u00e4ren, was jeder Teil des Codes macht. Erstelle sowohl einzeilige als auch mehrzeilige Kommentare.</p>\n",
+                "java": "public class Main {\n    public static void main(String[] args) {\n        todo ...\n        System.out.println(\"Dies ist der Beginn eines Kurses, der dir Java beibringen soll.\");\n        todo ... \n        System.out.println(\"Am Ende des Kurses wirst du die Grundlagen der Programmierung mit Java beherrschen\");\n    }\n}"
+            },
+            {
+                "chapter_nr": 3,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle ein Programm, das die folgenden Variablen deklariert und initialisiert:</p>\n<ul>\n    <li>Eine ganze Zahl (int) mit dem Namen <code>alter</code> und dem Wert 16.</li>\n    <li>Eine Dezimalzahl (double) mit dem Namen <code>gewicht</code> und dem Wert 65.5.</li>\n    <li>Ein Zeichen (char) mit dem Namen <code>anfangsBuchstabe</code> und dem Wert 'J'.</li>\n    <li>Ein Wahrheitswert (boolean) mit dem Namen <code>istStudent</code> und dem Wert <code>true</code>.</li>\n</ul>\n<p>Gib anschlie\u00dfend die Werte der Variablen in der Konsole aus.</p><p>Den Wert einer Variable x kann man z.B. mit dem folgenden Befehl ausgeben:</p>\n<pre class=\"western\"><code class=\"western\">System.out.println(\"Wert von x: \" + x);</code></pre>\n<p></p>\n",
+                "java": "public class Main {\n    public static void main(String[] args) {\n        todo ...\n    }\n}"
+            },
+            {
+                "chapter_nr": 4,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle ein Programm, das zwei (Dezimal-)Zahlen deklariert und die Aufgaben und Ergebnisse der vier grundlegenden arithmetischen Operationen (Addition, Subtraktion, Multiplikation und Division) ausgibt.</p>\n",
+                "java": "public class Main {\n    public static void main(String[] args) {\n        // TODO: Deklariere und initialisiere zwei Variablen mit den Namen zahl1 und zahl2\n        // TODO: F\u00fchre die vier grundlegenden arithmetischen Operationen durch \n        // und speichere sie in den Variablen summe, differenz, produkt und quotient\n       int summe = \n       int differenz = \n       int produkt = \n       int quotient = \n       // TODO: Gib die Ergebnisse der Operationen aus\n    }\n}"
+            },
+            {
+                "chapter_nr": 5,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Vervollst\u00e4ndige das Programm, so dass es nach einem Username fragt und diesen unter der Variable userName abspeichert.\n        Anschlie\u00dfend soll das Programm den Text \"Der Username ist: userName\" ausgeben, wobei userName durch den Wert der Variable ersetzt wird. </p>\n",
+                "java": "import java.util.Scanner;\n\nclass Main {\n  public static void main(String[] args) {\n    Scanner scanner = new Scanner(System.in);\n    todo ...\n  }\n}"
+            },
+            {
+                "chapter_nr": 6,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle ein Programm, das eine Zahl vom Benutzer einliest und \u00fcberpr\u00fcft, ob die Zahl gerade oder ungerade ist. Gib eine entsprechende Nachricht aus.</p>\n",
+                "java": "import java.util.Scanner;\n\nclass Main {\n    public static void main(String[] args) {\n        Scanner scanner = new Scanner(System.in);\n        // TODO: Lese eine Zahl vom Benutzer ein\n        // TODO: \u00dcberpr\u00fcfe, ob die Zahl gerade oder ungerade ist\n        // TODO: Gib die entsprechende Nachricht aus\n    }\n}"
+            },
+            {
+                "chapter_nr": 7,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle ein Programm, das eine Zahl zwischen 1 und 5 einliest und den entsprechenden Wochentag ausgibt. Verwende die <b>switch-case</b> Struktur, um die Wochentage zu definieren.</p>\n",
+                "java": "import java.util.Scanner;\n\nclass Main {\n    public static void main(String[] args) {\n        Scanner scanner = new Scanner(System.in);\n        // TODO: Lese eine Zahl zwischen 1 und 5 ein\n        // TODO: Verwende die switch-case Struktur, um den entsprechenden Wochentag auszugeben\n    }\n}"
+            },
+            {
+                "chapter_nr": 8,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle ein Programm, das die Zahlen von 1 bis 10 mit einer for-Schleife ausgibt.</p>\n",
+                "java": "public class Main {\n    public static void main(String[] args) {\n        // TODO: Verwende eine for-Schleife, um die Zahlen von 1 bis 10 auszugeben\n    }\n}"
+            },
+            {
+                "chapter_nr": 9,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle ein Programm, das die Zahlen von 10 bis 1 mit einer while-Schleife ausgibt.</p>\n",
+                "java": "public class Main {\n    public static void main(String[] args) {\n        // TODO: Verwende eine while-Schleife, um die Zahlen von 10 bis 1 auszugeben\n    }\n}"
+            },
+            {
+                "chapter_nr": 10,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle ein Programm, das die Zahlen von 1 bis 20 ausgibt, aber die Zahlen 5 und 10 \u00fcberspringt. Verwende daf\u00fcr die <b>continue</b> Anweisung. Beende die Schleife, wenn die Zahl 15 erreicht ist, indem du die <b>break</b> Anweisung verwendest.</p>\n",
+                "java": "public class Main {\n    public static void main(String[] args) {\n        // TODO: Verwende eine Schleife, um die Zahlen von 1 bis 20 auszugeben\n        // TODO: \u00dcberspringe die Zahlen 5 und 10 mit continue\n        // TODO: Beende die Schleife, wenn die Zahl 15 erreicht ist mit break\n    }\n}"
+            },
+            {
+                "chapter_nr": 11,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle ein Programm, das eine <code>double</code> Zahl deklariert und diese in eine <code>int</code> Zahl umwandelt. Gib sowohl die urspr\u00fcngliche <code>double</code> Zahl als auch die umgewandelte <code>int</code> Zahl aus.</p>\n",
+                "java": "public class Main {\n    public static void main(String[] args) {\n        // TODO: Deklariere eine double Zahl\n        // TODO: Wandle die double Zahl in eine int Zahl um\n        // TODO: Gib beide Zahlen aus\n    }\n}"
+            },
+            {
+                "chapter_nr": 12,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle ein Programm, das zwei Zahlen vom Benutzer einliest und die Division der ersten Zahl durch die zweite Zahl durchf\u00fchrt. F\u00fcr das Einlesen einer Zahl vom Benutzer kannst du du folgenden Befehl verwenden:<pre class=\"western\"><code class=\"western\">scanner.nextInt()</code></pre>\n Stelle sicher, dass die zweite Zahl nicht Null ist, bevor du die Division durchf\u00fchrst. Gib eine entsprechende Fehlermeldung aus, wenn die zweite Zahl Null ist.</p>\n<p>Probiere auch mal aus, was passiert, wenn du doch durch Null teilst.</p>\n",
+                "java": "import java.util.Scanner;\n\nclass Main {\n    public static void main(String[] args) {\n        Scanner scanner = new Scanner(System.in);\n        // TODO: Lese zwei Zahlen vom Benutzer ein\n        // TODO: \u00dcberpr\u00fcfe, ob die zweite Zahl Null ist\n        // TODO: F\u00fchre die Division durch und gib das Ergebnis aus\n    }\n}"
+            },
+            {
+                "chapter_nr": 13,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle ein Programm, das den Benutzer nach seinem Alter fragt und basierend auf dem Alter eine entsprechende Nachricht ausgibt. Wenn der Benutzer unter 18 Jahre alt ist, gib \"Du bist ein Jugendlicher\" aus. Wenn der Benutzer zwischen 18 und 65 Jahren alt ist, gib \"Du bist ein Erwachsener\" aus. Wenn der Benutzer \u00fcber 65 Jahre alt ist, gib \"Du bist ein Senior\" aus.</p>\n",
+                "java": "import java.util.Scanner;\n\nclass Main {\n    public static void main(String[] args) {\n        Scanner scanner = new Scanner(System.in);\n        // TODO: Frage den Benutzer nach seinem Alter\n        // TODO: Verwende if-else Anweisungen, um die entsprechende Nachricht auszugeben\n    }\n}"
+            },
+            {
+                "chapter_nr": 14,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle ein Programm, das ein Array von 5 ganzen Zahlen deklariert, diese initialisiert und anschlie\u00dfend die Werte des Arrays in der Konsole ausgibt.</p>\n",
+                "java": "public class Main {\n    public static void main(String[] args) {\n        // TODO: Deklariere und initialisiere ein Array von 5 ganzen Zahlen\n        // TODO: Gib die Werte des Arrays in der Konsole aus.\n    }\n}"
+            },
+            {
+                "chapter_nr": 15,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle ein Programm, das ein Array von 5 ganzen Zahlen deklariert, diese mit Werten initialisiert und dann die Werte verdoppelt. Gib die urspr\u00fcnglichen und die verdoppelten Werte in der Konsole aus. Verwende eine for-Schleife zur Verdoppelung und Ausgabe der Werte des Arrays.</p>\n",
+                "java": "public class Main {\n    public static void main(String[] args) {\n        // TODO: Deklariere und initialisiere ein Array von 5 ganzen Zahlen\n        // TODO: Verwende eine Schleife, um die Werte im Array zu verdoppeln und die urspr\u00fcnlichen und verdoppelten Werte auszugeben.\n    }\n}"
+            },
+            {
+                "chapter_nr": 16,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle ein Programm, das ein zweidimensionales Array von 3x3 deklariert, es mit Werten initialisiert und anschlie\u00dfend die Werte des Arrays in der Konsole ausgibt. Verwende zur Ausgabe der Werte zwei verschachtelte for-Schleifen.</p>\n",
+                "java": "public class Main {\n    public static void main(String[] args) {\n        // TODO: Deklariere und initialisiere ein zweidimensionales Array von 3x3\n        // TODO: Gib die Werte des Arrays in der Konsole aus. Verwnde dazu zwei verschachtelte for-Schleifen.\n    }\n}"
+            },
+            {
+                "chapter_nr": 17,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle ein Programm, das eine Methode deklariert, die eine einfache Nachricht ausgibt. Rufe diese Methode in der <code>main</code> Methode drei mal auf.</p>\n",
+                "java": "public class Main {\n    public static void main(String[] args) {\n        // TODO: Rufe deine Methode drei mal auf\n    }\n\n    //TODO: Deklariere und erstelle deine Methode, die einen einfachen Text ausgibt.\n}"
+            },
+            {
+                "chapter_nr": 18,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle ein Programm, das eine Methode deklariert, die zwei Zahlen als Parameter entgegennimmt und deren Summe ausgibt. Rufe diese Methode in der <code>main</code> Methode mit verschiedenen Zahlen auf.</p>\n",
+                "java": "public class Main {\n    public static void main(String[] args) {\n        // TODO: Rufe deine Methode mit verschiedenen Zahlen auf\n    }\n\n    //TODO: Deklariere und erstelle deine Methode, die zwei Zahlen als Parameter entgegennimmt und deren Summe ausgibt.\n}"
+            },
+            {
+                "chapter_nr": 19,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle ein Programm, das eine Methode deklariert, die den Quadratwert einer Zahl berechnet und zur\u00fcckgibt. Rufe diese Methode in der <code>main</code> Methode auf und gib das Ergebnis aus.</p>\n",
+                "java": "public class Main {\n    public static void main(String[] args) {\n        // TODO: Rufe deine Methode auf und gib das Ergebnis aus\n    }\n\n    //TODO: Deklariere und erstelle deine Methode, die den Quadratwert einer Zahl berechnet und zur\u00fcckgibt.\n}"
+            },
+            {
+                "chapter_nr": 20,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle eine Klasse namens <code>Person</code>, die die Attribute <code>name</code> (String) und <code>alter</code> (int) hat. Erstelle dann ein Objekt der Klasse <code>Person</code> und gib den Attributen entsprechende Werte. Gib anschlie\u00dfend die Werte der Attribute auf der Konsole aus.</p>\n</p>",
+                "java": "// TODO: Erstelle eine Klasse mit dem Namen Person mit den Attributen name und alter.\n\n\npublic class Main {\n    public static void main(String[] args) {\n        // TODO: Erstelle ein Objekt der Klasse Person, setze die Attribute und gib sie auf der Konsole aus.\n    }\n}"
+            },
+            {
+                "chapter_nr": 21,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle eine Klasse namens <code>Rechner</code>, die eine Methode <code>addiere</code> hat, die zwei Zahlen als Parameter entgegennimmt und deren Summe zur\u00fcckgibt. Erstelle dann ein Objekt der Klasse <code>Rechner</code> in der <code>main</code> Methode und rufe die <code>addiere</code> Methode auf, um die Summe von zwei Zahlen zu berechnen und auszugeben.</p>\n",
+                "java": "class Rechner {\n    // TODO: Definiere die Methode addiere, die zwei Zahlen addiert und zur\u00fcckgibt\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        // TODO: Erstelle ein Objekt der Klasse Rechner und rufe die addiere Methode auf\n    }\n}"
+            },
+            {
+                "chapter_nr": 22,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle eine Klasse namens <code>Person</code>, die die Instanzvariablen <code>name</code> (String) und <code>alter</code> (int) und eine Methode <code>vorstellen</code> hat. F\u00fcge einen Konstruktor hinzu, der die Variablen initialisiert. Erstelle dann ein Objekt der Klasse <code>Person</code> in der <code>main</code> Methode und gib die Werte der Instanzvariablen mit Hilfe der <code>vorstellen</code> Methode aus.</p>\n",
+                "java": "// TODO: Erstelle eine Klasse Person mit den geforderten Attributen und Methode.\n\npublic class Main {\n    public static void main(String[] args) {\n        // TODO: Erstelle ein Objekt der Klasse Person und gib die Werte der Instanzvariablen aus\n    }\n}"
+            },
+            {
+                "chapter_nr": 23,
+                "assignment": "<h2>Aufgabe</h2>\n    <p>Erstelle ein Programm, das die Vererbung zwischen verschiedenen Tierarten demonstriert und dabei die\n\t\tBesonderheiten der Tiere hervorhebt. Du kannst das Programm erweitern, um\n\t\tauch andere Tiere wie V\u00f6gel oder Fische einzubeziehen.</p>\n\t<p>Erstelle eine Basis-Klasse Tier, die allgemeine Eigenschaften und Methoden f\u00fcr Tiere definiert.</p>\n\t<p>Erstelle dann zwei spezialisierte Klassen, Hund und Katze, die von der Klasse Tier erben.</p>\n\t<p>Die Klassen sollen folgende Anforderungen erf\u00fcllen:</p>\n\t<p>Basis-Klasse Tier:</p>\n\t<ul>\n\t\t<li>Attribut: name (String) - Der Name des Tieres.</li>\n\t\t<li>Attribut: gewicht (double) - Das Gewicht des Tieres.</li>\n\t</ul>\n\t<p>Klasse Hund:</p>\n\t<ul>\n\t\t<li>Erbt von der Klasse Tier.</li>\n\t\t<li>Methode: geraeuschMachen() - Gibt &quot;Hund bellt: Wuff, Wuff!&quot; aus.</li>\n\t\t<li>Methode: apportieren() - Gibt &quot;Hund apportiert den Ball!&quot; aus.</li>\n\t</ul>\n\t<p>Klasse Katze:</p>\n\t<ul>\n\t\t<li>Erbt von der Klasse Tier.</li>\n\t\t<li>Methode: geraeuschMachen() - Gibt &quot;Katze miaut: Miau, Miau!&quot; aus.</li>\n\t\t<li>Methode: kratzen() - Gibt &quot;Katze kratzt das Sofa!&quot; aus.</li>\n\t</ul>\n\t<p>main-Klasse:</p>\n\t<ul>\n\t\t<li>Erstelle in der main-Methode ein Objekt von der Klasse Hund und eines von der Klasse Katze.</li>\n\t\t<li>Rufe die Methode geraeuschMachen() f\u00fcr beide Objekte auf.</li>\n\t\t<li>Rufe die Methoden apportieren() und kratzen() f\u00fcr die entsprechenden Objekte auf.</li>\n\t\t<li>Gib die Attribute name und gewicht f\u00fcr beide Objekte aus.</li>\n\t\t<li>Zus\u00e4tzlich: \u00dcberlege dir, welche besonderen Eigenschaften oder Verhaltensweisen du f\u00fcr andere Tiere\n\t\t\thinzuf\u00fcgen k\u00f6nntest, und implementiere diese als neue Klassen.</li>\n\t</ul>\n",
+                "java": "// Basis-Klasse Tier\nclass Tier {\n    todo ...\n}\n\n// Spezialisierte Klasse Hund, erbt von Tier\nclass Hund extends Tier {\n    todo ...\n}\n\n// Spezialisierte Klasse Katze, erbt von Tier\nclass Katze extends Tier {\n\n    // Konstruktor\n    public Katze(String name, double gewicht) {\n        super(name, gewicht);\n    }\n\n    todo ...\n\n}\n\n// Main-Klasse zum Testen\npublic class Main {\n    public static void main(String[] args) {\n        todo ...\n    }\n}\n"
+            },
+            {
+                "chapter_nr": 24,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle eine Basisklasse <code>Fahrzeug</code> mit einer Methode <code>fahren</code>, die eine allgemeine Nachricht ausgibt. Erstelle dann zwei abgeleitete Klassen <code>Auto</code> und <code>Motorrad</code>, die die Methode <code>fahren</code> \u00fcberschreiben und spezifische Nachrichten ausgeben. Erstelle in der <code>main</code> Methode ein Objekt jeder Klasse und rufe die <code>fahren</code> Methode auf.</p>\n",
+                "java": "class Fahrzeug {\n    todo ...\n}\n\nclass Auto extends Fahrzeug {\n    todo ...\n}\n\nclass Motorrad extends Fahrzeug {\n    todo ...\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        // TODO: Erstelle ein Objekt von Auto und Motorrad und rufe die fahren Methode auf\n    }\n}"
+            },
+            {
+                "chapter_nr": 25,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle eine Klasse <code>Fahrzeug</code> mit einem Attribut <code>geschwindigkeit</code> und einer Methode <code>fahren</code>, die die Geschwindigkeit ausgibt. Erstelle dann eine Klasse <code>Auto</code>, die von <code>Fahrzeug</code> erbt und einen Konstruktor hat, der die Geschwindigkeit \u00fcber das <code>super</code> Schl\u00fcsselwort initialisiert. Rufe die Methode <code>fahren</code> in der <code>main</code> Methode auf.</p>\n",
+                "java": "todo ..."
+            }
+        ]
+    },
+    "peter": {
+        "password_hash": "$2b$12$pHftVu6KIxO2fvh1A/kBZOVXrcfjzgf5k04qwkSZ8xQozGznngbby",
+        "assignment_chapter": 1,
+        "current_chapter": 1,
+        "preferences": {
+            "favorite_subjects": "Deutsch, Geschichte",
+            "hobbies": "Tanzen",
+            "profession": "Lehrer",
+            "other": ""
+        },
+        "data": [
+            {
+                "chapter_nr": 1,
+                "assignment": "\n<!DOCTYPE html>\n<html>\n<head>\n\t<meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"/>\n\t<title>Learn Java - Kapitel 1</title>\n\t<style type=\"text/css\">\n\t\tp { line-height: 100%; margin-bottom: 0.01in; background: transparent; background: transparent; font-family: \"Liberation Serif\"; font-size: 12pt }\n\t\th1 { margin-bottom: 0.08in; background: transparent; background: transparent; page-break-after: avoid }\n\t\th1.western { font-family: \"Liberation Serif\", serif; font-size: 24pt; font-weight: bold }\n\t\th2 { margin-top: 0.14in; margin-bottom: 0.08in; background: transparent; background: transparent; page-break-after: avoid }\n\t\th2.western { font-family: \"Liberation Serif\", serif; font-size: 18pt; font-weight: bold }\n\t\tpre { margin-top: 0.01in; margin-bottom: 0.01in; background: #cccccc; font-size: 12pt; page-break-before: auto; page-break-after: auto }\n\t\tpre.western { margin-top: 0.1in; \"font-family: \"Liberation Mono\", monospace }\n\t\tcode.western { font-family: \"Liberation Mono\", monospace}\n\t\tul, ol { font-family: \"Liberation Serif\"; font-size: 12pt; line-height: 100%; margin-bottom: 0.01in; }\n\t\tli { font-family: \"Liberation Serif\"; font-size: 12pt; line-height: 100%; margin-bottom: 0.01in; }\n\t</style>\n</head>\n<body lang=\"de-DE\">\n<h1 class=\"western\">Kapitel 1 - Hallo Welt</h1>\n<p>Rechts siehst du ein &quot;Hallo Welt&quot; Programm.</p>\n<p>In vielen Programmiersprachen ist dies das erste Programm, das man schreibt. Es macht nichts weiter, als dass es die Worte &quot;Hallo Welt&quot; ausgibt.</p>\n<p>Im ersten Kapitel lernst du mit Hilfe dieses einfachen Programms einige Regeln f\u00fcr Java kennen. Du wirst hier schon auf einige Begriffe sto\u00dfen, die am Anfang noch unklar sind und die du erst im Laufe dieses Lehrgangs richtig verstehen wirst. Mach dir darum keine Sorgen.</p>\n<p>Das Programm besteht aus einer Klasse mit dem Namen &quot;main&quot;:</p>\n<pre class=\"western\"><code class=\"western\">public class Main {\n<code class=\"western\">     </code>...\n}</code></pre>\n<p>Da das Programm nur aus einer Klasse besteht, ist dies die Hauptklasse. Jede Java Datei hat die Erweiterung <b>.java </b>und besitzt eine Hauptklasse mit dem gleichen Namen wie die Datei. Dieses Programm w\u00fcrde also unter dem Namen <b>Main.java</b> abgespeichert.</p>\n<p>Du wirst noch genauer erfahren, was man bei der Programmierung unter einer Klasse versteht.</p>\n<p>Zun\u00e4chst kannst du dir eine Klasse als ein Konzept mit einer Aufgabe vorstellen. Die Aufgabe dieser Klasse ist die Ausgabe des Textes &quot;Hallo Welt&quot;.</p>\n<p>Klassennamen schreibt man in der Regel gro\u00df. Die geschweiften Klammern geben an, was alles zu der Klasse hinzu geh\u00f6rt.</p>\n<p>In der Klasse befindet sich eine <b>Methode</b> main(), die die Aufgabe des Programms enth\u00e4lt:</p>\n<pre class=\"western\"><code class=\"western\">public static void main(String[] args) {\n<code class=\"western\">     </code>...\n}</code></pre>\n<p>Der Name einer Methode endet immer mit runden Klammern. Sp\u00e4ter wirst du sehen, dass es auch Methoden gibt, bei denen nichts in der Klammer steht. Trotzdem m\u00fcssen die runden Klammern immer am Ende des Namens vorhanden sein.</p>\n<p>Wie bei der Klasse zeigen die geschweiften Klammern an, was zu der Methode hinzu geh\u00f6rt.</p>\n<p>Die Begriffe <b>public</b>, <b>static</b>, <b>void</b> und <b>String[] args</b> werden wir sp\u00e4ter genauer verstehen. F\u00fcrs erste reicht es zu verstehen, dass sie (notwendige) Eigenschaften der Methode beschreiben.</p>\n<p>Der entscheidende Befehl f\u00fcr das Programm ist:</p>\n<pre class=\"western\"><code class=\"western\">System.out.println(&quot;Hallo Welt&quot;);</code></pre>\n<p>Dieser Befehl weist den Computer an, den Text &quot;Hallo Welt&quot; auszugeben.</p>\n<p>Der Befehl ist zusammengesetzt aus einzelnen Komponenten (zu erkennen an den Punkten). Du wirst bald verstehen, was die einzelnen Teile bedeuten. F\u00fcrs Erste kannst du dir merken, dass man mit diesem Befehl Text ausgeben kann.</p>\n<br><h2>Aufgabe</h2>\n<p>\u00c4ndere das Programm so ab, dass es nicht mehr \"Hallo Welt\", sondern \"Hello World\" ausgibt. Um das Programm interessanter zu gestalten, f\u00fcge eine zweite Ausgabe hinzu, die deinen Namen oder ein Hobby von dir erw\u00e4hnt, z.B. \"Ich tanze gerne!\"</p>\n</body>\n</html>\n",
+                "java": "\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(\"Hallo Welt!\");\n        // todo: \u00c4ndere die Ausgabe auf \"Hello World\" und f\u00fcge eine zweite Ausgabe hinzu, die deinen Namen oder ein Hobby erw\u00e4hnt.\n    }\n}\n"
+            },
+            {
+                "chapter_nr": 2,
+                "assignment": "<h2>Aufgabe</h2>\n<p>F\u00fcge deinem Programm Kommentare hinzu, um zu erkl\u00e4ren, was jeder Teil des Codes macht. Erstelle sowohl einzeilige als auch mehrzeilige Kommentare.</p>\n",
+                "java": "public class Main {\n    public static void main(String[] args) {\n        todo ...\n        System.out.println(\"Dies ist der Beginn eines Kurses, der dir Java beibringen soll.\");\n        todo ... \n        System.out.println(\"Am Ende des Kurses wirst du die Grundlagen der Programmierung mit Java beherrschen\");\n    }\n}"
+            },
+            {
+                "chapter_nr": 3,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle ein Programm, das die folgenden Variablen deklariert und initialisiert:</p>\n<ul>\n    <li>Eine ganze Zahl (int) mit dem Namen <code>alter</code> und dem Wert 16.</li>\n    <li>Eine Dezimalzahl (double) mit dem Namen <code>gewicht</code> und dem Wert 65.5.</li>\n    <li>Ein Zeichen (char) mit dem Namen <code>anfangsBuchstabe</code> und dem Wert 'J'.</li>\n    <li>Ein Wahrheitswert (boolean) mit dem Namen <code>istStudent</code> und dem Wert <code>true</code>.</li>\n</ul>\n<p>Gib anschlie\u00dfend die Werte der Variablen in der Konsole aus.</p><p>Den Wert einer Variable x kann man z.B. mit dem folgenden Befehl ausgeben:</p>\n<pre class=\"western\"><code class=\"western\">System.out.println(\"Wert von x: \" + x);</code></pre>\n<p></p>\n",
+                "java": "public class Main {\n    public static void main(String[] args) {\n        todo ...\n    }\n}"
+            },
+            {
+                "chapter_nr": 4,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle ein Programm, das zwei (Dezimal-)Zahlen deklariert und die Aufgaben und Ergebnisse der vier grundlegenden arithmetischen Operationen (Addition, Subtraktion, Multiplikation und Division) ausgibt.</p>\n",
+                "java": "public class Main {\n    public static void main(String[] args) {\n        // TODO: Deklariere und initialisiere zwei Variablen mit den Namen zahl1 und zahl2\n        // TODO: F\u00fchre die vier grundlegenden arithmetischen Operationen durch \n        // und speichere sie in den Variablen summe, differenz, produkt und quotient\n       int summe = \n       int differenz = \n       int produkt = \n       int quotient = \n       // TODO: Gib die Ergebnisse der Operationen aus\n    }\n}"
+            },
+            {
+                "chapter_nr": 5,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Vervollst\u00e4ndige das Programm, so dass es nach einem Username fragt und diesen unter der Variable userName abspeichert.\n        Anschlie\u00dfend soll das Programm den Text \"Der Username ist: userName\" ausgeben, wobei userName durch den Wert der Variable ersetzt wird. </p>\n",
+                "java": "import java.util.Scanner;\n\nclass Main {\n  public static void main(String[] args) {\n    Scanner scanner = new Scanner(System.in);\n    todo ...\n  }\n}"
+            },
+            {
+                "chapter_nr": 6,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle ein Programm, das eine Zahl vom Benutzer einliest und \u00fcberpr\u00fcft, ob die Zahl gerade oder ungerade ist. Gib eine entsprechende Nachricht aus.</p>\n",
+                "java": "import java.util.Scanner;\n\nclass Main {\n    public static void main(String[] args) {\n        Scanner scanner = new Scanner(System.in);\n        // TODO: Lese eine Zahl vom Benutzer ein\n        // TODO: \u00dcberpr\u00fcfe, ob die Zahl gerade oder ungerade ist\n        // TODO: Gib die entsprechende Nachricht aus\n    }\n}"
+            },
+            {
+                "chapter_nr": 7,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle ein Programm, das eine Zahl zwischen 1 und 5 einliest und den entsprechenden Wochentag ausgibt. Verwende die <b>switch-case</b> Struktur, um die Wochentage zu definieren.</p>\n",
+                "java": "import java.util.Scanner;\n\nclass Main {\n    public static void main(String[] args) {\n        Scanner scanner = new Scanner(System.in);\n        // TODO: Lese eine Zahl zwischen 1 und 5 ein\n        // TODO: Verwende die switch-case Struktur, um den entsprechenden Wochentag auszugeben\n    }\n}"
+            },
+            {
+                "chapter_nr": 8,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle ein Programm, das die Zahlen von 1 bis 10 mit einer for-Schleife ausgibt.</p>\n",
+                "java": "public class Main {\n    public static void main(String[] args) {\n        // TODO: Verwende eine for-Schleife, um die Zahlen von 1 bis 10 auszugeben\n    }\n}"
+            },
+            {
+                "chapter_nr": 9,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle ein Programm, das die Zahlen von 10 bis 1 mit einer while-Schleife ausgibt.</p>\n",
+                "java": "public class Main {\n    public static void main(String[] args) {\n        // TODO: Verwende eine while-Schleife, um die Zahlen von 10 bis 1 auszugeben\n    }\n}"
+            },
+            {
+                "chapter_nr": 10,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle ein Programm, das die Zahlen von 1 bis 20 ausgibt, aber die Zahlen 5 und 10 \u00fcberspringt. Verwende daf\u00fcr die <b>continue</b> Anweisung. Beende die Schleife, wenn die Zahl 15 erreicht ist, indem du die <b>break</b> Anweisung verwendest.</p>\n",
+                "java": "public class Main {\n    public static void main(String[] args) {\n        // TODO: Verwende eine Schleife, um die Zahlen von 1 bis 20 auszugeben\n        // TODO: \u00dcberspringe die Zahlen 5 und 10 mit continue\n        // TODO: Beende die Schleife, wenn die Zahl 15 erreicht ist mit break\n    }\n}"
+            },
+            {
+                "chapter_nr": 11,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle ein Programm, das eine <code>double</code> Zahl deklariert und diese in eine <code>int</code> Zahl umwandelt. Gib sowohl die urspr\u00fcngliche <code>double</code> Zahl als auch die umgewandelte <code>int</code> Zahl aus.</p>\n",
+                "java": "public class Main {\n    public static void main(String[] args) {\n        // TODO: Deklariere eine double Zahl\n        // TODO: Wandle die double Zahl in eine int Zahl um\n        // TODO: Gib beide Zahlen aus\n    }\n}"
+            },
+            {
+                "chapter_nr": 12,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle ein Programm, das zwei Zahlen vom Benutzer einliest und die Division der ersten Zahl durch die zweite Zahl durchf\u00fchrt. F\u00fcr das Einlesen einer Zahl vom Benutzer kannst du du folgenden Befehl verwenden:<pre class=\"western\"><code class=\"western\">scanner.nextInt()</code></pre>\n Stelle sicher, dass die zweite Zahl nicht Null ist, bevor du die Division durchf\u00fchrst. Gib eine entsprechende Fehlermeldung aus, wenn die zweite Zahl Null ist.</p>\n<p>Probiere auch mal aus, was passiert, wenn du doch durch Null teilst.</p>\n",
+                "java": "import java.util.Scanner;\n\nclass Main {\n    public static void main(String[] args) {\n        Scanner scanner = new Scanner(System.in);\n        // TODO: Lese zwei Zahlen vom Benutzer ein\n        // TODO: \u00dcberpr\u00fcfe, ob die zweite Zahl Null ist\n        // TODO: F\u00fchre die Division durch und gib das Ergebnis aus\n    }\n}"
+            },
+            {
+                "chapter_nr": 13,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle ein Programm, das den Benutzer nach seinem Alter fragt und basierend auf dem Alter eine entsprechende Nachricht ausgibt. Wenn der Benutzer unter 18 Jahre alt ist, gib \"Du bist ein Jugendlicher\" aus. Wenn der Benutzer zwischen 18 und 65 Jahren alt ist, gib \"Du bist ein Erwachsener\" aus. Wenn der Benutzer \u00fcber 65 Jahre alt ist, gib \"Du bist ein Senior\" aus.</p>\n",
+                "java": "import java.util.Scanner;\n\nclass Main {\n    public static void main(String[] args) {\n        Scanner scanner = new Scanner(System.in);\n        // TODO: Frage den Benutzer nach seinem Alter\n        // TODO: Verwende if-else Anweisungen, um die entsprechende Nachricht auszugeben\n    }\n}"
+            },
+            {
+                "chapter_nr": 14,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle ein Programm, das ein Array von 5 ganzen Zahlen deklariert, diese initialisiert und anschlie\u00dfend die Werte des Arrays in der Konsole ausgibt.</p>\n",
+                "java": "public class Main {\n    public static void main(String[] args) {\n        // TODO: Deklariere und initialisiere ein Array von 5 ganzen Zahlen\n        // TODO: Gib die Werte des Arrays in der Konsole aus.\n    }\n}"
+            },
+            {
+                "chapter_nr": 15,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle ein Programm, das ein Array von 5 ganzen Zahlen deklariert, diese mit Werten initialisiert und dann die Werte verdoppelt. Gib die urspr\u00fcnglichen und die verdoppelten Werte in der Konsole aus. Verwende eine for-Schleife zur Verdoppelung und Ausgabe der Werte des Arrays.</p>\n",
+                "java": "public class Main {\n    public static void main(String[] args) {\n        // TODO: Deklariere und initialisiere ein Array von 5 ganzen Zahlen\n        // TODO: Verwende eine Schleife, um die Werte im Array zu verdoppeln und die urspr\u00fcnlichen und verdoppelten Werte auszugeben.\n    }\n}"
+            },
+            {
+                "chapter_nr": 16,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle ein Programm, das ein zweidimensionales Array von 3x3 deklariert, es mit Werten initialisiert und anschlie\u00dfend die Werte des Arrays in der Konsole ausgibt. Verwende zur Ausgabe der Werte zwei verschachtelte for-Schleifen.</p>\n",
+                "java": "public class Main {\n    public static void main(String[] args) {\n        // TODO: Deklariere und initialisiere ein zweidimensionales Array von 3x3\n        // TODO: Gib die Werte des Arrays in der Konsole aus. Verwnde dazu zwei verschachtelte for-Schleifen.\n    }\n}"
+            },
+            {
+                "chapter_nr": 17,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle ein Programm, das eine Methode deklariert, die eine einfache Nachricht ausgibt. Rufe diese Methode in der <code>main</code> Methode drei mal auf.</p>\n",
+                "java": "public class Main {\n    public static void main(String[] args) {\n        // TODO: Rufe deine Methode drei mal auf\n    }\n\n    //TODO: Deklariere und erstelle deine Methode, die einen einfachen Text ausgibt.\n}"
+            },
+            {
+                "chapter_nr": 18,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle ein Programm, das eine Methode deklariert, die zwei Zahlen als Parameter entgegennimmt und deren Summe ausgibt. Rufe diese Methode in der <code>main</code> Methode mit verschiedenen Zahlen auf.</p>\n",
+                "java": "public class Main {\n    public static void main(String[] args) {\n        // TODO: Rufe deine Methode mit verschiedenen Zahlen auf\n    }\n\n    //TODO: Deklariere und erstelle deine Methode, die zwei Zahlen als Parameter entgegennimmt und deren Summe ausgibt.\n}"
+            },
+            {
+                "chapter_nr": 19,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle ein Programm, das eine Methode deklariert, die den Quadratwert einer Zahl berechnet und zur\u00fcckgibt. Rufe diese Methode in der <code>main</code> Methode auf und gib das Ergebnis aus.</p>\n",
+                "java": "public class Main {\n    public static void main(String[] args) {\n        // TODO: Rufe deine Methode auf und gib das Ergebnis aus\n    }\n\n    //TODO: Deklariere und erstelle deine Methode, die den Quadratwert einer Zahl berechnet und zur\u00fcckgibt.\n}"
+            },
+            {
+                "chapter_nr": 20,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle eine Klasse namens <code>Person</code>, die die Attribute <code>name</code> (String) und <code>alter</code> (int) hat. Erstelle dann ein Objekt der Klasse <code>Person</code> und gib den Attributen entsprechende Werte. Gib anschlie\u00dfend die Werte der Attribute auf der Konsole aus.</p>\n</p>",
+                "java": "// TODO: Erstelle eine Klasse mit dem Namen Person mit den Attributen name und alter.\n\n\npublic class Main {\n    public static void main(String[] args) {\n        // TODO: Erstelle ein Objekt der Klasse Person, setze die Attribute und gib sie auf der Konsole aus.\n    }\n}"
+            },
+            {
+                "chapter_nr": 21,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle eine Klasse namens <code>Rechner</code>, die eine Methode <code>addiere</code> hat, die zwei Zahlen als Parameter entgegennimmt und deren Summe zur\u00fcckgibt. Erstelle dann ein Objekt der Klasse <code>Rechner</code> in der <code>main</code> Methode und rufe die <code>addiere</code> Methode auf, um die Summe von zwei Zahlen zu berechnen und auszugeben.</p>\n",
+                "java": "class Rechner {\n    // TODO: Definiere die Methode addiere, die zwei Zahlen addiert und zur\u00fcckgibt\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        // TODO: Erstelle ein Objekt der Klasse Rechner und rufe die addiere Methode auf\n    }\n}"
+            },
+            {
+                "chapter_nr": 22,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle eine Klasse namens <code>Person</code>, die die Instanzvariablen <code>name</code> (String) und <code>alter</code> (int) und eine Methode <code>vorstellen</code> hat. F\u00fcge einen Konstruktor hinzu, der die Variablen initialisiert. Erstelle dann ein Objekt der Klasse <code>Person</code> in der <code>main</code> Methode und gib die Werte der Instanzvariablen mit Hilfe der <code>vorstellen</code> Methode aus.</p>\n",
+                "java": "// TODO: Erstelle eine Klasse Person mit den geforderten Attributen und Methode.\n\npublic class Main {\n    public static void main(String[] args) {\n        // TODO: Erstelle ein Objekt der Klasse Person und gib die Werte der Instanzvariablen aus\n    }\n}"
+            },
+            {
+                "chapter_nr": 23,
+                "assignment": "<h2>Aufgabe</h2>\n    <p>Erstelle ein Programm, das die Vererbung zwischen verschiedenen Tierarten demonstriert und dabei die\n\t\tBesonderheiten der Tiere hervorhebt. Du kannst das Programm erweitern, um\n\t\tauch andere Tiere wie V\u00f6gel oder Fische einzubeziehen.</p>\n\t<p>Erstelle eine Basis-Klasse Tier, die allgemeine Eigenschaften und Methoden f\u00fcr Tiere definiert.</p>\n\t<p>Erstelle dann zwei spezialisierte Klassen, Hund und Katze, die von der Klasse Tier erben.</p>\n\t<p>Die Klassen sollen folgende Anforderungen erf\u00fcllen:</p>\n\t<p>Basis-Klasse Tier:</p>\n\t<ul>\n\t\t<li>Attribut: name (String) - Der Name des Tieres.</li>\n\t\t<li>Attribut: gewicht (double) - Das Gewicht des Tieres.</li>\n\t</ul>\n\t<p>Klasse Hund:</p>\n\t<ul>\n\t\t<li>Erbt von der Klasse Tier.</li>\n\t\t<li>Methode: geraeuschMachen() - Gibt &quot;Hund bellt: Wuff, Wuff!&quot; aus.</li>\n\t\t<li>Methode: apportieren() - Gibt &quot;Hund apportiert den Ball!&quot; aus.</li>\n\t</ul>\n\t<p>Klasse Katze:</p>\n\t<ul>\n\t\t<li>Erbt von der Klasse Tier.</li>\n\t\t<li>Methode: geraeuschMachen() - Gibt &quot;Katze miaut: Miau, Miau!&quot; aus.</li>\n\t\t<li>Methode: kratzen() - Gibt &quot;Katze kratzt das Sofa!&quot; aus.</li>\n\t</ul>\n\t<p>main-Klasse:</p>\n\t<ul>\n\t\t<li>Erstelle in der main-Methode ein Objekt von der Klasse Hund und eines von der Klasse Katze.</li>\n\t\t<li>Rufe die Methode geraeuschMachen() f\u00fcr beide Objekte auf.</li>\n\t\t<li>Rufe die Methoden apportieren() und kratzen() f\u00fcr die entsprechenden Objekte auf.</li>\n\t\t<li>Gib die Attribute name und gewicht f\u00fcr beide Objekte aus.</li>\n\t\t<li>Zus\u00e4tzlich: \u00dcberlege dir, welche besonderen Eigenschaften oder Verhaltensweisen du f\u00fcr andere Tiere\n\t\t\thinzuf\u00fcgen k\u00f6nntest, und implementiere diese als neue Klassen.</li>\n\t</ul>\n",
+                "java": "// Basis-Klasse Tier\nclass Tier {\n    todo ...\n}\n\n// Spezialisierte Klasse Hund, erbt von Tier\nclass Hund extends Tier {\n    todo ...\n}\n\n// Spezialisierte Klasse Katze, erbt von Tier\nclass Katze extends Tier {\n\n    // Konstruktor\n    public Katze(String name, double gewicht) {\n        super(name, gewicht);\n    }\n\n    todo ...\n\n}\n\n// Main-Klasse zum Testen\npublic class Main {\n    public static void main(String[] args) {\n        todo ...\n    }\n}\n"
+            },
+            {
+                "chapter_nr": 24,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle eine Basisklasse <code>Fahrzeug</code> mit einer Methode <code>fahren</code>, die eine allgemeine Nachricht ausgibt. Erstelle dann zwei abgeleitete Klassen <code>Auto</code> und <code>Motorrad</code>, die die Methode <code>fahren</code> \u00fcberschreiben und spezifische Nachrichten ausgeben. Erstelle in der <code>main</code> Methode ein Objekt jeder Klasse und rufe die <code>fahren</code> Methode auf.</p>\n",
+                "java": "class Fahrzeug {\n    todo ...\n}\n\nclass Auto extends Fahrzeug {\n    todo ...\n}\n\nclass Motorrad extends Fahrzeug {\n    todo ...\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        // TODO: Erstelle ein Objekt von Auto und Motorrad und rufe die fahren Methode auf\n    }\n}"
+            },
+            {
+                "chapter_nr": 25,
+                "assignment": "<h2>Aufgabe</h2>\n<p>Erstelle eine Klasse <code>Fahrzeug</code> mit einem Attribut <code>geschwindigkeit</code> und einer Methode <code>fahren</code>, die die Geschwindigkeit ausgibt. Erstelle dann eine Klasse <code>Auto</code>, die von <code>Fahrzeug</code> erbt und einen Konstruktor hat, der die Geschwindigkeit \u00fcber das <code>super</code> Schl\u00fcsselwort initialisiert. Rufe die Methode <code>fahren</code> in der <code>main</code> Methode auf.</p>\n",
+                "java": "todo ..."
+            }
+        ]
+    }
+}

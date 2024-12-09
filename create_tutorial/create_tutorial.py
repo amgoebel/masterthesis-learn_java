@@ -1,0 +1,128 @@
+import dotenv
+from langchain_openai import ChatOpenAI
+from langchain.schema.messages import HumanMessage, SystemMessage
+from langchain.prompts import (
+    PromptTemplate,
+    SystemMessagePromptTemplate,
+    HumanMessagePromptTemplate,
+    ChatPromptTemplate,
+)
+from langchain_core.output_parsers import StrOutputParser
+import re
+import os
+
+dotenv.load_dotenv()
+
+chat_model = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+output_parser = StrOutputParser()
+
+system_role = """You are a German speaking high school teacher for computer science that develops chapters for
+    a java learn course for beginners. Each chapter also contains an assignment in the end.
+    The course is being used in an IDE which is divided into three sections. In the left section the content
+    of the chapter is displayed. In the middle section is an editor in which the student can write java code
+    to solve the assignment. The output of the program and hints are displayed in the right section. The student 
+    can compile and run its code with corresponding buttons. If applicable, the student can also enter input 
+    to the running program in the right section.
+    For most assignments the student is also given a starting code in the editor.
+    Your assignment is to create a specific chapter, the corresponding assignment and a java code as the 
+    starting code. You can reference the starting code in the chapter since the student can see both."""
+
+system_role_prompt = SystemMessagePromptTemplate(
+    prompt=PromptTemplate(
+        template=system_role
+    )
+)
+
+
+def create_tutorials(json_file, chapter) -> str:
+
+    system_create_tutorial_message = """You will be given a json file that contains three keys: "tutorial",
+    "html_head" and "html_tail".
+    The value of "tutorial" is an array where each element corresponds to a chapter and contains five keys: 
+    "chapter_nr": The number of the chapter, "topic": The topic of the chapter, "content": 
+    The content of the chapter as an html body, "assignment": The assignment in the end of the chapter as an 
+    html body and "java": The starting code for the student.
+    The values of "html_head" and "html_trail" are later placed around the values of "content" and "assignment"
+    in order to build a valid html document.
+    Some chapters are already finished and can be used as examples of how a chapter should look like 
+    together with the corresponding assignment and starting java code. 
+    Closely analyze the examples and create values for all keys of chapter nr {chapter}. Make sure that the 
+    chapter is similar to the examples in style and extensiveness and that the chapter does not anticipate 
+    content of later chapters.
+    It is import that you keep in mind, that the student only knows the content of the previous 
+    chapters and has no other programming experience. This also means that the student does not know
+    technical terms such as "class", "method", "declaration" or "initialization". You have to explain 
+    technical terms when you introduce them and you can only use them after they have been introduced.
+    It is also important that the starting code does not solve the assignment. It only gives 
+    a rudimentary starting frame. Write "to do ... " into the starting code where the students has 
+    to add his or her code.
+        
+    Give the full JSON file. Wrap the file with ```file and ``` 
+    
+    JSON file:
+    {json_file}            
+       
+    """
+
+    system_create_tutorial_prompt = SystemMessagePromptTemplate(
+        prompt=PromptTemplate(
+            input_variables=["json_file", "chapter"], template=system_create_tutorial_message
+        )
+    )
+
+    messages = [system_role_prompt, system_create_tutorial_prompt]
+    prompt = ChatPromptTemplate(
+        input_variables=["json_file", "chapter"],
+        messages=messages,
+    )
+    chain = prompt | chat_model | output_parser
+
+    response = chain.invoke(
+        {"json_file": json_file, "chapter": chapter})
+
+    keyword1 = "`file"
+    keyword2 = "`"
+
+       
+    # Find the start and end positions of the keywords
+    start_pos = response.find(keyword1) + len(keyword1)
+    end_pos = response.find(keyword2, start_pos)  # start searching for keyword2 after start_pos
+    
+    # Extract the text between the keywords
+    extracted_text = response[start_pos:end_pos]
+
+    return(extracted_text)
+
+
+
+def set_working_directory():
+    try:
+        os.chdir(os.path.dirname(__file__))
+    except:
+        print("... there was an error setting the working directory")
+
+
+def get_json_file():
+    filename = "tutorial.json"
+    f = open(filename, "r", encoding='utf-8')
+    file_content = f.read()
+    f.close()
+    return (file_content)
+
+
+def save_file(content):
+    filename = "tutorial.json"
+    f = open(filename, "w", encoding='utf-8')
+    f.write(content)
+    f.close
+
+
+def main():
+    set_working_directory()
+    json_file = get_json_file()
+    response = create_tutorials(chapter=26,json_file=json_file)
+    save_file(response)
+        
+        
+if (__name__ == "__main__"):
+    main()
