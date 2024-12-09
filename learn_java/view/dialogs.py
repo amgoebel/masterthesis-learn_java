@@ -30,6 +30,7 @@ class Dialog_Preferences(QDialog, Ui_UI_Dialog_Preferences):
         self.lE_Fach.setText(self._model.get_favorite_subjects())
         self.lE_Hobbys.setText(self._model.get_hobbies())
         self.lE_Beruf.setText(self._model.get_profession())
+        self.pTE_Sonstiges.setPlainText(self._model.get_other())
         
 
 

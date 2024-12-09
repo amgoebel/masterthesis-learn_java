@@ -23,6 +23,8 @@ class Controller:
             self._show_welcome_page()
         else:
             self._model.set_starting_chapter()
+            if self._model.get_preferences_set():
+                self._adjust_assignments()
         self._set_code_file()
         self._set_tutorial()
 
@@ -133,16 +135,18 @@ Mit der Taste "start" kannst du dein Programm nun laufen lassen."""
         self._model.clear_output()
                 
     def _adjust_assignments(self):
-        if (self._dialog_preferences.exec() == QDialog.DialogCode.Accepted):
-            self._model.set_preferences(favorite_subjects=self._dialog_preferences.lE_Fach.text(),
-                                        hobbies=self._dialog_preferences.lE_Hobbys.text(),
-                                        profession=self._dialog_preferences.lE_Beruf.text(),
-                                        other="")
-            self._assignment_adjuster = Assignment_Adjuster(model=self._model)
-            self._assignment_adjuster.start()             
+        self._assignment_adjuster = Assignment_Adjuster(model=self._model)
+        self._assignment_adjuster.start()             
     
     def _show_welcome_page(self):
-        self._dialog_welcome.exec()
+        if (self._dialog_preferences.exec() == QDialog.DialogCode.Accepted):
+            self._model.set_preferences(favorite_subjects=self._dialog_preferences.lE_Fach.text(),
+                                    hobbies=self._dialog_preferences.lE_Hobbys.text(),
+                                    profession=self._dialog_preferences.lE_Beruf.text(),
+                                    other=self._dialog_preferences.pTE_Sonstiges.toPlainText())
+            self._model.set_preferences_set()
+            self._adjust_assignments()
+            
 
     def _clear_information(self):
         self._view.tE_Informationen.clear()

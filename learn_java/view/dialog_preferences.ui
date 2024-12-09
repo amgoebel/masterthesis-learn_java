@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>700</width>
-    <height>300</height>
+    <width>767</width>
+    <height>380</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -19,175 +19,132 @@
   <property name="windowTitle">
    <string>Persönliche Informationen</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
-   <item>
-    <layout class="QFormLayout" name="formLayout">
-     <item row="0" column="0" colspan="2">
-      <widget class="QLabel" name="l_Vorlieben">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>510</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>16777212</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="locale">
-        <locale language="German" country="Germany"/>
-       </property>
-       <property name="text">
-        <string>Fülle bitte diese Felder aus, damit die Aufgaben auf dich angepasst werden können:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="l_Name">
-       <property name="text">
-        <string>Name:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="QLineEdit" name="lE_Name">
-       <property name="minimumSize">
-        <size>
-         <width>500</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="locale">
-        <locale language="German" country="Germany"/>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="l_Alter">
-       <property name="text">
-        <string>Alter:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1">
-      <widget class="QLineEdit" name="lE_Alter">
-       <property name="minimumSize">
-        <size>
-         <width>500</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="locale">
-        <locale language="German" country="Germany"/>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="0">
-      <widget class="QLabel" name="l_Fach">
-       <property name="text">
-        <string>Lieblingsfächer:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="1">
-      <widget class="QLineEdit" name="lE_Fach">
-       <property name="minimumSize">
-        <size>
-         <width>500</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="locale">
-        <locale language="German" country="Germany"/>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="0">
-      <widget class="QLabel" name="l_Hobbys">
-       <property name="text">
-        <string>Hobbys:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="1">
-      <widget class="QLineEdit" name="lE_Hobbys">
-       <property name="minimumSize">
-        <size>
-         <width>500</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="locale">
-        <locale language="German" country="Germany"/>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="0">
-      <widget class="QLabel" name="l_Beruf">
-       <property name="text">
-        <string>Berufswunsch:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="1">
-      <widget class="QLineEdit" name="lE_Beruf">
-       <property name="minimumSize">
-        <size>
-         <width>500</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="locale">
-        <locale language="German" country="Germany"/>
-       </property>
-      </widget>
-     </item>
-     <item row="6" column="0">
-      <widget class="QLabel" name="l_Vorbild">
-       <property name="text">
-        <string>Vorbild:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="6" column="1">
-      <widget class="QLineEdit" name="lE_Vorbild">
-       <property name="minimumSize">
-        <size>
-         <width>500</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="locale">
-        <locale language="German" country="Germany"/>
-       </property>
-      </widget>
-     </item>
-     <item row="8" column="1">
-      <widget class="QLabel" name="l_note">
-       <property name="text">
-        <string>Durch die Änderung dieser Angaben, werden die Aufgaben neu erstellt. Dies kann eine Weile dauern!</string>
-       </property>
-      </widget>
-     </item>
-     <item row="7" column="1">
-      <widget class="QDialogButtonBox" name="buttonBox">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="standardButtons">
-        <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-       </property>
-      </widget>
-     </item>
-    </layout>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0" colspan="2">
+    <widget class="QTextEdit" name="tE_title">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>100</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>100</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background: transparent;
+border: none;
+</string>
+     </property>
+     <property name="locale">
+      <locale language="German" country="Germany"/>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+     <property name="html">
+      <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Noto Sans'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;h1 style=&quot; margin-top:18px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:xx-large; font-weight:600;&quot;&gt;Willkommen zum Programm &lt;/span&gt;&lt;span style=&quot; font-size:xx-large; font-weight:600; text-decoration: underline;&quot;&gt;Learn Java&lt;/span&gt;&lt;/h1&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Fülle bitte diese Felder aus, damit die Aufgaben auf dich angepasst werden können:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="l_Fach">
+     <property name="text">
+      <string>Lieblingsfächer:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QLineEdit" name="lE_Fach">
+     <property name="minimumSize">
+      <size>
+       <width>500</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="locale">
+      <locale language="German" country="Germany"/>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="l_Hobbys">
+     <property name="text">
+      <string>Hobbys:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QLineEdit" name="lE_Hobbys">
+     <property name="minimumSize">
+      <size>
+       <width>500</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="locale">
+      <locale language="German" country="Germany"/>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="l_Beruf">
+     <property name="text">
+      <string>Berufswunsch:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="QLineEdit" name="lE_Beruf">
+     <property name="minimumSize">
+      <size>
+       <width>500</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="locale">
+      <locale language="German" country="Germany"/>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <widget class="QLabel" name="l_Sonstiges">
+     <property name="text">
+      <string>Selbstbeschreibung:
+(Hier kannst doch noch
+weitere Informationen
+über dich angeben,
+damit die Aufgaben
+besser zu dir passen.)</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="1">
+    <widget class="QPlainTextEdit" name="pTE_Sonstiges"/>
+   </item>
+   <item row="5" column="1">
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>

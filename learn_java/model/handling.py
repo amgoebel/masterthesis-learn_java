@@ -1,9 +1,12 @@
 import os
 import json
+import threading
 import bcrypt
 from pathlib import Path
 from PyQt6.QtCore import Qt, QAbstractListModel, QModelIndex, QCoreApplication
 from PyQt6.QtGui import QColor
+
+file_lock = threading.Lock()
 
 class Handling(QAbstractListModel):
     # handles all 
@@ -70,32 +73,19 @@ class Handling(QAbstractListModel):
     def get_input_sent(self):
         return self._input_sent
 
-    # change working directory
-    def set_working_directory_java(self):
-        try:
-            os.chdir(self.file_path + "/java_files")
-        except:
-            print("... there was an error setting the working directory")
-            
-    def set_working_directory_tutorial(self):
-        try:
-            os.chdir(self.file_path + "/tutorial_files")
-        except:
-            print("... there was an error setting the working directory")
-
     # get current start file
     def get_current_java_file(self):
-        data = self.load_user_data(self.username)        
+        data = self.load_user_data().get("data", {})      
         text = data[self._current_chapter - 1]['java']
         return text
     
     def set_current_java_file(self,code):
-        data = self.load_user_data(self.username)   
-        data[self._current_chapter - 1]['java'] = code
-        self.save_user_data(self.username,data)
+        data = self.load_user_data()
+        data.get("data", {})[self._current_chapter - 1]['java'] = code
+        self.save_user_data(data)
         
     def get_java_file(self,chapter_nr):
-        data = self.load_user_data(self.username)
+        data = self.load_user_data().get("data", {})
         text = data[chapter_nr - 1]['java']
         return text
     
@@ -105,13 +95,13 @@ class Handling(QAbstractListModel):
         return text
     
     def set_java_file(self,chapter_nr,code):
-        data = self.load_user_data(self.username)        
-        data[chapter_nr - 1]['java'] = code
-        self.save_user_data(self.username,data)
+        data = self.load_user_data()     
+        data.get("data", {})[chapter_nr - 1]['java'] = code
+        self.save_user_data(data)
         
     def get_tutorial_html(self,chapter_nr):
         data = self.load_tutorial_data()
-        data2 = self.load_user_data(self.username)
+        data2 = self.load_user_data().get("data", {})
         text = data['html_head']
         text += data['tutorial'][chapter_nr - 1]['content']
         text += data2[chapter_nr - 1]['assignment']
@@ -119,14 +109,14 @@ class Handling(QAbstractListModel):
         return text
     
     def get_assignment(self,chapter_nr):
-        data = self.load_user_data(self.username) 
+        data = self.load_user_data().get("data", {})
         text = data[chapter_nr - 1]['assignment']
         return text  
     
     def set_assignment(self,chapter_nr,assignment):
-        data = self.load_user_data(self.username)        
-        data[chapter_nr - 1]['assignment'] = assignment
-        self.save_user_data(self.username,data)
+        data = self.load_user_data()       
+        data.get("data", {})[chapter_nr - 1]['assignment'] = assignment
+        self.save_user_data(data)
         
     def get_original_assignment(self,chapter_nr):
         data = self.load_tutorial_data()        
@@ -146,41 +136,48 @@ class Handling(QAbstractListModel):
         
     # set chapter from last session
     def set_starting_chapter(self):
-        data = self.load_data()
-        self._current_chapter = data[self.username]['current_chapter']
+        self._current_chapter = self.load_user_data()['current_chapter']
         
     # set user preferences
     def set_preferences(self, favorite_subjects, hobbies,profession, other):
-        data = self.load_data()
-        data[self.username]['preferences']['favorite_subjects'] = favorite_subjects
-        data[self.username]['preferences']['hobbies'] = hobbies
-        data[self.username]['preferences']['profession'] = profession
-        data[self.username]['preferences']['other'] = other
-        self.save_data(data)
+        data = self.load_user_data()
+        data['preferences']['favorite_subjects'] = favorite_subjects
+        data['preferences']['hobbies'] = hobbies
+        data['preferences']['profession'] = profession
+        data['preferences']['other'] = other
+        self.save_user_data(data)
         
     # get from preferences
+    def get_preferences_set(self):
+        data = self.load_user_data()
+        return data['preferences']['set']
+    
+    def set_preferences_set(self):
+        data = self.load_user_data()
+        data['preferences']['set'] = True
+        self.save_user_data(data)
+    
     def get_favorite_subjects(self):
-        data = self.load_data()
-        return data[self.username]['preferences']['favorite_subjects']
+        data = self.load_user_data()
+        return data['preferences']['favorite_subjects']
     
     def get_hobbies(self):
-        data = self.load_data()
-        return data[self.username]['preferences']['hobbies']
+        data = self.load_user_data()
+        return data['preferences']['hobbies']
     
     def get_profession(self):
-        data = self.load_data()
-        return data[self.username]['preferences']['profession']
+        data = self.load_user_data()
+        return data['preferences']['profession']
     
     def get_other(self):
-        data = self.load_data()
-        return data[self.username]['preferences']['other']
+        data = self.load_user_data()
+        return data['preferences']['other']
   
-    # set chapter for next last session
+    # set chapter for next session
     def set_session_chapter(self):
-        data = self.load_data()
-        data2 = data.get(self.username, {})
-        data2["current_chapter"] = self._current_chapter
-        self.save_data(data)
+        data = self.load_user_data()
+        data["current_chapter"] = self._current_chapter
+        self.save_user_data(data)
         
     # get current chapter
     def get_current_chapter(self):
@@ -216,7 +213,7 @@ class Handling(QAbstractListModel):
 
         password_hash = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
         data[username] = {"password_hash": password_hash, "assignment_chapter": 0,"current_chapter": 1, "preferences": 
-            {"favorite_subjects": "", "hobbies": "", "profession": "", "other": ""}, "data": []}
+            {"set": False, "favorite_subjects": "", "hobbies": "", "profession": "", "other": ""}, "data": []}
         tutorial = data.get(username, {}).get("data", {})
         for i in range(1 , self._max_chapter + 1):
             java = self.get_original_java_file(i)
@@ -238,27 +235,43 @@ class Handling(QAbstractListModel):
             self.username = username
         return success
 
+    # file handling: 
     def load_data(self):
         self.set_working_directory_tutorial()
-        with self.json_user_path.open("r") as f:
-            return json.load(f)
+        with file_lock:
+            with self.json_user_path.open("r") as f:
+                return json.load(f)
 
     def save_data(self, data):
         self.set_working_directory_tutorial()
-        with self.json_user_path.open("w") as f:
-            json.dump(data, f, indent=4)
+        with file_lock:
+            with self.json_user_path.open("w") as f:
+                json.dump(data, f, indent=4)
     
-    def load_user_data(self, username):
+    def load_user_data(self):
         data = self.load_data()
-        return data.get(username, {}).get("data", {})
+        return data.get(self.username, {})
 
-    def save_user_data(self, username, user_data):
+    def save_user_data(self, user_data):
         data = self.load_data()
-        if username in data:
-            data[username]["data"] = user_data
+        if self.username in data:
+            data[self.username] = user_data
             self.save_data(data)
             
     def load_tutorial_data(self):
         self.set_working_directory_tutorial()
         with self.json_tutorial_path.open("r") as f:
             return json.load(f)
+        
+    # change working directories:
+    def set_working_directory_java(self):
+        try:
+            os.chdir(self.file_path + "/java_files")
+        except:
+            print("... there was an error setting the working directory")
+            
+    def set_working_directory_tutorial(self):
+        try:
+            os.chdir(self.file_path + "/tutorial_files")
+        except:
+            print("... there was an error setting the working directory")

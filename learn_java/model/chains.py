@@ -163,9 +163,11 @@ class Assignment_Adjuster (QThread):
                 response = self.formulate_assignment(chapter_nr)
                 self._model.set_assignment(chapter_nr=chapter_nr,assignment=response[0])
                 self._model.set_java_file(chapter_nr=chapter_nr,code=response[1])
+                print(f"Chapter {chapter_nr} has been adjusted to the users preferences.")
                 self.set_assignment_chapter(chapter_nr)
                 
             else:
+                print("All chapters have been adjusted to the users preferences.")
                 self._running = False
             
             
@@ -175,14 +177,14 @@ class Assignment_Adjuster (QThread):
         
     # get chapter number up to which the assignments have been adjusted
     def get_assignment_chapter(self):
-        data = self._model.load_data()
-        return data[self._model.username]['assignment_chapter']
+        data = self._model.load_user_data()
+        return data['assignment_chapter']
     
     # set chapter number up to which the assignments have been adjusted
     def set_assignment_chapter(self,chapter_nr):
-        data = self._model.load_data()
-        data[self._model.username]['assignment_chapter'] = chapter_nr
-        self._model.save_data(data)
+        data = self._model.load_user_data()
+        data['assignment_chapter'] = chapter_nr
+        self._model.save_user_data(data)
         
     
     def formulate_assignment(self, chapter_nr) -> str:
@@ -206,6 +208,7 @@ class Assignment_Adjuster (QThread):
         Be aware that the starting code is only a starting point for the student and not the solution!
         Most of the time it contains a "todo ..." part. The revised version should contain this as well. 
         The new starting code should be of the same extent as the original starting code. 
+        Do not give the chapter, only the assignment and the starting code. 
         Give the assignment in html format and the starting code in plain text. 
         Wrap the html with ```html and ``` and the java code with ```java and ``` 
 
