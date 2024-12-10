@@ -144,7 +144,6 @@ Mit der Taste "start" kannst du dein Programm nun laufen lassen."""
                                     hobbies=self._dialog_preferences.lE_Hobbys.text(),
                                     profession=self._dialog_preferences.lE_Beruf.text(),
                                     other=self._dialog_preferences.pTE_Sonstiges.toPlainText())
-            self._model.set_preferences_set()
             self._adjust_assignments()
             
 

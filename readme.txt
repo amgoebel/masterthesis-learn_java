@@ -2,6 +2,7 @@ Requirements:
 - Python with the following Packages:
 PyQT6
 bcrypt
+cryptography
 python-dotenv
 langchain
 openai

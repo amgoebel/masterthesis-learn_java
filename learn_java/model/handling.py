@@ -2,6 +2,10 @@ import os
 import json
 import threading
 import bcrypt
+import base64
+from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
+from cryptography.hazmat.primitives.hashes import SHA256
+from cryptography.fernet import Fernet
 from pathlib import Path
 from PyQt6.QtCore import Qt, QAbstractListModel, QModelIndex, QCoreApplication
 from PyQt6.QtGui import QColor
@@ -16,6 +20,8 @@ class Handling(QAbstractListModel):
         self.json_tutorial_path = Path("tutorial.json")
         self.file_path = os.path.dirname(__file__)
         self.username = ""
+        self.password = ""
+        self.fernet = ""
         self.new_user = False
         self.java_output = ""
         self.java_input = ""
@@ -75,18 +81,18 @@ class Handling(QAbstractListModel):
 
     # get current start file
     def get_current_java_file(self):
-        data = self.load_user_data().get("data", {})      
-        text = data[self._current_chapter - 1]['java']
+        data = self.load_user_data()      
+        text = data.get("tutorial", {})[self._current_chapter - 1]['java']
         return text
     
     def set_current_java_file(self,code):
         data = self.load_user_data()
-        data.get("data", {})[self._current_chapter - 1]['java'] = code
+        data.get("tutorial", {})[self._current_chapter - 1]['java'] = code
         self.save_user_data(data)
         
     def get_java_file(self,chapter_nr):
-        data = self.load_user_data().get("data", {})
-        text = data[chapter_nr - 1]['java']
+        data = self.load_user_data()
+        text = data.get("tutorial", {})[chapter_nr - 1]['java']
         return text
     
     def get_original_java_file(self,chapter_nr):
@@ -96,12 +102,12 @@ class Handling(QAbstractListModel):
     
     def set_java_file(self,chapter_nr,code):
         data = self.load_user_data()     
-        data.get("data", {})[chapter_nr - 1]['java'] = code
+        data.get("tutorial", {})[chapter_nr - 1]['java'] = code
         self.save_user_data(data)
         
     def get_tutorial_html(self,chapter_nr):
         data = self.load_tutorial_data()
-        data2 = self.load_user_data().get("data", {})
+        data2 = self.load_user_data().get("tutorial", {})
         text = data['html_head']
         text += data['tutorial'][chapter_nr - 1]['content']
         text += data2[chapter_nr - 1]['assignment']
@@ -109,13 +115,13 @@ class Handling(QAbstractListModel):
         return text
     
     def get_assignment(self,chapter_nr):
-        data = self.load_user_data().get("data", {})
-        text = data[chapter_nr - 1]['assignment']
+        data = self.load_user_data()
+        text = data.get("tutorial", {})[chapter_nr - 1]['assignment']
         return text  
     
     def set_assignment(self,chapter_nr,assignment):
         data = self.load_user_data()       
-        data.get("data", {})[chapter_nr - 1]['assignment'] = assignment
+        data.get("tutorial", {})[chapter_nr - 1]['assignment'] = assignment
         self.save_user_data(data)
         
     def get_original_assignment(self,chapter_nr):
@@ -141,6 +147,7 @@ class Handling(QAbstractListModel):
     # set user preferences
     def set_preferences(self, favorite_subjects, hobbies,profession, other):
         data = self.load_user_data()
+        data['preferences']['set'] = True
         data['preferences']['favorite_subjects'] = favorite_subjects
         data['preferences']['hobbies'] = hobbies
         data['preferences']['profession'] = profession
@@ -206,21 +213,44 @@ class Handling(QAbstractListModel):
         f.close()
         return(welcome)
     
+    # user management:
     def add_user(self, username, password):
         data = self.load_data()
         if username in data:
             return False  # Username already exists
 
         password_hash = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
-        data[username] = {"password_hash": password_hash, "assignment_chapter": 0,"current_chapter": 1, "preferences": 
-            {"set": False, "favorite_subjects": "", "hobbies": "", "profession": "", "other": ""}, "data": []}
-        tutorial = data.get(username, {}).get("data", {})
+        salt = os.urandom(16)
+        
+        self.fernet = Fernet(self.derive_key(password, salt))
+        data[username] = {
+            "password_hash": password_hash,
+            "salt": base64.urlsafe_b64encode(salt).decode(),  # Store the salt as a string
+            "user_data": {
+                "assignment_chapter": 0,
+                "current_chapter": 1,
+                "preferences": {
+                    "set": False,
+                    "favorite_subjects": "",
+                    "hobbies": "",
+                    "profession": "",
+                    "other": "",
+                },
+                "tutorial": [],
+            },
+        }
+        tutorial = data.get(username, {}).get("user_data", {}).get("tutorial", {})
         for i in range(1 , self._max_chapter + 1):
             java = self.get_original_java_file(i)
             assignment = self.get_original_assignment(i)
             tutorial.append({"chapter_nr": i, "assignment" : assignment, "java" : java})
+        user_data_json = json.dumps(data[username]["user_data"])
+        encrypted_data = self.fernet.encrypt(user_data_json.encode())  # Encrypt the serialized JSON string
+        data[username]["user_data"] = encrypted_data.decode()  # Store the encrypted data as a string
         self.save_data(data)
+        
         self.username = username
+        self.password = password
         self.new_user = True
         return True
 
@@ -233,7 +263,20 @@ class Handling(QAbstractListModel):
         success = bcrypt.checkpw(password.encode(), password_hash.encode())
         if success :
             self.username = username
+            self.password = password
+            salt = base64.urlsafe_b64decode(data[username]["salt"])
+            self.fernet = Fernet(self.derive_key(password, salt))
         return success
+
+    # Function to derive a key from a password
+    def derive_key(self,password: str, salt: bytes) -> bytes:
+        kdf = PBKDF2HMAC(
+            algorithm=SHA256(),
+            length=32,  # Key length for Fernet
+            salt=salt,
+            iterations=100_000,  # Number of iterations (adjust for security/performance)
+        )
+        return base64.urlsafe_b64encode(kdf.derive(password.encode()))
 
     # file handling: 
     def load_data(self):
@@ -250,13 +293,22 @@ class Handling(QAbstractListModel):
     
     def load_user_data(self):
         data = self.load_data()
-        return data.get(self.username, {})
+        
+        encrypted_user_data = data[self.username]["user_data"]
+        
+        # Decrypt the user data
+        decrypted_data = self.fernet.decrypt(encrypted_user_data.encode()).decode()
+        user_data = json.loads(decrypted_data)  # Convert back to dictionary
+        return user_data
+        
 
     def save_user_data(self, user_data):
         data = self.load_data()
-        if self.username in data:
-            data[self.username] = user_data
-            self.save_data(data)
+        user_data_json = json.dumps(user_data)
+        
+        encrypted_data = self.fernet.encrypt(user_data_json.encode())  # Encrypt the serialized JSON string
+        data[self.username]["user_data"] = encrypted_data.decode()  # Store the encrypted data as a string
+        self.save_data(data)
             
     def load_tutorial_data(self):
         self.set_working_directory_tutorial()

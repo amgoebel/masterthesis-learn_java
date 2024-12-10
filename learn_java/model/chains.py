@@ -163,12 +163,12 @@ class Assignment_Adjuster (QThread):
                 response = self.formulate_assignment(chapter_nr)
                 self._model.set_assignment(chapter_nr=chapter_nr,assignment=response[0])
                 self._model.set_java_file(chapter_nr=chapter_nr,code=response[1])
-                print(f"Chapter {chapter_nr} has been adjusted to the users preferences.")
                 self.set_assignment_chapter(chapter_nr)
+                print(f"Chapter {chapter_nr} has been adjusted to the users preferences.")
                 
             else:
-                print("All chapters have been adjusted to the users preferences.")
                 self._running = False
+                print("All chapters have been adjusted to the users preferences.")
             
             
         
