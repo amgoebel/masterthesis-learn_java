@@ -6,13 +6,20 @@ from langchain.prompts import (
     SystemMessagePromptTemplate,
     HumanMessagePromptTemplate,
     ChatPromptTemplate,
+    MessagesPlaceholder,
 )
 from langchain_core.output_parsers import StrOutputParser
-from PyQt6.QtCore import QThread
-import re
+from langchain_core.runnables.history import RunnableWithMessageHistory
+from langchain_core.runnables.history import RunnableWithMessageHistory
+from langchain_core.chat_history import InMemoryChatMessageHistory, BaseChatMessageHistory
+from langchain.memory import ConversationBufferMemory
+from PyQt6.QtCore import QThread, pyqtSignal
 
 import os
-os.environ["OPENAI_API_KEY"] = "sk-proj-0KMQeINNnl2EU3f50CLVT3BlbkFJTJqRvYtm3xgqS95M4Hh3"
+import uuid
+
+dotenv.load_dotenv()
+
 
 
 # Define chat model to use:
@@ -272,5 +279,222 @@ class Assignment_Adjuster (QThread):
             extracted_text.append(response[start_pos[i]:end_pos])
         
         
-        return(extracted_text)    
+        return(extracted_text)   
     
+    
+class Chat_Bot_Compile (QThread):
+    
+    def __init__(self,model,communicator,user_code,compile_result,initial_response):
+        super(Chat_Bot_Compile,self).__init__()
+        self._running = True
+        self._model = model
+        self._communicator = communicator
+        self._user_code = user_code
+        self._compile_result = compile_result
+        self._initial_response = initial_response
+          
+    
+    def run(self):
+                
+        # In-memory store for session histories
+        store = {}
+
+
+        # Function to manage session history
+        def get_session_history(session_id: str) -> BaseChatMessageHistory:
+            if session_id not in store:
+                store[session_id] = InMemoryChatMessageHistory()
+            return store[session_id]
+
+        # Define the system and user prompt templates
+        system_compile_chat_message = """You will be given the java code of the student and the error message of the compiler. 
+        The student sees the error message of the compiler.
+        You have already analyzed the code and the error and have given him a corresponding initial hint.
+        Your task is to answer follow-up questions by the student about the error and your analysis. Only answer questions 
+        concerning this and do not solve the problem for the student, but give him a further hint that will guide him to the 
+        solution.
+
+        error message: 
+        {error}
+
+        java code:
+        {user_code}
+
+        initial hint:
+        {hint}
+        """
+
+        # Prompt for the system message
+        system_compile_message_chat_prompt = SystemMessagePromptTemplate(
+            prompt=PromptTemplate(
+                input_variables=["error", "user_code", "hint"], 
+                template=system_compile_chat_message
+            )
+        )
+        
+        # Prompt for the user question
+        user_question_prompt = HumanMessagePromptTemplate(
+            prompt=PromptTemplate(
+                template="{question}")
+        )
+
+        # Define the full chat prompt template
+        chat_prompt = ChatPromptTemplate(
+            messages=
+            [
+                system_compile_message_chat_prompt,  # The system message
+                MessagesPlaceholder(variable_name="messages"),  # Placeholder for dynamic history
+                user_question_prompt,  # The current user message
+            ]
+        )
+
+        # Create the chain with system and user prompt
+        chain = chat_prompt | chat_model
+
+        # Add message history management
+        with_message_history = RunnableWithMessageHistory(
+            runnable=chain,
+            get_session_history=get_session_history,
+            input_messages_key="messages",  # Key for historical messages
+        )
+
+        # Config for the session
+        session_id = str(uuid.uuid4())
+        config = {"configurable": {"session_id": session_id}}
+
+        # Main loop for chat
+        while self._running:            
+            if self._model.get_question_sent():
+                self._model.set_question_sent(False)
+                user_input = self._model.get_question()
+                # Invoke the chain with user input and session configuration
+                response = with_message_history.invoke(
+                    {"question": user_input, "messages": [],
+                    "error": self._compile_result,
+                    "user_code": self._user_code,
+                    "hint": self._initial_response},  # Pass user input and empty initial history
+                    config=config,
+                )
+                self._model.set_answer(response.content)
+                 # Sent signal to controller that answer has been submitted
+                self._communicator.answer_sent.emit()            
+                      
+    def stop(self):
+        self._running = False
+        
+        
+class Chat_Bot_Run (QThread):
+    
+    def __init__(self,model,communicator,user_code,assignment,topics,input,output,initial_response):
+        super(Chat_Bot_Run,self).__init__()
+        self._running = True
+        self._model = model
+        self._communicator = communicator
+        self._assignment = assignment
+        self._user_code = user_code
+        self._topics = topics
+        self._input = input
+        self._output = output
+        self._initial_response = initial_response
+          
+    
+    def run(self):
+                
+        # In-memory store for session histories
+        store = {}
+
+
+        # Function to manage session history
+        def get_session_history(session_id: str) -> BaseChatMessageHistory:
+            if session_id not in store:
+                store[session_id] = InMemoryChatMessageHistory()
+            return store[session_id]
+
+        # Define the system and user prompt templates
+        system_run_chat_message = """You will be given the student's assignment, the java code of the student,
+        all previous topics of the tutorial and the output of the program.
+        If applicable, you will also be given the input to the program.
+        You have already analyzed the code, the topics and potential input and have given him a corresponding initial hint.
+        Your task is to answer follow-up questions by the student about your analysis. Only answer questions 
+        concerning this and do not solve the problem for the student, but give him a further hint that will guide him to the 
+        solution. If applicable you can reevaluate your analysis and tell the student that the assignment was solved correctly.
+        
+        assignment: 
+        {assignment}
+
+        java code:
+        {user_code}
+        
+        potential input:
+        {input}
+                
+        output:
+        {output}
+
+        previous topics:
+        {topics}
+
+        initial hint:
+        {hint}
+        """
+
+        # Prompt for the system message
+        system_run_message_chat_prompt = SystemMessagePromptTemplate(
+            prompt=PromptTemplate(
+                input_variables=["assignment","user_code","input","output","topics","hint"], 
+                template=system_run_chat_message
+            )
+        )
+        
+        # Prompt for the user question
+        user_question_prompt = HumanMessagePromptTemplate(
+            prompt=PromptTemplate(
+                template="{question}")
+        )
+
+        # Define the full chat prompt template
+        chat_prompt = ChatPromptTemplate(
+            messages=
+            [
+                system_run_message_chat_prompt,  # The system message
+                MessagesPlaceholder(variable_name="messages"),  # Placeholder for dynamic history
+                user_question_prompt,  # The current user message
+            ]
+        )
+
+        # Create the chain with system and user prompt
+        chain = chat_prompt | chat_model
+
+        # Add message history management
+        with_message_history = RunnableWithMessageHistory(
+            runnable=chain,
+            get_session_history=get_session_history,
+            input_messages_key="messages",  # Key for historical messages
+        )
+
+        # Config for the session
+        session_id = str(uuid.uuid4())
+        config = {"configurable": {"session_id": session_id}}
+
+        # Main loop for chat
+        while self._running:            
+            if self._model.get_question_sent():
+                self._model.set_question_sent(False)
+                user_input = self._model.get_question()
+                # Invoke the chain with user input and session configuration
+                response = with_message_history.invoke(
+                    {"question": user_input, "messages": [],
+                    "assignment": self._assignment,
+                    "user_code": self._user_code,
+                    "input": self._input,
+                    "output": self._output,
+                    "topics": self._topics,   
+                    "hint": self._initial_response},  # Pass user input and empty initial history
+                    config=config,
+                )
+                self._model.set_answer(response.content)
+                 # Sent signal to controller that answer has been submitted
+                self._communicator.answer_sent.emit()            
+                      
+    def stop(self):
+        self._running = False

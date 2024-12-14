@@ -50,7 +50,7 @@
        </layout>
       </item>
       <item>
-       <layout class="QVBoxLayout" name="vL_output_input">
+       <layout class="QVBoxLayout" name="vL_output_input" stretch="0,3,0,0,0,2,0,0">
         <item>
          <widget class="QLabel" name="l_Informationen">
           <property name="text">
@@ -62,6 +62,20 @@
          <widget class="QTextEdit" name="tE_Informationen">
           <property name="readOnly">
            <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="l_question">
+          <property name="text">
+           <string>Nachfrage:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="lE_question">
+          <property name="enabled">
+           <bool>false</bool>
           </property>
          </widget>
         </item>

@@ -1,7 +1,7 @@
 from PyQt6.QtCore import pyqtSignal, QObject
 from PyQt6.QtWidgets import QApplication, QDialog
 from model.java_engine import Java_Engine, compile_java
-from model.chains import Assignment_Adjuster
+from model.chains import Assignment_Adjuster, Chat_Bot_Compile, Chat_Bot_Run
 from view.dialogs import Dialog_Chapter, Dialog_Preferences, Dialog_Welcome
 
 class Controller:
@@ -13,6 +13,7 @@ class Controller:
         self._view = view
         self._java_engine = None
         self._assignment_adjuster = None
+        self._chat_bot = None
         self._communicator = Communicator()
         self._dialog_welcome = Dialog_Welcome(model=model)
         self._dialog_chapter = Dialog_Chapter(model=model)
@@ -32,7 +33,9 @@ class Controller:
         self._view.pB_compile.clicked.connect(self._compile_java_code)
         self._view.pB_run.clicked.connect(self._run_stop_java_program)
         self._view.lE_input.returnPressed.connect(self._send_input)
+        self._view.lE_question.returnPressed.connect(self._send_question)
         self._communicator.java_program_stopped.connect(self._after_run)
+        self._communicator.answer_sent.connect(self._answer_sent)
         self._view.action_Beenden.triggered.connect(self._exit_application)
         self._view.action_Kapitelwahl.triggered.connect(self._choose_chapter)
         self._view.action_Person.triggered.connect(self._adjust_assignments)
@@ -54,10 +57,21 @@ class Controller:
         self._model.set_input(self._view.lE_input.text())
         self._view.lE_input.clear()
         
+    def _send_question(self):
+        self._model.set_question(self._view.lE_question.text())
+        self._view.lE_question.clear()
+        
+    def _answer_sent(self):
+        self._view.tE_Informationen.setText(self._model.get_answer())
+        self._view.tE_Informationen.setStyleSheet("background-color: " + self._colors[0] + ";")
+        
     def _compile_java_code(self):
+        if self._chat_bot is not None:
+                self._chat_bot.stop()
         self._model.update_output("")  # clear output window
         self._model.set_current_java_file(self._view.pTE_code.toPlainText())
         self._view.pB_compile.setEnabled(False)
+        self._view.lE_question.setEnabled(False)
         QApplication.processEvents()
         user_code = self._view.pTE_code.toPlainText()
         self._model.write_java_file(user_code)
@@ -65,20 +79,32 @@ class Controller:
         if (compile_result == "compilation successful"):
             color = 1
             self._view.pB_run.setEnabled(True)
-            compile_result = """Das kompilieren deines Codes hat geklappt.
+            output = """Das kompilieren deines Codes hat geklappt.
 Mit der Taste "start" kannst du dein Programm nun laufen lassen.""" 
         else:
             color = 2
             self._view.pB_run.setEnabled(False)
+            self._view.lE_question.setEnabled(True)
             self._model.update_output(compile_result)
             QApplication.processEvents()
-            compile_result = self._model.compile_check(user_code=user_code,compile_result=compile_result)    
-        self._view.tE_Informationen.setText(compile_result)
+            output = self._model.compile_check(user_code=user_code,compile_result=compile_result)
+            self._chat_bot = Chat_Bot_Compile(
+                model=self._model,
+                communicator=self._communicator,
+                user_code=user_code,
+                compile_result=compile_result,
+                initial_response=output)
+            self._chat_bot.start()
+        self._view.tE_Informationen.setText(output)
         self._view.tE_Informationen.setStyleSheet("background-color: " + self._colors[color] + ";")
         self._view.pB_compile.setEnabled(True)
+        
+        
 
     def _run_stop_java_program(self):
         if self._view.pB_run.isChecked():
+            if self._chat_bot is not None:
+                self._chat_bot.stop()
             self._view.lE_input.setEnabled(True)
             QApplication.processEvents()
             self._java_engine = Java_Engine(self._model, self._communicator)
@@ -93,15 +119,31 @@ Mit der Taste "start" kannst du dein Programm nun laufen lassen."""
     def _after_run(self):
         self._view.pB_run.setChecked(False)
         self._view.lE_input.setEnabled(False)
+        self._view.lE_question.setEnabled(True)
         self._set_start_button_text(False)
         user_code = self._view.pTE_code.toPlainText()
         output = self._model.get_output()
         assignment = self._model.get_assignment(self._model.get_current_chapter())
         topics = self._model.get_topics(self._model.get_current_chapter())
         input = self._view.lE_input.text()
-        run_information = self._model.run_check(user_code=user_code,assignment=assignment,output=output,topics=topics,input=input)
+        run_information = self._model.run_check(
+            user_code=user_code,
+            assignment=assignment,
+            output=output,
+            topics=topics,
+            input=input)
         self._view.tE_Informationen.setText(run_information)
         self._view.tE_Informationen.setStyleSheet("background-color: " + self._colors[0] + ";")
+        self._chat_bot = Chat_Bot_Run(
+            model=self._model,
+            communicator=self._communicator,
+            user_code=user_code,
+            assignment=assignment,
+            topics=topics,
+            input=input,
+            output=output,
+            initial_response=output)
+        self._chat_bot.start()
 
     def _set_start_button_text(self, value):
         if value:
@@ -133,6 +175,9 @@ Mit der Taste "start" kannst du dein Programm nun laufen lassen."""
         self._view.pB_run.setEnabled(False)
         self._clear_information()
         self._model.clear_output()
+        if self._chat_bot is not None:
+                self._chat_bot.stop()
+        self._view.lE_question.setEnabled(False)
                 
     def _adjust_assignments(self):
         self._assignment_adjuster = Assignment_Adjuster(model=self._model)
@@ -161,3 +206,4 @@ class Communicator(QObject):
         super(Communicator,self).__init__()
 
     java_program_stopped = pyqtSignal()
+    answer_sent = pyqtSignal()

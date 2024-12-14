@@ -30,6 +30,9 @@ class Handling(QAbstractListModel):
         self._output = ""
         self._input = ""
         self._input_sent = False 
+        self._question = ""
+        self._question_sent = False
+        self._answer = ""
 
     # methods for data handling:
     def data(self, index, role=Qt.ItemDataRole.DisplayRole):
@@ -78,6 +81,28 @@ class Handling(QAbstractListModel):
     
     def get_input_sent(self):
         return self._input_sent
+    
+    # get questions
+    def set_question(self,question):
+        self._question = question
+        self.set_question_sent(True)
+        
+    def set_question_sent(self,value):
+        self._question_sent = value
+        
+    def get_question(self):
+        return self._question
+    
+    def get_question_sent(self):
+        return self._question_sent
+    
+    
+    # get answer
+    def set_answer(self,answer):
+        self._answer = answer
+    
+    def get_answer(self):
+        return self._answer
 
     # get current start file
     def get_current_java_file(self):

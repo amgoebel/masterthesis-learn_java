@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'gui.ui'
+# Form implementation generated from reading ui file 'view/gui.ui'
 #
 # Created by: PyQt6 UI code generator 6.7.1
 #
@@ -47,6 +47,13 @@ class Ui_MainWindow(object):
         self.tE_Informationen.setReadOnly(True)
         self.tE_Informationen.setObjectName("tE_Informationen")
         self.vL_output_input.addWidget(self.tE_Informationen)
+        self.l_question = QtWidgets.QLabel(parent=self.centralwidget)
+        self.l_question.setObjectName("l_question")
+        self.vL_output_input.addWidget(self.l_question)
+        self.lE_question = QtWidgets.QLineEdit(parent=self.centralwidget)
+        self.lE_question.setEnabled(False)
+        self.lE_question.setObjectName("lE_question")
+        self.vL_output_input.addWidget(self.lE_question)
         self.l_Output = QtWidgets.QLabel(parent=self.centralwidget)
         self.l_Output.setObjectName("l_Output")
         self.vL_output_input.addWidget(self.l_Output)
@@ -61,6 +68,8 @@ class Ui_MainWindow(object):
         self.lE_input.setEnabled(False)
         self.lE_input.setObjectName("lE_input")
         self.vL_output_input.addWidget(self.lE_input)
+        self.vL_output_input.setStretch(1, 3)
+        self.vL_output_input.setStretch(5, 2)
         self.hL_mainFields.addLayout(self.vL_output_input)
         self.hL_mainFields.setStretch(0, 1)
         self.hL_mainFields.setStretch(1, 1)
@@ -143,6 +152,7 @@ class Ui_MainWindow(object):
         self.l_Lehrgang.setText(_translate("MainWindow", "Lehrgang:"))
         self.l_Code.setText(_translate("MainWindow", "Dein Code:"))
         self.l_Informationen.setText(_translate("MainWindow", "Informationen:"))
+        self.l_question.setText(_translate("MainWindow", "Nachfrage:"))
         self.l_Output.setText(_translate("MainWindow", "Output / Fehlermeldung:"))
         self.l_Input.setText(_translate("MainWindow", "Input:"))
         self.pB_previous_Chapter.setText(_translate("MainWindow", "vorheriges Kapitel"))
