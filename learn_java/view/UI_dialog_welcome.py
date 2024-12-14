@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file './view/dialog_welcome.ui'
+# Form implementation generated from reading ui file 'view/dialog_welcome.ui'
 #
 # Created by: PyQt6 UI code generator 6.7.1
 #
@@ -12,26 +12,42 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_UI_Dialog_Welcome(object):
     def setupUi(self, UI_Dialog_Welcome):
         UI_Dialog_Welcome.setObjectName("UI_Dialog_Welcome")
-        UI_Dialog_Welcome.resize(1000, 900)
+        UI_Dialog_Welcome.resize(874, 597)
+        UI_Dialog_Welcome.setMaximumSize(QtCore.QSize(1200, 600))
         self.verticalLayout = QtWidgets.QVBoxLayout(UI_Dialog_Welcome)
         self.verticalLayout.setObjectName("verticalLayout")
-        self.tE_Welcome = QtWidgets.QTextEdit(parent=UI_Dialog_Welcome)
-        self.tE_Welcome.setLocale(QtCore.QLocale(QtCore.QLocale.Language.German, QtCore.QLocale.Country.Germany))
-        self.tE_Welcome.setReadOnly(True)
-        self.tE_Welcome.setObjectName("tE_Welcome")
-        self.verticalLayout.addWidget(self.tE_Welcome)
-        self.buttonBox = QtWidgets.QDialogButtonBox(parent=UI_Dialog_Welcome)
-        self.buttonBox.setLocale(QtCore.QLocale(QtCore.QLocale.Language.German, QtCore.QLocale.Country.Germany))
-        self.buttonBox.setOrientation(QtCore.Qt.Orientation.Horizontal)
-        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.StandardButton.Ok)
-        self.buttonBox.setObjectName("buttonBox")
-        self.verticalLayout.addWidget(self.buttonBox)
+        self.l_text = QtWidgets.QLabel(parent=UI_Dialog_Welcome)
+        self.l_text.setStyleSheet("font-size:16pt")
+        self.l_text.setObjectName("l_text")
+        self.verticalLayout.addWidget(self.l_text)
+        self.l_image = QtWidgets.QLabel(parent=UI_Dialog_Welcome)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.l_image.sizePolicy().hasHeightForWidth())
+        self.l_image.setSizePolicy(sizePolicy)
+        self.l_image.setMinimumSize(QtCore.QSize(144, 85))
+        self.l_image.setMaximumSize(QtCore.QSize(1435, 850))
+        self.l_image.setText("")
+        self.l_image.setPixmap(QtGui.QPixmap("view/Screenshot_0.png"))
+        self.l_image.setScaledContents(True)
+        self.l_image.setObjectName("l_image")
+        self.verticalLayout.addWidget(self.l_image)
+        self.horizontalLayout = QtWidgets.QHBoxLayout()
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout.addItem(spacerItem)
+        self.pB_next_page = QtWidgets.QPushButton(parent=UI_Dialog_Welcome)
+        self.pB_next_page.setLocale(QtCore.QLocale(QtCore.QLocale.Language.German, QtCore.QLocale.Country.Germany))
+        self.pB_next_page.setObjectName("pB_next_page")
+        self.horizontalLayout.addWidget(self.pB_next_page)
+        self.verticalLayout.addLayout(self.horizontalLayout)
 
         self.retranslateUi(UI_Dialog_Welcome)
-        self.buttonBox.accepted.connect(UI_Dialog_Welcome.accept) # type: ignore
-        self.buttonBox.rejected.connect(UI_Dialog_Welcome.reject) # type: ignore
         QtCore.QMetaObject.connectSlotsByName(UI_Dialog_Welcome)
 
     def retranslateUi(self, UI_Dialog_Welcome):
         _translate = QtCore.QCoreApplication.translate
         UI_Dialog_Welcome.setWindowTitle(_translate("UI_Dialog_Welcome", "Willkommen zu learn Java"))
+        self.l_text.setText(_translate("UI_Dialog_Welcome", "Herzlich Willkommen"))
+        self.pB_next_page.setText(_translate("UI_Dialog_Welcome", "Nächste Seite"))

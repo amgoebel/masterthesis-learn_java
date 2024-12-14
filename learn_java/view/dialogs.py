@@ -1,4 +1,7 @@
+import os
 from PyQt6.QtWidgets import QDialog
+from PyQt6.QtGui import QPixmap
+from PyQt6.QtCore import Qt
 from view.UI_dialog_chapter import Ui_Dialog_Choose_Chapter
 from view.UI_dialog_preferences import Ui_UI_Dialog_Preferences
 from view.UI_dialog_welcome import Ui_UI_Dialog_Welcome
@@ -35,15 +38,49 @@ class Dialog_Preferences(QDialog, Ui_UI_Dialog_Preferences):
 
 
 class Dialog_Welcome(QDialog, Ui_UI_Dialog_Welcome):
-    def __init__(self,model,parent=None):
+    def __init__(self,parent=None):
         super(Dialog_Welcome, self).__init__()
         self.setupUi(self)
-        self._model = model
-
+        self.pB_next_page.clicked.connect(self.next_image)
+        self._current_index = 0
+        self._max_index = 10
+        self._image_folder = os.path.dirname(__file__)
+        self._text = ["hallo",
+                      "hallo",
+                      "hallo",
+                      "hallo",
+                      "hallo",
+                      "hallo",
+                      "hallo",
+                      "hallo",
+                      "hallo",
+                      "hallo"]     
+        self.load_image()
+        
     def showEvent(self, event):
-        self._set_values()
         # Call the base class implementation to ensure the event is handled properly
         super().showEvent(event)
+    
+    def load_image(self):
+        """
+        Load the current image into the QLabel.
+        """
+        if 0 <= self._current_index < self._max_index:
+            pixmap = QPixmap(os.path.join(self._image_folder,f"Intro_{self._current_index+1}.png"))
+            self.l_image.setPixmap(pixmap)
+            self.l_text.setText(self._text[self._current_index])
 
-    def _set_values(self):
-        self.tE_Welcome.setText(self._model.get_welcome_html())
+    def next_image(self):
+        """
+        Move to the next image or terminate the program if the last image is reached.
+        """
+        self._current_index += 1
+        if self._current_index < self._max_index:
+            self.load_image()
+            if self._current_index == self._max_index - 1:
+                self.pB_next_page.setText("OK")  # Change button text on the last image
+        else:
+            self.accept()
+        
+        
+    

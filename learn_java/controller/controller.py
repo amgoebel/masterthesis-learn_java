@@ -15,7 +15,7 @@ class Controller:
         self._assignment_adjuster = None
         self._chat_bot = None
         self._communicator = Communicator()
-        self._dialog_welcome = Dialog_Welcome(model=model)
+        self._dialog_welcome = Dialog_Welcome()
         self._dialog_chapter = Dialog_Chapter(model=model)
         self._dialog_preferences = Dialog_Preferences(model=model)
         self._connectSignalsAndSlots()
@@ -190,6 +190,9 @@ Mit der Taste "start" kannst du dein Programm nun laufen lassen."""
                                     profession=self._dialog_preferences.lE_Beruf.text(),
                                     other=self._dialog_preferences.pTE_Sonstiges.toPlainText())
             self._adjust_assignments()
+        self._dialog_welcome.exec()
+        self._prepare_chapter()    
+            
             
 
     def _clear_information(self):

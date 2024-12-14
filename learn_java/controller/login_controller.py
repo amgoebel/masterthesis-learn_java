@@ -8,8 +8,6 @@ class Login_Controller:
         super(Login_Controller,self).__init__()
         self._model = model
         self._login_view = login_view
-        self._dialog_welcome = Dialog_Welcome(model=model)
-        self._dialog_preferences = Dialog_Preferences(model=model)
         self._connectSignalsAndSlots()
         self._register = False # has the register button been pushed already? 
         self._login_view.l_confirm_password.setVisible(False)
