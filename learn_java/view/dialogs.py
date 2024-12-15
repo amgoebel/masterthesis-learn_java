@@ -43,18 +43,20 @@ class Dialog_Welcome(QDialog, Ui_UI_Dialog_Welcome):
         self.setupUi(self)
         self.pB_next_page.clicked.connect(self.next_image)
         self._current_index = 0
-        self._max_index = 10
+        self._max_index = 11
         self._image_folder = os.path.dirname(__file__)
-        self._text = ["hallo",
-                      "hallo",
-                      "hallo",
-                      "hallo",
-                      "hallo",
-                      "hallo",
-                      "hallo",
-                      "hallo",
-                      "hallo",
-                      "hallo"]     
+        self._text = ["Hier siehst du ein Bild vom Hauptfenster des Programms, das dir helfen soll Java zu lernen.\nDas Programm ist in verschiedene Bereiche aufgeteilt.",
+                      "In diesem Bereich findest du zu jedem Kapitel eine Lektion und eine Aufgabe.\nLies dir die Lektion immer gut durch.",
+                      "In diesem Bereich musst du deine Programmierung eingeben um die Aufgabe zu lösen.\n",
+                      "In diesem Bereich erhältst du Informationen/Hilfe zu deiner Programmierung.\nEs kann manchmal ein paar Sekunden dauern bis die Hilfe angezeigt wird.",
+                      "In dieser Zeile kannst du kurze Nachfragen zu der Hilfe stellen.\nWenn du \"Enter\" drückst, wird die Frage abgeschickt.",
+                      "In diesem Bereich werden Fehlermeldungen und die Ausgaben\ndeiner Programmierung angezeigt.",
+                      "In dieser Zeile kannst du Eingaben zu deinem Programm machen, wenn dies nötig ist.\nWenn du \"Enter\" drückst, wird die Eingabe an das Programm übergeben.",
+                      "Mit diesen Tasten kannst du zum nächsten oder vorherigen Kapitel springen.\nDie Hilfe wird damit beendet.",
+                      "Mit dieser Taste kannst du deine Programmierung kompilieren.\nDas bedeutet, dass deine Programmierung auf syntaktische Fehler überprüft wird.",
+                      "Mit dieser Taste kannst du dein Programm starten. Falls es nicht von alleine\nstoppen sollte, kannst du es mit dieser Taste auch wieder anhalten.",
+                      "Im Menü kannst du das Programm beenden, die Schriftgröße ändern und dir diese\nInformationen nochmal anzeigen lassen. Viel Spaß mit dem Programm!"
+                      ]     
         self.load_image()
         
     def showEvent(self, event):
@@ -66,7 +68,7 @@ class Dialog_Welcome(QDialog, Ui_UI_Dialog_Welcome):
         Load the current image into the QLabel.
         """
         if 0 <= self._current_index < self._max_index:
-            pixmap = QPixmap(os.path.join(self._image_folder,f"Intro_{self._current_index+1}.png"))
+            pixmap = QPixmap(os.path.join(self._image_folder,f"Intro_{self._current_index}.png"))
             self.l_image.setPixmap(pixmap)
             self.l_text.setText(self._text[self._current_index])
 
@@ -80,6 +82,9 @@ class Dialog_Welcome(QDialog, Ui_UI_Dialog_Welcome):
             if self._current_index == self._max_index - 1:
                 self.pB_next_page.setText("OK")  # Change button text on the last image
         else:
+            self._current_index = 0
+            self.pB_next_page.setText("Nächste Seite")  # Change button text for the next run
+            self.load_image()
             self.accept()
         
         

@@ -23,7 +23,7 @@
    <item>
     <widget class="QLabel" name="l_text">
      <property name="styleSheet">
-      <string notr="true">font-size:16pt</string>
+      <string notr="true">font-size:16pt; color: rgb(0, 0, 255);</string>
      </property>
      <property name="text">
       <string>Herzlich Willkommen</string>

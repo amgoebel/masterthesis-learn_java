@@ -38,8 +38,9 @@ class Controller:
         self._communicator.answer_sent.connect(self._answer_sent)
         self._view.action_Beenden.triggered.connect(self._exit_application)
         self._view.action_Kapitelwahl.triggered.connect(self._choose_chapter)
-        self._view.action_Person.triggered.connect(self._adjust_assignments)
-        self._view.action_zeige_Startinformationen.triggered.connect(self._show_welcome_page)
+        self._view.action_increase_font_size.triggered.connect(self._view.increase_font_size)
+        self._view.action_decrease_font_size.triggered.connect(self._view.decrease_font_size)
+        self._view.action_zeige_Startinformationen.triggered.connect(self._dialog_welcome.exec)
         self._view.pB_next_Chapter.clicked.connect(self._next_chapter)
         self._view.pB_previous_Chapter.clicked.connect(self._previous_chapter)
 

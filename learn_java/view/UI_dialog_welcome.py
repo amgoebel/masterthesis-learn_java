@@ -17,7 +17,7 @@ class Ui_UI_Dialog_Welcome(object):
         self.verticalLayout = QtWidgets.QVBoxLayout(UI_Dialog_Welcome)
         self.verticalLayout.setObjectName("verticalLayout")
         self.l_text = QtWidgets.QLabel(parent=UI_Dialog_Welcome)
-        self.l_text.setStyleSheet("font-size:16pt")
+        self.l_text.setStyleSheet("font-size:16pt; color: rgb(0, 0, 255);")
         self.l_text.setObjectName("l_text")
         self.verticalLayout.addWidget(self.l_text)
         self.l_image = QtWidgets.QLabel(parent=UI_Dialog_Welcome)

@@ -211,8 +211,9 @@
      <string>&amp;Datei</string>
     </property>
     <addaction name="action_Kapitelwahl"/>
-    <addaction name="action_Person"/>
     <addaction name="action_zeige_Startinformationen"/>
+    <addaction name="action_increase_font_size"/>
+    <addaction name="action_decrease_font_size"/>
     <addaction name="action_Beenden"/>
    </widget>
    <addaction name="menu_Datei"/>
@@ -236,6 +237,16 @@
   <action name="action_zeige_Startinformationen">
    <property name="text">
     <string>zeige &amp;Startinformationen</string>
+   </property>
+  </action>
+  <action name="action_increase_font_size">
+   <property name="text">
+    <string>Schriftgröße vergrößern</string>
+   </property>
+  </action>
+  <action name="action_decrease_font_size">
+   <property name="text">
+    <string>Schriftgröße verkleinern</string>
    </property>
   </action>
  </widget>
