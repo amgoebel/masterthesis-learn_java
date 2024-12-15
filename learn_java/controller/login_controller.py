@@ -32,7 +32,7 @@ class Login_Controller:
             self._login_view.l_confirm_password.setVisible(True)
             self._login_view.lE_confirm_password.setVisible(True)
             self._login_view.pB_new_user.setText("Neuen Nutzer anlegen")
-            self._login_view.l_status_info.setText("Erstelle bitte einen neuen Benutzer")
+            self._login_view.l_status_info.setText("Bestätige bitte dein Passwort")
             self._login_view.lE_confirm_password.setFocus()
         
         else:
