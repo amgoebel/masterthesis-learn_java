@@ -1,0 +1,4 @@
+- a java jdk needs to be installed on the system
+- copy the files req.sh and program.sh into the folder learn_java
+- run the requirements with: sudo ./req.sh
+- run the program with: ./program.sh

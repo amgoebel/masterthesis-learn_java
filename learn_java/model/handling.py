@@ -1,4 +1,5 @@
 import os
+import sys
 import json
 import threading
 import bcrypt
@@ -18,7 +19,10 @@ class Handling(QAbstractListModel):
         super(Handling,self).__init__()
         self.json_user_path = Path("users.json")
         self.json_tutorial_path = Path("tutorial.json")
-        self.file_path = os.path.dirname(__file__)
+        if getattr(sys, 'frozen', False):
+            self.file_path = os.path.dirname(sys.executable)
+        elif __file__:
+            self.file_path = os.path.dirname(__file__) 
         self.username = ""
         self.password = ""
         self.fernet = ""
@@ -130,10 +134,12 @@ class Handling(QAbstractListModel):
         data.get("tutorial", {})[chapter_nr - 1]['java'] = code
         self.save_user_data(data)
         
-    def get_tutorial_html(self,chapter_nr):
+    def get_tutorial_html(self,chapter_nr,font_size):
         data = self.load_tutorial_data()
         data2 = self.load_user_data().get("tutorial", {})
         text = data['html_head']
+        fsize = str(font_size) + "pt"
+        text = text.replace('fsize',fsize)
         text += data['tutorial'][chapter_nr - 1]['content']
         text += data2[chapter_nr - 1]['assignment']
         text += data['html_tail']
@@ -224,7 +230,7 @@ class Handling(QAbstractListModel):
         self.set_working_directory_java()
         print("writing java code to file ...")
         try:
-            f = open("Main.java","w")
+            f = open("Main.java","w", encoding='utf-8')
             f.write(user_code)
             f.close()
             print("... code successfully written to file")
@@ -307,8 +313,13 @@ class Handling(QAbstractListModel):
     def load_data(self):
         self.set_working_directory_tutorial()
         with file_lock:
-            with self.json_user_path.open("r") as f:
+            with self.json_user_path.open("r", encoding="utf-8") as f:
                 return json.load(f)
+    
+    def load_tutorial_data(self):
+        self.set_working_directory_tutorial()
+        with self.json_tutorial_path.open("r", encoding="utf-8") as f:
+            return json.load(f)
 
     def save_data(self, data):
         self.set_working_directory_tutorial()
@@ -334,11 +345,6 @@ class Handling(QAbstractListModel):
         encrypted_data = self.fernet.encrypt(user_data_json.encode())  # Encrypt the serialized JSON string
         data[self.username]["user_data"] = encrypted_data.decode()  # Store the encrypted data as a string
         self.save_data(data)
-            
-    def load_tutorial_data(self):
-        self.set_working_directory_tutorial()
-        with self.json_tutorial_path.open("r") as f:
-            return json.load(f)
         
     # change working directories:
     def set_working_directory_java(self):

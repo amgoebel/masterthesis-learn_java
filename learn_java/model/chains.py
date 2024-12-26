@@ -18,8 +18,8 @@ from PyQt6.QtCore import QThread, pyqtSignal
 import os
 import uuid
 
-dotenv.load_dotenv()
-
+#dotenv.load_dotenv()
+os.environ['OPENAI_API_KEY'] = 'sk-proj-0KMQeINNnl2EU3f50CLVT3BlbkFJTJqRvYtm3xgqS95M4Hh3'
 
 
 # Define chat model to use:
@@ -196,7 +196,7 @@ class Assignment_Adjuster (QThread):
     
     def formulate_assignment(self, chapter_nr) -> str:
         
-        tutorial_chapter = self._model.get_tutorial_html(chapter_nr)
+        tutorial_chapter = self._model.get_tutorial_html(chapter_nr,12)
         assignment = self._model.get_original_assignment(chapter_nr)
         code = self._model.get_java_file(chapter_nr)
         topics = self._model.get_topics(chapter_nr)

@@ -12,7 +12,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self._model = model
         self.lV_output.setModel(self._model)
         self._java_engine = None
-        self._font_size = 10
+        self._font = QApplication.font()
+        self._font_size = 12
+        self._font.setPointSize(self._font_size)
+        QApplication.setFont(self._font)         
 
     def closeEvent(self,event):
         if (self._java_engine != None):
@@ -22,19 +25,20 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def connect_java_engine(self,java_engine):
         self._java_engine = java_engine
         
+    def get_font_size(self):
+        return self._font_size
+        
     def increase_font_size(self):
         """Set the font size globally for the application."""
-        font = QApplication.font()  # Get the current application font
         self._font_size += 1
-        font.setPointSize(self._font_size)     # Set the font size
-        QApplication.setFont(font)  # Apply the updated font globally
+        self._font.setPointSize(self._font_size)     # Set the font size
+        QApplication.setFont(self._font)  # Apply the updated font globally
         
     def decrease_font_size(self):
         """Set the font size globally for the application."""
-        font = QApplication.font()  # Get the current application font
         self._font_size -= 1
-        font.setPointSize(self._font_size)     # Set the font size
-        QApplication.setFont(font)  # Apply the updated font globally    
+        self._font.setPointSize(self._font_size)     # Set the font size
+        QApplication.setFont(self._font)  # Apply the updated font globally   
 
     
 class Login_Dialog(QDialog,Ui_UI_Dialog_Login):

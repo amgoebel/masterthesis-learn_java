@@ -1,4 +1,5 @@
 import os
+import sys
 from PyQt6.QtWidgets import QDialog
 from PyQt6.QtGui import QPixmap
 from PyQt6.QtCore import Qt
@@ -44,7 +45,10 @@ class Dialog_Welcome(QDialog, Ui_UI_Dialog_Welcome):
         self.pB_next_page.clicked.connect(self.next_image)
         self._current_index = 0
         self._max_index = 11
-        self._image_folder = os.path.dirname(__file__)
+        if getattr(sys, 'frozen', False):
+            self._image_folder = os.path.dirname(sys.executable)
+        elif __file__:
+            self._image_folder = os.path.dirname(__file__) 
         self._text = ["Hier siehst du ein Bild vom Hauptfenster des Programms, das dir helfen soll Java zu lernen.\nDas Programm ist in verschiedene Bereiche aufgeteilt.",
                       "In diesem Bereich findest du zu jedem Kapitel eine Lektion und eine Aufgabe.\nLies dir die Lektion immer gut durch.",
                       "In diesem Bereich musst du deine Programmierung eingeben um die Aufgabe zu lösen.\n",

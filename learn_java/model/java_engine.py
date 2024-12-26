@@ -1,6 +1,13 @@
 from PyQt6.QtCore import pyqtSignal, QThread, pyqtSlot
 import os
 import subprocess
+import sys
+
+# Determine OS-specific options
+if sys.platform == "win32":  # Windows
+    creation_flags = subprocess.CREATE_NO_WINDOW
+else:  # Linux or others
+    creation_flags = 0  # No special flags needed
 
 class Java_Engine(QThread):
     stop_signal = pyqtSignal()
@@ -24,7 +31,9 @@ class Java_Engine(QThread):
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             text=True,
-            bufsize=1
+            bufsize=0,
+            universal_newlines=True,
+            creationflags=creation_flags
         )
 
         self._input_monitor = Input_Monitor(process=self._process, model=self._model)
@@ -37,7 +46,8 @@ class Java_Engine(QThread):
         self._input_monitor.wait()
         self._communicator.java_program_stopped.emit()
 
-        stderr = str(self._process.communicate())
+        #stderr = str(self._process.communicate())
+        stderr = self._process.stderr.read()
         if self._process.returncode != 0:
             self._model.update_output("Fehlermeldung:\n" + stderr)
         print("... java program has terminated")
@@ -51,7 +61,7 @@ class Java_Engine(QThread):
         if self._input_monitor:
             self._input_monitor.stop()
 
-
+"""
 class Output_Monitor(QThread):
     data_signal = pyqtSignal(str)  # Signal to send data to the main thread
 
@@ -78,6 +88,39 @@ class Output_Monitor(QThread):
 
     def stop(self):
         self._running = False
+
+"""
+
+class Output_Monitor(QThread):
+    data_signal = pyqtSignal(str)  # Signal to send data to the main thread
+
+    def __init__(self, process, model):
+        super(Output_Monitor, self).__init__()
+        self._process = process
+        self._model = model
+        self._running = True
+
+        # Connect signal to model update
+        self.data_signal.connect(self._model.update_output)
+
+    def run(self):
+        self._model.clear_output()
+        while self._running:
+            # Read line-by-line instead of one character
+            line = self._process.stdout.readline()  # Read one line at a time
+            if line:  # Emit line immediately
+                self.data_signal.emit(line)
+            elif self._process.poll() is not None:  # Stop if process is done
+                break
+
+        # Ensure remaining output is processed
+        remaining_output = self._process.stdout.read()
+        if remaining_output:
+            self.data_signal.emit(remaining_output)
+
+    def stop(self):
+        self._running = False
+
 
 
 class Input_Monitor(QThread):
@@ -106,7 +149,12 @@ def compile_java():
     set_working_directory_java()
     print("starting compilation ...")
     try:
-        p = subprocess.run(["javac","Main.java"], capture_output=True, text=True, check=True)
+        p = subprocess.run(
+            ["javac","Main.java"], 
+            capture_output=True, 
+            text=True, 
+            check=True,
+            creationflags=creation_flags)
         print("... compilation successful")
         error_code = "compilation successful"
     except subprocess.CalledProcessError as e: 

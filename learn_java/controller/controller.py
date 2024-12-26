@@ -38,8 +38,8 @@ class Controller:
         self._communicator.answer_sent.connect(self._answer_sent)
         self._view.action_Beenden.triggered.connect(self._exit_application)
         self._view.action_Kapitelwahl.triggered.connect(self._choose_chapter)
-        self._view.action_increase_font_size.triggered.connect(self._view.increase_font_size)
-        self._view.action_decrease_font_size.triggered.connect(self._view.decrease_font_size)
+        self._view.action_increase_font_size.triggered.connect(self.increase_font_size)
+        self._view.action_decrease_font_size.triggered.connect(self.decrease_font_size)
         self._view.action_zeige_Startinformationen.triggered.connect(self._dialog_welcome.exec)
         self._view.pB_next_Chapter.clicked.connect(self._next_chapter)
         self._view.pB_previous_Chapter.clicked.connect(self._previous_chapter)
@@ -48,7 +48,7 @@ class Controller:
         self._view.pTE_code.setPlainText(self._model.get_current_java_file())
 
     def _set_tutorial(self):
-        html_content = self._model.get_tutorial_html(self._model.get_current_chapter())
+        html_content = self._model.get_tutorial_html(self._model.get_current_chapter(),self._view.get_font_size())
         self._view.tE_Tutorial.setHtml(html_content)
 
     def _update_output(self, output): #, colorNr=0):
@@ -152,6 +152,14 @@ Mit der Taste "start" kannst du dein Programm nun laufen lassen."""
         else:
             self._view.pB_run.setText("start")
 
+    def increase_font_size(self):
+        self._view.increase_font_size()
+        self._set_tutorial()
+    
+    def decrease_font_size(self):
+        self._view.decrease_font_size()
+        self._set_tutorial()
+    
     def _next_chapter(self):
         if (self._model.get_current_chapter() < self._model.get_max_chapter()):
             self._model.set_current_java_file(self._view.pTE_code.toPlainText())
