@@ -105,11 +105,13 @@ class Output_Monitor(QThread):
 
     def run(self):
         self._model.clear_output()
+        total_output = ""
         while self._running:
             # Read line-by-line instead of one character
             line = self._process.stdout.readline()  # Read one line at a time
             if line:  # Emit line immediately
-                self.data_signal.emit(line)
+                total_output += line
+                self.data_signal.emit(total_output)
             elif self._process.poll() is not None:  # Stop if process is done
                 break
 
