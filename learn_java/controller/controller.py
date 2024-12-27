@@ -134,7 +134,7 @@ Mit der Taste "start" kannst du dein Programm nun laufen lassen."""
             topics=topics,
             input=input)
         self._view.tE_Informationen.setText(run_information)
-        self._view.tE_Informationen.setStyleSheet("background-color: " + self._colors[0] + ";")
+        self._view.tE_Informationen.setStyleSheet("")
         self._chat_bot = Chat_Bot_Run(
             model=self._model,
             communicator=self._communicator,
