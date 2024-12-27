@@ -206,7 +206,7 @@ Mit der Taste "start" kannst du dein Programm nun laufen lassen."""
 
     def _clear_information(self):
         self._view.tE_Informationen.clear()
-        self._view.tE_Informationen.setStyleSheet("background-color: " + self._colors[0] + ";")
+        self._view.tE_Informationen.setStyleSheet("")
 
     def _exit_application(self):
         self._model.set_session_chapter()
