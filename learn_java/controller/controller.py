@@ -64,7 +64,7 @@ class Controller:
         
     def _answer_sent(self):
         self._view.tE_Informationen.setText(self._model.get_answer())
-        self._view.tE_Informationen.setStyleSheet("background-color: " + self._colors[0] + ";")
+        self._view.tE_Informationen.setStyleSheet("")
         
     def _compile_java_code(self):
         if self._chat_bot is not None:
