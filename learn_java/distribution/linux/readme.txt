@@ -1,4 +1,5 @@
 - a java jdk needs to be installed on the system
+- a valid OpenAI Key needs to be saved to the environment variable OPENAI_API_KEY
 - copy the files req.sh and program.sh into the folder learn_java
 - run the requirements with: sudo ./req.sh
 - run the program with: ./program.sh

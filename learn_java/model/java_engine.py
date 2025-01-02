@@ -10,9 +10,11 @@ else:  # Linux or others
     creation_flags = 0  # No special flags needed
 
 class Java_Engine(QThread):
+    # Thread class to run and manage the execution of Java programs.
     stop_signal = pyqtSignal()
 
     def __init__(self, model, communicator):
+        # Initialize the Java engine with the model and communicator.
         super(Java_Engine, self).__init__()
         self._model = model
         self._process = None
@@ -21,8 +23,8 @@ class Java_Engine(QThread):
         self._communicator = communicator
         self.stop_signal.connect(self.stop)
 
-    # Run Java code
     def run(self):
+        # Run the Java program and manage input/output monitoring.
         self._model.set_working_directory_java()
         print("running java program ...")
         self._process = subprocess.Popen(
@@ -54,6 +56,7 @@ class Java_Engine(QThread):
 
     @pyqtSlot()
     def stop(self):
+        # Stop the Java program and terminate input/output monitoring.
         if self._process:
             self._process.kill()
         if self._output_monitor:
@@ -61,11 +64,13 @@ class Java_Engine(QThread):
         if self._input_monitor:
             self._input_monitor.stop()
 
-"""
+
 class Output_Monitor(QThread):
+    # Thread class to monitor and handle the output of a running Java program.
     data_signal = pyqtSignal(str)  # Signal to send data to the main thread
 
     def __init__(self, process, model):
+        # Initialize the output monitor with the process and model.
         super(Output_Monitor, self).__init__()
         self._process = process
         self._model = model
@@ -75,39 +80,10 @@ class Output_Monitor(QThread):
         self.data_signal.connect(self._model.update_output)
 
     def run(self):
+        # Monitor the output of the Java program and update the model.
         self._model.clear_output()
         total_output = ""
         while self._running:
-            if self._process.poll() is not None:
-                self._running = False
-                break
-            output = self._process.stdout.read(1)
-            if output:
-                total_output += output
-                self.data_signal.emit(total_output)  # Emit signal instead of direct update
-
-    def stop(self):
-        self._running = False
-
-"""
-
-class Output_Monitor(QThread):
-    data_signal = pyqtSignal(str)  # Signal to send data to the main thread
-
-    def __init__(self, process, model):
-        super(Output_Monitor, self).__init__()
-        self._process = process
-        self._model = model
-        self._running = True
-
-        # Connect signal to model update
-        self.data_signal.connect(self._model.update_output)
-
-    def run(self):
-        self._model.clear_output()
-        total_output = ""
-        while self._running:
-            # Read line-by-line instead of one character
             line = self._process.stdout.readline()  # Read one line at a time
             if line:  # Emit line immediately
                 total_output += line
@@ -121,18 +97,23 @@ class Output_Monitor(QThread):
             self.data_signal.emit(remaining_output)
 
     def stop(self):
+        # Stop monitoring the output.
         self._running = False
 
 
 
 class Input_Monitor(QThread):
+    # Thread class to monitor and handle the input for a running Java program.
+    
     def __init__(self, process, model):
+        # Initialize the input monitor with the process and model.
         super(Input_Monitor, self).__init__()
         self._process = process
         self._model = model
         self._running = True
 
     def run(self):
+        # Monitor the input for the Java program and send it to the process.
         while self._running:
             if self._process.poll() is not None:
                 self._running = False
@@ -143,11 +124,12 @@ class Input_Monitor(QThread):
                 self._process.stdin.flush()
 
     def stop(self):
+        # Stop monitoring the input.
         self._running = False
         
 
-# compile java code
 def compile_java():
+    # Compile the Java code and return the result of the compilation process.
     set_working_directory_java()
     print("starting compilation ...")
     try:
@@ -165,8 +147,8 @@ def compile_java():
         error_code = "Error message: " + e.stderr
     return(error_code)
 
-# change working directory
 def set_working_directory_java():
+    # Change the working directory to the location of Java files.
     file_path = os.path.dirname(__file__)
     try:
         os.chdir(file_path + "/java_files")

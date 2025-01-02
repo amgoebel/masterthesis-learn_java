@@ -2,44 +2,43 @@ import os
 import sys
 from PyQt6.QtWidgets import QDialog
 from PyQt6.QtGui import QPixmap
-from PyQt6.QtCore import Qt
 from view.UI_dialog_chapter import Ui_Dialog_Choose_Chapter
 from view.UI_dialog_preferences import Ui_UI_Dialog_Preferences
 from view.UI_dialog_welcome import Ui_UI_Dialog_Welcome
 
 
 class Dialog_Chapter(QDialog, Ui_Dialog_Choose_Chapter):
+    # Dialog class for choosing a chapter in the tutorial.
     def __init__(self,model,parent=None):
+        # Initialize the chapter dialog with the model and set up UI values.
         super(Dialog_Chapter, self).__init__()
         self.setupUi(self)
         self._model = model
-        self._set_values()
-
-    def _set_values(self):
-        for i in range(1, self._model.get_max_chapter() + 1):
-            self.cB_choose_chapter.addItem(str(i))
-
-class Dialog_Preferences(QDialog, Ui_UI_Dialog_Preferences):
-    def __init__(self,model,parent=None):
-        super(Dialog_Preferences, self).__init__()
-        self.setupUi(self)
-        self._model = model
-
+        
     def showEvent(self, event):
+        # Handle the show event to set up initial values.
         self._set_values()
         # Call the base class implementation to ensure the event is handled properly
         super().showEvent(event)
 
     def _set_values(self):
-        self.lE_Fach.setText(self._model.get_favorite_subjects())
-        self.lE_Hobbys.setText(self._model.get_hobbies())
-        self.lE_Beruf.setText(self._model.get_profession())
-        self.pTE_Sonstiges.setPlainText(self._model.get_other())
-        
+        # Populate the chapter selection combo box with available chapters.
+        for i in range(1, self._model.get_max_chapter() + 1):
+            self.cB_choose_chapter.addItem(str(i))
 
+class Dialog_Preferences(QDialog, Ui_UI_Dialog_Preferences):
+    # Dialog class for setting user preferences.
+    def __init__(self,model,parent=None):
+        # Initialize the preferences dialog with the model.
+        super(Dialog_Preferences, self).__init__()
+        self.setupUi(self)
+        self._model = model
+       
 
 class Dialog_Welcome(QDialog, Ui_UI_Dialog_Welcome):
+    # Dialog class for displaying the welcome pages that explain the usage of the program.
     def __init__(self,parent=None):
+        # Initialize the welcome dialog and set up the image and text sequence.
         super(Dialog_Welcome, self).__init__()
         self.setupUi(self)
         self.pB_next_page.clicked.connect(self.next_image)
@@ -64,22 +63,18 @@ class Dialog_Welcome(QDialog, Ui_UI_Dialog_Welcome):
         self.load_image()
         
     def showEvent(self, event):
-        # Call the base class implementation to ensure the event is handled properly
+        # Handle the show event to ensure proper display of the dialog.
         super().showEvent(event)
     
     def load_image(self):
-        """
-        Load the current image into the QLabel.
-        """
+        # Load the current image into the QLabel.
         if 0 <= self._current_index < self._max_index:
             pixmap = QPixmap(os.path.join(self._image_folder,f"Intro_{self._current_index}.png"))
             self.l_image.setPixmap(pixmap)
             self.l_text.setText(self._text[self._current_index])
 
     def next_image(self):
-        """
-        Move to the next image or terminate the program if the last image is reached.
-        """
+        # Move to the next image or terminate the program if the last image is reached.
         self._current_index += 1
         if self._current_index < self._max_index:
             self.load_image()
@@ -90,6 +85,3 @@ class Dialog_Welcome(QDialog, Ui_UI_Dialog_Welcome):
             self.pB_next_page.setText("Nächste Seite")  # Change button text for the next run
             self.load_image()
             self.accept()
-        
-        
-    

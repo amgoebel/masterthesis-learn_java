@@ -1,3 +1,5 @@
+import os
+import uuid
 import dotenv
 from langchain_openai import ChatOpenAI
 from langchain.schema.messages import HumanMessage, SystemMessage
@@ -14,12 +16,6 @@ from langchain_core.runnables.history import RunnableWithMessageHistory
 from langchain_core.chat_history import InMemoryChatMessageHistory, BaseChatMessageHistory
 from langchain.memory import ConversationBufferMemory
 from PyQt6.QtCore import QThread, pyqtSignal
-
-import os
-import uuid
-
-#dotenv.load_dotenv()
-os.environ['OPENAI_API_KEY'] = 'sk-proj-0KMQeINNnl2EU3f50CLVT3BlbkFJTJqRvYtm3xgqS95M4Hh3'
 
 
 # Define chat model to use:
@@ -45,15 +41,18 @@ system_role_prompt = SystemMessagePromptTemplate(
 )
 
 # Load environment variables (mainly the token for the LLM)
-#dotenv.load_dotenv()
+dotenv.load_dotenv()
 
 
 
 class Chains:
+    # Class to handle interactions with the language model for compilation and execution checks.
     def __init__(self):
+        # Initialize the Chains class.
         super(Chains,self).__init__()    
 
     def compile_check(self, user_code, compile_result) -> str:
+        # Check the compilation result and provide hints to the user based on the error message.
         
         system_compile_message = """You will be given the java code of the student and the error message of the compiler. 
         The student sees the error message of the compiler. 
@@ -90,6 +89,7 @@ class Chains:
 
 
     def run_check(self, user_code, assignment, output, topics, input) -> str:
+        # Check the execution result and provide hints to the user based on the program output.
         
         system_run_message = """You will be given the student's assignment, the java code of the student,
         all previous topics of the tutorial and the output of the program.
@@ -158,12 +158,15 @@ class Chains:
     
     
 class Assignment_Adjuster (QThread):
+    # Thread class to adjust assignments based on user preferences. (runs in the background)
     def __init__(self,model):
+        # Initialize the assignment adjuster with the model.
         super(Assignment_Adjuster,self).__init__()
         self._running = True
         self._model = model
         
     def run(self):
+        # Run the assignment adjustment process for each chapter.
         while self._running:
             chapter_nr = self.get_assignment_chapter() + 1
             if  chapter_nr < self._model.get_max_chapter():
@@ -175,26 +178,25 @@ class Assignment_Adjuster (QThread):
                 
             else:
                 self._running = False
-                print("All chapters have been adjusted to the users preferences.")
-            
-            
+                print("All chapters have been adjusted to the users preferences.")  
         
     def stop(self):
+        # Stop the assignment adjustment process.
         self._running = False
         
-    # get chapter number up to which the assignments have been adjusted
     def get_assignment_chapter(self):
+        # Get the chapter number up to which assignments have been adjusted.
         data = self._model.load_user_data()
         return data['assignment_chapter']
     
-    # set chapter number up to which the assignments have been adjusted
     def set_assignment_chapter(self,chapter_nr):
+        # Set the chapter number up to which assignments have been adjusted.
         data = self._model.load_user_data()
         data['assignment_chapter'] = chapter_nr
         self._model.save_user_data(data)
         
-    
     def formulate_assignment(self, chapter_nr) -> str:
+        # Formulate a new assignment and starting code based on user preferences.
         
         tutorial_chapter = self._model.get_tutorial_html(chapter_nr,12)
         assignment = self._model.get_original_assignment(chapter_nr)
@@ -283,8 +285,10 @@ class Assignment_Adjuster (QThread):
     
     
 class Chat_Bot_Compile (QThread):
+    # Thread class to handle chat bot interactions for code compilation errors.
     
     def __init__(self,model,communicator,user_code,compile_result,initial_response):
+        # Initialize the chat bot for compilation with the model, communicator, and initial data.
         super(Chat_Bot_Compile,self).__init__()
         self._running = True
         self._model = model
@@ -295,13 +299,12 @@ class Chat_Bot_Compile (QThread):
           
     
     def run(self):
-                
-        # In-memory store for session histories
-        store = {}
+        # Run the chat bot to handle user questions about compilation errors.
+        
+        store = {}  # In-memory store for session histories
 
-
-        # Function to manage session history
         def get_session_history(session_id: str) -> BaseChatMessageHistory:
+            # Function to manage session history
             if session_id not in store:
                 store[session_id] = InMemoryChatMessageHistory()
             return store[session_id]
@@ -380,12 +383,15 @@ class Chat_Bot_Compile (QThread):
                 self._communicator.answer_sent.emit()            
                       
     def stop(self):
+        # Stop the chat bot.
         self._running = False
         
         
 class Chat_Bot_Run (QThread):
+    # Thread class to handle chat interactions for code execution results.
     
     def __init__(self,model,communicator,user_code,assignment,topics,input,output,initial_response):
+        # Initialize the chat bot for execution with the model, communicator, and initial data.
         super(Chat_Bot_Run,self).__init__()
         self._running = True
         self._model = model
@@ -397,13 +403,11 @@ class Chat_Bot_Run (QThread):
         self._output = output
         self._initial_response = initial_response
           
-    
     def run(self):
-                
-        # In-memory store for session histories
-        store = {}
-
-
+        # Run the chat bot to handle user questions about execution results.      
+        
+        store = {}   # In-memory store for session histories
+        
         # Function to manage session history
         def get_session_history(session_id: str) -> BaseChatMessageHistory:
             if session_id not in store:
@@ -497,4 +501,5 @@ class Chat_Bot_Run (QThread):
                 self._communicator.answer_sent.emit()            
                       
     def stop(self):
+        # Stop the chat bot.
         self._running = False

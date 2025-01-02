@@ -297,7 +297,7 @@ class Handling(QAbstractListModel):
         # Prepare tutorial data for each chapter
         tutorial = data.get(username, {}).get("user_data", {}).get("tutorial", {})
         for i in range(1 , self._max_chapter + 1):
-            java = self.get_original_java_file(i)
+            java = self.get_original_java_code(i)
             assignment = self.get_original_assignment(i)
             tutorial.append({"chapter_nr": i, "assignment" : assignment, "java" : java})
 
