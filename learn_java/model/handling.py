@@ -33,24 +33,24 @@ class Handling(QAbstractListModel):
         self.password = ""               # Current user password
         self.fernet = ""                 # Encryption object for user data
         self.new_user = False            # Flag for new user creation
-        self._current_chapter = 1        # Tracks the current tutorial chapter
-        self._max_chapter = 25           # Maximum number of chapters
-        self._output = ""                # Output from Java program
-        self._input = ""                 # Input for Java program
-        self._input_sent = False         # Flag for input sent status
-        self._question = ""              # Chatbot question
-        self._question_sent = False      # Flag for chatbot question sent status
-        self._answer = ""                # Chatbot answer
+        self.current_chapter = 1         # Tracks the current tutorial chapter
+        self.max_chapter = 25           # Maximum number of chapters
+        self.output = ""                # Output from Java program
+        self.input = ""                 # Input for Java program
+        self.input_sent = False         # Flag for input sent status
+        self.question = ""              # Chatbot question
+        self.question_sent = False      # Flag for chatbot question sent status
+        self.answer = ""                # Chatbot answer
 
     ### Output handling of the running java program (needed for the QAbstractListModel):
     def data(self, index, role=Qt.ItemDataRole.DisplayRole):
         if role == Qt.ItemDataRole.DisplayRole:
-            return str(self._output)
+            return str(self.output)
         return None
     
     def setData(self, index, output, role=Qt.ItemDataRole.EditRole):
         if role == Qt.ItemDataRole.EditRole:
-            self._output = output
+            self.output = output
             self.dataChanged.emit(index, index)   # Notify view about data change
             QCoreApplication.processEvents()      # Process GUI events
             return True
@@ -75,46 +75,46 @@ class Handling(QAbstractListModel):
     ### Input handling for Java program:
     def set_input(self,input):
         # Set input for Java program
-        self._input = input
+        self.input = input
         self.set_input_sent(True)
 
     def get_input(self):
         # Get the current input
-        return self._input  
+        return self.input  
 
     def set_input_sent(self,value):
         # Set the input sent status
-        self._input_sent = value 
+        self.input_sent = value 
 
     def get_input_sent(self):
         # Check if input has been sent
-        return self._input_sent
+        return self.input_sent
     
     ### Chat bot handling (question and answer):
     def set_question(self,question):
         # Set the chatbot question
-        self._question = question
+        self.question = question
         self.set_question_sent(True)
 
     def get_question(self):
         # Get the chatbot question
-        return self._question
+        return self.question
 
     def set_question_sent(self,value):
         # Set question sent status
-        self._question_sent = value
+        self.question_sent = value
 
     def get_question_sent(self):
         # Check if question has been sent
-        return self._question_sent
+        return self.question_sent
 
     def set_answer(self,answer):
         # Set the chatbot answer
-        self._answer = answer
+        self.answer = answer
 
     def get_answer(self):
         # Get the chatbot answer
-        return self._answer
+        return self.answer
 
     ### Java code handling for each chapter:
     def get_java_code(self,chapter_nr):
@@ -132,13 +132,13 @@ class Handling(QAbstractListModel):
     def get_current_java_code(self):
         # Retrieve Java code for the current chapter
         data = self.load_user_data()      
-        text = data.get("tutorial", {})[self._current_chapter - 1]['java']
+        text = data.get("tutorial", {})[self.current_chapter - 1]['java']
         return text
 
     def set_current_java_code(self,code):
         # Save Java code for the current chapter
         data = self.load_user_data()
-        data.get("tutorial", {})[self._current_chapter - 1]['java'] = code
+        data.get("tutorial", {})[self.current_chapter - 1]['java'] = code
         self.save_user_data(data)
 
     def get_original_java_code(self,chapter_nr):
@@ -202,24 +202,24 @@ class Handling(QAbstractListModel):
     ### Chapter handling:
     def set_current_chapter(self,chapter):
         # Set the the current chapter to a specific chapter
-        self._current_chapter = chapter
+        self.current_chapter = chapter
     
     def get_current_chapter(self):
         # Load the current chapter
-        return self._current_chapter
+        return self.current_chapter
     
     def get_max_chapter(self):
         # Load the number of chapters
-        return self._max_chapter
+        return self.max_chapter
         
     def set_starting_chapter(self):
         # Set the chapter at the start of the program from last session
-        self._current_chapter = self.load_user_data()['current_chapter']
+        self.current_chapter = self.load_user_data()['current_chapter']
        
     def set_session_chapter(self):
         # Set current chapter for the start of the next session 
         data = self.load_user_data()
-        data["current_chapter"] = self._current_chapter
+        data["current_chapter"] = self.current_chapter
         self.save_user_data(data)
         
     ### User preferences handling:
@@ -296,7 +296,7 @@ class Handling(QAbstractListModel):
         
         # Prepare tutorial data for each chapter
         tutorial = data.get(username, {}).get("user_data", {}).get("tutorial", {})
-        for i in range(1 , self._max_chapter + 1):
+        for i in range(1 , self.max_chapter + 1):
             java = self.get_original_java_code(i)
             assignment = self.get_original_assignment(i)
             tutorial.append({"chapter_nr": i, "assignment" : assignment, "java" : java})

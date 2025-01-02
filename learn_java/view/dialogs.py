@@ -13,17 +13,17 @@ class Dialog_Chapter(QDialog, Ui_Dialog_Choose_Chapter):
         # Initialize the chapter dialog with the model and set up UI values.
         super(Dialog_Chapter, self).__init__()
         self.setupUi(self)
-        self._model = model
+        self.model = model
         
     def showEvent(self, event):
         # Handle the show event to set up initial values.
-        self._set_values()
+        self.set_values()
         # Call the base class implementation to ensure the event is handled properly
         super().showEvent(event)
 
-    def _set_values(self):
+    def set_values(self):
         # Populate the chapter selection combo box with available chapters.
-        for i in range(1, self._model.get_max_chapter() + 1):
+        for i in range(1, self.model.get_max_chapter() + 1):
             self.cB_choose_chapter.addItem(str(i))
 
 class Dialog_Preferences(QDialog, Ui_UI_Dialog_Preferences):
@@ -32,7 +32,7 @@ class Dialog_Preferences(QDialog, Ui_UI_Dialog_Preferences):
         # Initialize the preferences dialog with the model.
         super(Dialog_Preferences, self).__init__()
         self.setupUi(self)
-        self._model = model
+        self.model = model
        
 
 class Dialog_Welcome(QDialog, Ui_UI_Dialog_Welcome):
@@ -42,8 +42,8 @@ class Dialog_Welcome(QDialog, Ui_UI_Dialog_Welcome):
         super(Dialog_Welcome, self).__init__()
         self.setupUi(self)
         self.pB_next_page.clicked.connect(self.next_image)
-        self._current_index = 0
-        self._max_index = 11
+        self.current_index = 0
+        self.max_index = 11
         if getattr(sys, 'frozen', False):
             self._image_folder = os.path.dirname(sys.executable)
         elif __file__:
@@ -68,20 +68,20 @@ class Dialog_Welcome(QDialog, Ui_UI_Dialog_Welcome):
     
     def load_image(self):
         # Load the current image into the QLabel.
-        if 0 <= self._current_index < self._max_index:
-            pixmap = QPixmap(os.path.join(self._image_folder,f"Intro_{self._current_index}.png"))
+        if 0 <= self.current_index < self.max_index:
+            pixmap = QPixmap(os.path.join(self._image_folder,f"Intro_{self.current_index}.png"))
             self.l_image.setPixmap(pixmap)
-            self.l_text.setText(self._text[self._current_index])
+            self.l_text.setText(self._text[self.current_index])
 
     def next_image(self):
         # Move to the next image or terminate the program if the last image is reached.
-        self._current_index += 1
-        if self._current_index < self._max_index:
+        self.current_index += 1
+        if self.current_index < self.max_index:
             self.load_image()
-            if self._current_index == self._max_index - 1:
+            if self.current_index == self.max_index - 1:
                 self.pB_next_page.setText("OK")  # Change button text on the last image
         else:
-            self._current_index = 0
+            self.current_index = 0
             self.pB_next_page.setText("Nächste Seite")  # Change button text for the next run
             self.load_image()
             self.accept()

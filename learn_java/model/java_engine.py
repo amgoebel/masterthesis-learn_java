@@ -16,18 +16,18 @@ class Java_Engine(QThread):
     def __init__(self, model, communicator):
         # Initialize the Java engine with the model and communicator.
         super(Java_Engine, self).__init__()
-        self._model = model
-        self._process = None
-        self._input_monitor = None
-        self._output_monitor = None
-        self._communicator = communicator
+        self.model = model
+        self.process = None
+        self.input_monitor = None
+        self.output_monitor = None
+        self.communicator = communicator
         self.stop_signal.connect(self.stop)
 
     def run(self):
         # Run the Java program and manage input/output monitoring.
-        self._model.set_working_directory_java()
+        self.model.set_working_directory_java()
         print("running java program ...")
-        self._process = subprocess.Popen(
+        self.process = subprocess.Popen(
             ['java', 'Main'],
             stdin=subprocess.PIPE,
             stdout=subprocess.PIPE,
@@ -38,31 +38,31 @@ class Java_Engine(QThread):
             creationflags=creation_flags
         )
 
-        self._input_monitor = Input_Monitor(process=self._process, model=self._model)
-        self._output_monitor = Output_Monitor(process=self._process, model=self._model)
-        self._input_monitor.start()
-        self._output_monitor.start()
+        self.input_monitor = Input_Monitor(process=self.process, model=self.model)
+        self.output_monitor = Output_Monitor(process=self.process, model=self.model)
+        self.input_monitor.start()
+        self.output_monitor.start()
 
         # Wait for the monitors to finish
-        self._output_monitor.wait()
-        self._input_monitor.wait()
-        self._communicator.java_program_stopped.emit()
+        self.output_monitor.wait()
+        self.input_monitor.wait()
+        self.communicator.java_program_stopped.emit()
 
         #stderr = str(self._process.communicate())
-        stderr = self._process.stderr.read()
-        if self._process.returncode != 0:
-            self._model.update_output("Fehlermeldung:\n" + stderr)
+        stderr = self.process.stderr.read()
+        if self.process.returncode != 0:
+            self.model.update_output("Fehlermeldung:\n" + stderr)
         print("... java program has terminated")
 
     @pyqtSlot()
     def stop(self):
         # Stop the Java program and terminate input/output monitoring.
-        if self._process:
-            self._process.kill()
-        if self._output_monitor:
-            self._output_monitor.stop()
-        if self._input_monitor:
-            self._input_monitor.stop()
+        if self.process:
+            self.process.kill()
+        if self.output_monitor:
+            self.output_monitor.stop()
+        if self.input_monitor:
+            self.input_monitor.stop()
 
 
 class Output_Monitor(QThread):
@@ -72,33 +72,33 @@ class Output_Monitor(QThread):
     def __init__(self, process, model):
         # Initialize the output monitor with the process and model.
         super(Output_Monitor, self).__init__()
-        self._process = process
-        self._model = model
-        self._running = True
+        self.process = process
+        self.model = model
+        self.running = True
 
         # Connect signal to model update
-        self.data_signal.connect(self._model.update_output)
+        self.data_signal.connect(self.model.update_output)
 
     def run(self):
         # Monitor the output of the Java program and update the model.
-        self._model.clear_output()
+        self.model.clear_output()
         total_output = ""
-        while self._running:
-            line = self._process.stdout.readline()  # Read one line at a time
+        while self.running:
+            line = self.process.stdout.readline()  # Read one line at a time
             if line:  # Emit line immediately
                 total_output += line
                 self.data_signal.emit(total_output)
-            elif self._process.poll() is not None:  # Stop if process is done
+            elif self.process.poll() is not None:  # Stop if process is done
                 break
 
         # Ensure remaining output is processed
-        remaining_output = self._process.stdout.read()
+        remaining_output = self.process.stdout.read()
         if remaining_output:
             self.data_signal.emit(remaining_output)
 
     def stop(self):
         # Stop monitoring the output.
-        self._running = False
+        self.running = False
 
 
 
@@ -108,24 +108,24 @@ class Input_Monitor(QThread):
     def __init__(self, process, model):
         # Initialize the input monitor with the process and model.
         super(Input_Monitor, self).__init__()
-        self._process = process
-        self._model = model
-        self._running = True
+        self.process = process
+        self.model = model
+        self.running = True
 
     def run(self):
         # Monitor the input for the Java program and send it to the process.
-        while self._running:
-            if self._process.poll() is not None:
-                self._running = False
+        while self.running:
+            if self.process.poll() is not None:
+                self.running = False
                 break
-            if self._model.get_input_sent():
-                self._model.set_input_sent(False)
-                self._process.stdin.write(self._model.get_input() + "\n")
-                self._process.stdin.flush()
+            if self.model.get_input_sent():
+                self.model.set_input_sent(False)
+                self.process.stdin.write(self.model.get_input() + "\n")
+                self.process.stdin.flush()
 
     def stop(self):
         # Stop monitoring the input.
-        self._running = False
+        self.running = False
         
 
 def compile_java():
