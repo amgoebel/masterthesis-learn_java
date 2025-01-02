@@ -45,7 +45,7 @@ class Controller:
         self._view.pB_previous_Chapter.clicked.connect(self._previous_chapter)
 
     def _set_code_file(self):
-        self._view.pTE_code.setPlainText(self._model.get_current_java_file())
+        self._view.pTE_code.setPlainText(self._model.get_current_java_code())
 
     def _set_tutorial(self):
         html_content = self._model.get_tutorial_html(self._model.get_current_chapter(),self._view.get_font_size())
@@ -70,7 +70,7 @@ class Controller:
         if self._chat_bot is not None:
                 self._chat_bot.stop()
         self._model.update_output("")  # clear output window
-        self._model.set_current_java_file(self._view.pTE_code.toPlainText())
+        self._model.set_current_java_code(self._view.pTE_code.toPlainText())
         self._view.pB_compile.setEnabled(False)
         self._view.lE_question.setEnabled(False)
         QApplication.processEvents()
@@ -162,13 +162,13 @@ Mit der Taste "start" kannst du dein Programm nun laufen lassen."""
     
     def _next_chapter(self):
         if (self._model.get_current_chapter() < self._model.get_max_chapter()):
-            self._model.set_current_java_file(self._view.pTE_code.toPlainText())
+            self._model.set_current_java_code(self._view.pTE_code.toPlainText())
             self._model.set_current_chapter(self._model.get_current_chapter() + 1)
             self._prepare_chapter()
             
     def _previous_chapter(self):
         if (self._model.get_current_chapter() > 1):
-            self._model.set_current_java_file(self._view.pTE_code.toPlainText())
+            self._model.set_current_java_code(self._view.pTE_code.toPlainText())
             self._model.set_current_chapter(self._model.get_current_chapter() - 1)
             self._prepare_chapter()
         

@@ -169,7 +169,7 @@ class Assignment_Adjuster (QThread):
             if  chapter_nr < self._model.get_max_chapter():
                 response = self.formulate_assignment(chapter_nr)
                 self._model.set_assignment(chapter_nr=chapter_nr,assignment=response[0])
-                self._model.set_java_file(chapter_nr=chapter_nr,code=response[1])
+                self._model.set_java_code(chapter_nr=chapter_nr,code=response[1])
                 self.set_assignment_chapter(chapter_nr)
                 print(f"Chapter {chapter_nr} has been adjusted to the users preferences.")
                 
@@ -198,7 +198,7 @@ class Assignment_Adjuster (QThread):
         
         tutorial_chapter = self._model.get_tutorial_html(chapter_nr,12)
         assignment = self._model.get_original_assignment(chapter_nr)
-        code = self._model.get_java_file(chapter_nr)
+        code = self._model.get_original_java_code(chapter_nr)
         topics = self._model.get_topics(chapter_nr)
                 
         subject = self._model.get_favorite_subjects()
