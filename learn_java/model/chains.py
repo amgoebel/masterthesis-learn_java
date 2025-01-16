@@ -5,7 +5,6 @@ import dotenv
 from langchain_openai import ChatOpenAI
 from langchain_anthropic import ChatAnthropic
 
-from langchain.schema.messages import HumanMessage, SystemMessage
 from langchain.prompts import (
     PromptTemplate,
     SystemMessagePromptTemplate,
@@ -17,13 +16,12 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables.history import RunnableWithMessageHistory
 from langchain_core.runnables.history import RunnableWithMessageHistory
 from langchain_core.chat_history import InMemoryChatMessageHistory, BaseChatMessageHistory
-from langchain.memory import ConversationBufferMemory
-from PyQt6.QtCore import QThread, pyqtSignal
+from PyQt6.QtCore import QThread
 
 
 # Define chat model to use:
-#chat_model = ChatOpenAI(model="gpt-4o-mini", temperature=0)
-chat_model = ChatAnthropic(model="claude-3-haiku-20240307", temperature=0)
+chat_model = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+#chat_model = ChatAnthropic(model="claude-3-haiku-20240307", temperature=0)
 
 # Output parser to format the output of the LLM
 output_parser = StrOutputParser()
