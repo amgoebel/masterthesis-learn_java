@@ -1,7 +1,10 @@
-import os
 import uuid
 import dotenv
+
+# LLMS:
 from langchain_openai import ChatOpenAI
+from langchain_anthropic import ChatAnthropic
+
 from langchain.schema.messages import HumanMessage, SystemMessage
 from langchain.prompts import (
     PromptTemplate,
@@ -19,14 +22,15 @@ from PyQt6.QtCore import QThread, pyqtSignal
 
 
 # Define chat model to use:
-chat_model = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+#chat_model = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+chat_model = ChatAnthropic(model="claude-3-haiku-20240307", temperature=0)
 
 # Output parser to format the output of the LLM
 output_parser = StrOutputParser()
 
 # System role for the LLM    
 system_role = """You are a friendly German speaking high school teacher for computer science that 
-helps high school students to learn java. The student uses a program similar to an IDE. The gui of the program 
+helps high school students to learn java. Always answer in German. The student uses a program similar to an IDE. The gui of the program 
 displays on the left hand side a tutorial with different chapters containing various topics of the java 
 programming language. Each chapter also contains a corresponding assignment.
 In the middle section of the gui is an editor in which the student can write java code to solve the assignment. 
@@ -42,8 +46,6 @@ system_role_prompt = SystemMessagePromptTemplate(
 
 # Load environment variables (mainly the token for the LLM)
 dotenv.load_dotenv()
-
-
 
 class Chains:
     # Class to handle interactions with the language model for compilation and execution checks.

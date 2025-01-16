@@ -171,6 +171,7 @@ Mit der Taste "start" kannst du dein Programm nun laufen lassen."""
             color = 2                             # set background color to red
             self.view.pB_run.setEnabled(False)   # disable run button
             self.model.update_output(compile_result)  # update model and view with error message from compiler
+            QApplication.processEvents()              # update view
             output = self.model.compile_check(user_code=user_code,compile_result=compile_result) # get hint from LLM
             self.chat_bot = Chat_Bot_Compile(
                 model=self.model,
