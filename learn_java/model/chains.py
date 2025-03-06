@@ -21,7 +21,7 @@ from PyQt6.QtCore import QThread
 
 # Define chat model to use:
 chat_model = ChatOpenAI(model="gpt-4o-mini", temperature=0)
-#chat_model = ChatAnthropic(model="claude-3-haiku-20240307", temperature=0)
+#chat_model = ChatAnthropic(model="claude-3-haiku-20240307", temperature=0)  #"claude-3-5-haiku-20241022"
 
 # Output parser to format the output of the LLM
 output_parser = StrOutputParser()
