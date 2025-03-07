@@ -121,8 +121,6 @@ def create_tutorials(json_file, chapter) -> str:
     start_pos = response.find(keyword1) + len(keyword1)
     end_pos = response.find(keyword2, start_pos)  # start searching for keyword2 after start_pos
     
-    print(response)
-    
     # Extract the text between the keywords
     extracted_text = response[start_pos:end_pos]
 
