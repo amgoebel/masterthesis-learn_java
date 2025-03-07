@@ -1,3 +1,4 @@
 - a java jdk needs to be installed on the system
 - unpack the file learn_java.zip
 - run the executable learn_java.exe
+- the windows version has not been testes thoroughly, it might be unstable
