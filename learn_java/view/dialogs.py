@@ -23,8 +23,9 @@ class Dialog_Chapter(QDialog, Ui_Dialog_Choose_Chapter):
 
     def set_values(self):
         # Populate the chapter selection combo box with available chapters.
-        for i in range(1, self.model.get_max_chapter() + 1):
-            self.cB_choose_chapter.addItem(str(i))
+        if (self.cB_choose_chapter.count() == 0): # only if the cB has not been filled already
+            for i in range(1, self.model.get_max_chapter() + 1):
+                self.cB_choose_chapter.addItem(str(i))
 
 class Dialog_Preferences(QDialog, Ui_UI_Dialog_Preferences):
     # Dialog class for setting user preferences.
