@@ -7,7 +7,7 @@
 # Choose the chapter number to be added and the LLM to be used (lines 33 to 37)
 
 # choose the chapter number here:
-chapter_number = 9
+chapter_number = 6
 
 
 
@@ -32,9 +32,9 @@ dotenv.load_dotenv()
 
 # Define chat model to use: (comment out the others)
 #chat_model = ChatOpenAI(model="gpt-4o-mini", temperature=0)
-chat_model = ChatOpenAI(model="gpt-4o", temperature=0)
+#chat_model = ChatOpenAI(model="gpt-4o", temperature=0)
 #chat_model = ChatAnthropic(model="claude-3-haiku-20240307", temperature=0)
-#chat_model = ChatAnthropic(model="claude-3-5-haiku-20241022", temperature=0)
+chat_model = ChatAnthropic(model="claude-3-5-haiku-20241022", temperature=0)
 
 # Output parser to format the output of the LLM
 output_parser = StrOutputParser()

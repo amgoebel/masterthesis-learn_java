@@ -171,7 +171,7 @@ class Assignment_Adjuster (QThread):
         # Run the assignment adjustment process for each chapter.
         while self._running:
             chapter_nr = self.get_assignment_chapter() + 1
-            if  chapter_nr < self._model.get_max_chapter():
+            if  chapter_nr < self._model.get_max_chapter() + 1:
                 response = self.formulate_assignment(chapter_nr)
                 self._model.set_assignment(chapter_nr=chapter_nr,assignment=response[0])
                 self._model.set_java_code(chapter_nr=chapter_nr,code=response[1])
