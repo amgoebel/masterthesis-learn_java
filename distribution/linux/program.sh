@@ -1,2 +1,2 @@
-export OPENAI_API_KEY=sk-proj-0KMQeINNnl2EU3f50CLVT3BlbkFJTJqRvYtm3xgqS95M4Hh3
+#export OPENAI_API_KEY=sk-proj-0KMQeINNnl2EU3f50CLVT3BlbkFJTJqRvYtm3xgqS95M4Hh3
 python3.12 main.py
