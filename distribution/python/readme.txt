@@ -1,4 +1,4 @@
 - a java jdk needs to be installed on the system
 - a valid OpenAI or Anthropic Key needs to be saved to the environment variable OPENAI_API_KEY or ANTHROPIC_API_KEY
-- the following packages need to be installed: pyqt6==6.7.1 bcrypt==4.2.1 cryptography==44.0.0 python-dotenv langchain-openai langchain-community langchainhub cffi==1.17.1
+- the following packages need to be installed: pyqt6==6.7.1 bcrypt==4.2.1 cryptography==44.0.0 python-dotenv langchain-openai langchain-anthropic langchain-community langchainhub cffi==1.17.1
 - run the main.py file
